@@ -4,6 +4,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpackMerge = require('webpack-merge');
+
+const { ImageminWebpackPlugin } = require('imagemin-webpack');
+const imageminGifsicle = require('imagemin-gifsicle');
+const plugins = [imageminGifsicle()];
+
 const modeConfig = (env) => require(`./webpack.utils/webpack.${env}`)(env);
 
 module.exports = ({ mode }) => webpackMerge(
@@ -29,7 +34,7 @@ module.exports = ({ mode }) => webpackMerge(
             })
           },
           {
-            test: /\.(svg|png|jpg)$/,
+            test: /\.(svg|png|jpe?g)$/,
             use: [
               {
                 loader: "file-loader",
@@ -51,7 +56,12 @@ module.exports = ({ mode }) => webpackMerge(
           template: "./index.html",
           favicon: "./favicon.ico"
         }),
-        new webpack.ProgressPlugin()
+        new webpack.ProgressPlugin(),
+        new ImageminWebpackPlugin({
+          imageminOptions: {
+            plugins
+          }
+        })
       ]
     },
     modeConfig(mode)

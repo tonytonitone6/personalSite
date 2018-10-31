@@ -20,6 +20,7 @@
     "react": "^16.5.2",
     "react-decoration": "^2.0.0",
     "react-dom": "^16.5.2",
+    "react-intl": "^2.7.2",
     "styled-components": "^4.0.2"
   },
   "devDependencies": {

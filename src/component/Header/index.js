@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { component } from 'react-decoration';
+import { FormattedMessage } from 'react-intl';
 
 import {
   HeaderWrapper,
@@ -17,14 +18,24 @@ import {
 class Header {
 
   state = {
-    menu: ['about me', 'experience', 'protfolio']
+    menu: [
+      { message: "App.aboutMe", item:"aboutMe" },
+      { message: "App.experience", item:"experience" },
+      { message: "App.protfolio", item:"protfolio" }
+    ]
   }
 
-  onRenderList = (item, index) => {
+  onRenderMenuList = ({ item, message }, index) => {
     return (
-      <li key={item}><a href="#">{item}</a></li>
+      <li key={item}>
+        <a href="#">
+          <FormattedMessage 
+            id={message}
+          />
+        </a>
+      </li>
     )
-  }
+  } 
 
   render() {
     const { menu } = this.state;
@@ -33,19 +44,23 @@ class Header {
         <HeaderContainer>
           <HeaderMenu>
             <ul>
-              {menu.map(this.onRenderList)}
+              {menu.map(this.onRenderMenuList)}
             </ul>
           </HeaderMenu>
           <Introduction>
             <h1>Stan Mao</h1>
             <span>Backend Engineer</span>
+            <SocialArea>
+              <SocialIcon target="_blank" href="https://twitter.com/stanmao"><i className="fab fa-twitter-square"></i></SocialIcon>
+              <SocialIcon target="_blank" href="https://www.facebook.com/yuhsaing.mao"><i className="fab fa-facebook"></i></SocialIcon>
+              <SocialIcon target="_blank" href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"><i className="fab fa-instagram"></i></SocialIcon>
+              <SocialIcon target="_blank" href="https://github.com/tonytonitone6"><i className="fab fa-github"></i></SocialIcon>
+            </SocialArea>
           </Introduction>
-          <SocialArea>
-            <SocialIcon><i class="fab fa-twitter-square"></i></SocialIcon>
-          </SocialArea>
         </HeaderContainer>
         <HeaderSocial>
-          
+          <h2></h2>
+          <p></p>
         </HeaderSocial>
       </HeaderWrapper>
     );

@@ -58,6 +58,12 @@ export const HeaderMenu = styled.div`
       }
     }
   }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+
 `;
 
 export const HeaderSocial = styled.div`
@@ -70,11 +76,11 @@ export const HeaderSocial = styled.div`
 `;
 
 export const Introduction = styled.div`
-  flex: 0 0 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);  
+
   & > h1 {
     animation: ${moveToRight} 1s ease-in;
     text-align: center;
@@ -84,13 +90,43 @@ export const Introduction = styled.div`
     font-size: 3rem;
     display: block;
     margin: 2rem;
+    text-align: center;
   }
+
+  @media (max-width: 600px) {
+    & > span {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    & > span {
+      font-size: 1rem;
+    }
+  }
+
+
 `;
 
 export const SocialArea = styled.div`
-
+  display: flex;
+  justify-content: center;
 `;
 
-export const SocialIcon = styled.span`
+export const SocialIcon = styled.a`
+  margin: 1rem 2rem;
+
+  & > [class*="fab"] {
+    color: #fff;
+    font-size: 2rem;
+    transition: all 1s;
+    &:hover {
+      color: red;
+    }
+  }
+
+  
+
+  
 
 `;

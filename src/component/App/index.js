@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import Header from '../Header';
+import SkillSection from '../SkillSection';
 import { createGlobalStyle } from "styled-components";
+import en from 'react-intl/locale-data/en';
+import zh from 'react-intl/locale-data/zh';
+import en_US from '../locale/en.US';
+import zh_CN from '../locale/zh_CN';
+import { addLocaleData, IntlProvider } from 'react-intl';
+
+addLocaleData([...en, ...zh]);
+
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -24,12 +33,21 @@ const GlobalStyle = createGlobalStyle`
 
 
 export default class extends Component {
+
+  state = {
+    locale: en_US
+  }
+
   render() {
+    const { locale } = this.state;
     return (
-      <div>
-        <GlobalStyle />
-        <Header />
-      </div>
+      <IntlProvider locale={'en'} messages={locale}>
+        <React.Fragment>
+          <GlobalStyle />
+          <Header />
+          <SkillSection />
+        </React.Fragment>
+      </IntlProvider>
     );
   }
 }

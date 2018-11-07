@@ -16,15 +16,15 @@ const moveToRight = keyframes`
 `;
 
 export const HeaderWrapper = styled.header`
-    height: 70vh;
-    background-image: linear-gradient(rgba(45, 93, 225, 0.5), rgba(9, 30, 220, 0.5)), url(${bgPhotos});
-    background-size: cover;
-    background-position: center;
+    height: 100vh;
 `;
 
 export const HeaderContainer = styled.div`
   position: relative;
-  height: 100%;
+  height: 70%;
+  background-image: linear-gradient(rgba(45, 93, 225, 0.5), rgba(9, 30, 220, 0.5)), url(${bgPhotos});
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: flex-end;
 `;
@@ -69,8 +69,8 @@ export const HeaderMenu = styled.div`
 export const HeaderSocial = styled.div`
   position: absolute;
   bottom: 0;
-  height: 30vh;
-  width: 100vw;
+  height: 30%;
+  width: 100%;
   background: #000;
   opacity: 0.9;
 `;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Header from '../Header';
 import SkillSection from '../SkillSection';
 import { createGlobalStyle } from "styled-components";
@@ -35,7 +36,19 @@ const GlobalStyle = createGlobalStyle`
 export default class extends Component {
 
   state = {
-    locale: en_US
+    locale: en_US,
+  }
+
+  onGetLocationRef = (location) => {
+    this.setState({location: location}, () => console.log(this.state));
+  }
+
+  onScrollToSection = () => {
+    const { location: {current}} = this.state;
+    current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',})
   }
 
   render() {
@@ -44,8 +57,9 @@ export default class extends Component {
       <IntlProvider locale={'en'} messages={locale}>
         <React.Fragment>
           <GlobalStyle />
-          <Header />
-          <SkillSection />
+          <Header scroll={this.onScrollToSection} />
+          <SkillSection getLocation={this.onGetLocationRef}>
+          </SkillSection>
         </React.Fragment>
       </IntlProvider>
     );

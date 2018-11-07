@@ -26,8 +26,9 @@ class Header {
   }
 
   onRenderMenuList = ({ item, message }, index) => {
+    const { scroll } = this.props;
     return (
-      <li key={item}>
+      <li key={item} onClick={scroll}>
         <a href="#">
           <FormattedMessage 
             id={message}
@@ -59,8 +60,6 @@ class Header {
           </Introduction>
         </HeaderContainer>
         <HeaderSocial>
-          <h2></h2>
-          <p></p>
         </HeaderSocial>
       </HeaderWrapper>
     );

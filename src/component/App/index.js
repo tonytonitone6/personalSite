@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     :focus {
       outline: none;
     }
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 400;
     color: #fff;
     line-height: 17px;
@@ -44,11 +44,10 @@ export default class extends Component {
   }
 
   onScrollToSection = () => {
-    const { location: {current}} = this.state;
-    current.scrollIntoView({
+    const { location } = this.state;
+    location.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
-      inline: 'center',})
+      block: 'start'})
   }
 
   render() {

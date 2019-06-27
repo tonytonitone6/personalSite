@@ -29,11 +29,11 @@ class Header {
     const { scroll } = this.props;
     return (
       <li key={item} onClick={scroll}>
-        <a href="#">
+        <span>
           <FormattedMessage 
             id={message}
           />
-        </a>
+        </span>
       </li>
     )
   } 

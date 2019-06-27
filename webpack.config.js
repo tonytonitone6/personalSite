@@ -1,19 +1,13 @@
 const { join } = require("path");
-const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const webpackMerge = require('webpack-merge');
+const webpackMerge = require("webpack-merge");
 
-const { ImageminWebpackPlugin } = require('imagemin-webpack');
-const imageminGifsicle = require('imagemin-gifsicle');
-const plugins = [imageminGifsicle()];
+const modeConfig = (env, API_URI) => require(`./webpack.utils/webpack.${env}`)(env, API_URI);
 
-const modeConfig = (env) => require(`./webpack.utils/webpack.${env}`)(env);
-
-module.exports = ({ mode }) => webpackMerge(
+module.exports = ({ mode, API_URI }) =>
+  webpackMerge(
     {
-      entry: './src/index.js',
+      entry: "./index.js",
       output: {
         path: join(__dirname, "dist"),
         publicPath: "/",
@@ -22,48 +16,22 @@ module.exports = ({ mode }) => webpackMerge(
       module: {
         rules: [
           {
-            loader: "babel-loader",
-            test: /\.js$/,
+            loader: "ts-loader",
+            test: /\.tsx?$/,
             exclude: /node_modules/
           },
           {
             test: /\.s?css$/,
             use: ExtractTextPlugin.extract({
               fallback: "style-loader",
-              use: ["css-loader", "postcss-loader", "sass-loader"]
+              use: ["css-loader", "sass-loader"]
             })
-          },
-          {
-            test: /\.(svg|png|jpe?g)$/,
-            use: [
-              {
-                loader: "file-loader",
-                options: {
-                  name: "image/[hash:8].[name].[ext]"
-                }
-              }
-            ]
           }
         ]
       },
-      plugins: [
-        new CleanWebpackPlugin(["dist"]),
-        new ExtractTextPlugin({
-          filename: "css/style.css",
-          allChunks: true
-        }),
-        new HtmlWebpackPlugin({
-          template: "./index.html",
-          favicon: "./favicon.ico"
-        }),
-        new webpack.ProgressPlugin(),
-        new ImageminWebpackPlugin({
-          imageminOptions: {
-            plugins
-          }
-        })
-      ]
+      resolve: {
+        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"]
+      }
     },
-    modeConfig(mode)
-  )
- 
+    modeConfig(mode, API_URI)
+  );

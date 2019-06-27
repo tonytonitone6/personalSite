@@ -36,6 +36,7 @@ export const HeaderMenu = styled.div`
       display: inline-block;
       margin: 1rem 1rem 0 1rem;
       position: relative;
+      cursor: pointer;
       &::after {
         content: '';
         display: inline-block;
@@ -52,7 +53,7 @@ export const HeaderMenu = styled.div`
         width: 100%;
       }
       
-      & > a { 
+      & > span { 
         text-decoration: none;
         color: #fff;
       }

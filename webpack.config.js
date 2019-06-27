@@ -7,7 +7,7 @@ const modeConfig = (env, API_URI) => require(`./webpack.utils/webpack.${env}`)(e
 module.exports = ({ mode, API_URI }) =>
   webpackMerge(
     {
-      entry: "./index.js",
+      entry: "./src/index.tsx",
       output: {
         path: join(__dirname, "dist"),
         publicPath: "/",

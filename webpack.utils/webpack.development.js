@@ -27,6 +27,7 @@ module.exports = (env, API_URI) => ({
   devServer: {
     contentBase: join(__dirname, "../dist"),
     historyApiFallback: true,
+    open: true
     // proxy: {
     //   "/v1": "http://[::1]:5000"
     // }

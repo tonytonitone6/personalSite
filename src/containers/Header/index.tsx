@@ -1,28 +1,53 @@
-import React, { Component } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import React, { FunctionComponent, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import {
+  HeaderWrapper,
+  HeaderContainer,
+  HeaderMenu,
+  HeaderSocial,
+  Introduction,
+  SocialArea,
+  SocialIcon
+} from './styles';
 
 
-class Header extends Component<RouteComponentProps> {
+const Header: FunctionComponent = () => {
 
-  public state = {
-    loading: true,
-    showModal: false
-  };
+  const [menuLists, setMenuLists] = useState([
+    { message: 'App.aboutMe', item: 'aboutMe'},
+    { message: 'App.experience', item: 'experience' },
+    { message: 'App.protfolio', item: 'protfolio' }
+  ])
 
-  private name = 'stan';
-
-  public componentDidMount() {
-  }
-
-
-
-  render() {
-    return(
-      <div>
-        456
-      </div>
+  const onRenderMenuList = ({ item, message}: {item: string, message: string}) => {
+    return (
+      <li 
+        key={item}
+      >
+        <a href="#">
+          <FormattedMessage 
+            id={message}
+          />
+        </a>
+      </li>
     )
   }
+
+
+
+  return (
+    <HeaderWrapper>
+      <HeaderContainer>
+        <HeaderMenu>
+          <ul>
+            {menuLists.map(onRenderMenuList)}
+          </ul>
+        </HeaderMenu>
+      </HeaderContainer>
+    </HeaderWrapper>
+  )
 }
+
 
 export default Header;

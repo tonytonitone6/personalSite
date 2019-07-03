@@ -26,6 +26,17 @@ module.exports = ({ mode, API_URI }) =>
               fallback: "style-loader",
               use: ["css-loader", "sass-loader"]
             })
+          },
+          {
+            test: /\.(svg|png|jpe?g)$/,
+            use:[
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'image/[hash:8].[name].[ext]'
+                }
+              }
+            ]
           }
         ]
       },

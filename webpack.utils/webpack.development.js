@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const { join } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 module.exports = (env, API_URI) => ({
@@ -20,6 +21,12 @@ module.exports = (env, API_URI) => ({
       }
     }),
     new webpack.ProgressPlugin(),
+    new ImageminPlugin({
+      disable: false,
+      pngquant: {
+        quality: '95-100'
+      }
+    })
     // new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
   ],
   mode: env,

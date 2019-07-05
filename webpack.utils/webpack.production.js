@@ -5,6 +5,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = (env, API_URI) => ({
@@ -33,6 +34,12 @@ module.exports = (env, API_URI) => ({
       'collections': true,
       'paths': true,
       'shorthands': false
+    }),
+    new ImageminPlugin({
+      disable: false,
+      pngquant: {
+        quality: '95-100'
+      }
     }),
     new CompressionPlugin({
       filename: "[path].gz[query]",

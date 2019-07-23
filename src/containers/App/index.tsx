@@ -1,12 +1,14 @@
 import React, { FunctionComponent, Fragment, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { addLocaleData, IntlProvider } from 'react-intl';
-
+import { ApolloProvider } from 'react-apollo';
 import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
-import en_US from '../../locale/en.US';
-import zh_CN from '../../locale/zh.CN';
-import Header from '../Header';
+
+import en_US from '@locales/en.US';
+import zh_CN from '@locales/zh.CN';
+import Header from '@containers/Header';
+import { client } from '@utils/api';
 
 addLocaleData([...en, ...zh]);
 
@@ -34,12 +36,14 @@ const App: FunctionComponent = () => {
   const [language, setLanguage] = useState(en_US);
 
   return (
-    <IntlProvider locale={'en'} messages={language}>
-      <Fragment>
-        <GlobalStyle />
-        <Header />
-      </Fragment>
-    </IntlProvider>
+    <ApolloProvider client={client}>
+      <IntlProvider locale={'en'} messages={language}>
+        <Fragment>
+          <GlobalStyle />
+          <Header />
+        </Fragment>
+      </IntlProvider>
+    </ApolloProvider>
   )
 }
 

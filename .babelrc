@@ -5,6 +5,17 @@
   "plugins": [
     "transform-runtime",
     "transform-decorators-legacy",
-    "transform-class-properties"
+    "transform-class-properties",
+    // [
+    //   "module-resolver",
+    //   {
+    //     "root": ["./src"],
+    //     "alias": {
+    //       "@components": "./src/components",
+    //       "@containers": "./src/containers",
+    //       "@locales": "./src/locales"
+    //     }
+    //   }
+    // ]
   ]
 }

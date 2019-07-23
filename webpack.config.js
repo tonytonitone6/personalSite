@@ -4,6 +4,10 @@ const webpackMerge = require("webpack-merge");
 
 const modeConfig = (env, API_URI) => require(`./webpack.utils/webpack.${env}`)(env, API_URI);
 
+const srcPath = (dir) => {
+  return join(__dirname, 'src', dir);
+}
+
 module.exports = ({ mode, API_URI }) =>
   webpackMerge(
     {
@@ -41,6 +45,12 @@ module.exports = ({ mode, API_URI }) =>
         ]
       },
       resolve: {
+        alias: {
+          '@locales': srcPath('locales'),
+          '@components': srcPath('components'),
+          '@containers': srcPath('containers'),
+          '@utils': srcPath('utils')
+        },
         extensions: [".js", ".jsx", ".json", ".ts", ".tsx"]
       }
     },

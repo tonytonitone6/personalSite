@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 
 interface MenuListType {
@@ -6,8 +6,12 @@ interface MenuListType {
   item: string;
 }
 
-const MenuItem: FunctionComponent = () => {
-
+const MenuItem: FunctionComponent = ():JSX.Element => {
+  return (
+  <div>
+    123
+  </div>
+  )
 }
 
 

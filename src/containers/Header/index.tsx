@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import MenuItem from './MenuItem';
+import ContentList from '@assets/Content.json';
 
 import {
   HeaderWrapper,
@@ -14,14 +15,13 @@ import {
 } from './styles';
 
 
+interface TypeMenuItem {
+  id: number;
+  name: string;
+}
+
+
 const Header: FunctionComponent = () => {
-
-  const [menuLists, setMenuLists] = useState([
-    { message: 'App.aboutMe', item: 'aboutMe'},
-    { message: 'App.experience', item: 'experience' },
-    { message: 'App.protfolio', item: 'protfolio' }
-  ]);
-
   const [iconList, setIconList] = useState([
     { href: 'https://twitter.com/stanmao', icon: 'fab fa-twitter-square'},
     { href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook' },
@@ -29,14 +29,14 @@ const Header: FunctionComponent = () => {
     { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
   ])
 
-  const onRenderMenuList = ({ item, message }: {item: string, message: string}) => {
+  const onRenderMenuList = ({id, name}: TypeMenuItem) => {
     return (
       <li 
-        key={item}
+        key={id}
       >
         <a href="#">
           <FormattedMessage 
-            id={message}
+            id={name}
           />
         </a>
       </li>
@@ -50,7 +50,7 @@ const Header: FunctionComponent = () => {
       <HeaderContainer>
         <HeaderMenu>
           <ul>
-            {menuLists.map(onRenderMenuList)}
+            {ContentList.map(onRenderMenuList)}
           </ul>
         </HeaderMenu>
         <Introduction>

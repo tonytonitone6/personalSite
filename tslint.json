@@ -9,6 +9,8 @@
     "object-literal-sort-keys": false,
     "no-console": false,
     "jsx-no-lambda": false,
-    "member-ordering": false
+    "interface-name": [true, "never-prefix"],
+    "member-ordering": false,
+    "member-access": false
   }
 }

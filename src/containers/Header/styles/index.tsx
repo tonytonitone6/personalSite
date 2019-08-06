@@ -15,12 +15,12 @@ const moveToRight = keyframes`
 
 
 export const HeaderWrapper = styled.header`
-  height: 100vh;
+  height: 100%;
 `;
 
 export const HeaderContainer = styled.div`
   position: relative;
-  height: 70%;
+  height: 100%;
   background-image: linear-gradient(rgba(45, 93, 225, 0.5), rgba(9, 30, 220, 0.5)), url(${bgPhotos});
   background-size: cover;
   background-position: center;

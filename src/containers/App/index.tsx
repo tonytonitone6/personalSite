@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState } from 'react';
+import React, { FunctionComponent, Fragment, useState, useEffect, useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import { ApolloProvider } from 'react-apollo';
@@ -8,7 +8,10 @@ import zh from 'react-intl/locale-data/zh';
 import en_US from '@locales/en.US';
 import zh_CN from '@locales/zh.CN';
 import Header from '@containers/Header';
+import Content from '@components/Content';
+import useLocalStorage from '@utils/useLocalstorage';
 import { client } from '@utils/api';
+import { MenuContext } from '@context/menuContext';
 
 addLocaleData([...en, ...zh]);
 
@@ -18,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  html, body {
+  html, body, #root {
     width: 100%;
     height: 100%;
     :focus {
@@ -31,18 +34,48 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App: FunctionComponent = () => {
+const getWebSiteLanguage = ():string => {
+  if (window) {
+    return window.navigator.language.split('-')[0];
+  }
+  return navigator.language.split('-')[0];
+}
 
-  const [language, setLanguage] = useState(en_US);
+const setMesLang = (lng: any) => {
+  switch(lng) {
+    case 'en':
+      return en_US;
+      break;
 
+    default:
+      break;
+  }
+}
+
+const App: FunctionComponent = (): JSX.Element => {
+  const [language, setLanguage] = useState(() => getWebSiteLanguage());
+  const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));
+  const value = useContext(MenuContext);
+
+  console.log(value);
+
+  useEffect(() => {
+    setMessagesLang(() => setMesLang(language));
+  }, [language]);
+
+
+  
   return (
     <ApolloProvider client={client}>
-      <IntlProvider locale={'en'} messages={language}>
-        <Fragment>
-          <GlobalStyle />
-          <Header />
-        </Fragment>
-      </IntlProvider>
+      <MenuContext.Provider value={{}}>
+        <IntlProvider locale={language} messages={messagesLang}>
+          <Fragment>
+            <GlobalStyle />
+            <Header />
+            <Content />
+          </Fragment>
+        </IntlProvider>
+      </MenuContext.Provider>
     </ApolloProvider>
   )
 }

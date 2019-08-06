@@ -49,7 +49,9 @@ module.exports = ({ mode, API_URI }) =>
           '@locales': srcPath('locales'),
           '@components': srcPath('components'),
           '@containers': srcPath('containers'),
-          '@utils': srcPath('utils')
+          '@utils': srcPath('utils'),
+          "@assets": srcPath('assets'),
+          "@context": srcPath("context")
         },
         extensions: [".js", ".jsx", ".json", ".ts", ".tsx"]
       }

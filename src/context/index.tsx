@@ -1,0 +1,1 @@
+export { MenuContext } from '@context/menuContext';

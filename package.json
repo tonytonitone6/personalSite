@@ -10,7 +10,7 @@
     "prod": "npm run webpack -- --env.mode production",
     "format": "prettier --write \"**/*.{js,jsx,tsx,json}\"",
     "lint": "tslint \"**/*.{ts,tsx}\"",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "mao",
   "license": "ISC",

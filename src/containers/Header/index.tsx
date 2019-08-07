@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useContext, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import MenuItem from './MenuItem';
+import { SocialArea } from './SocialArea';
 import ContentList from '@assets/Content.json';
+import { MenuContext } from '@context/index';
 
 import {
   HeaderWrapper,
@@ -10,7 +11,6 @@ import {
   HeaderMenu,
   HeaderSocial,
   Introduction,
-  SocialArea,
   SocialIcon
 } from './styles';
 
@@ -22,28 +22,41 @@ interface TypeMenuItem {
 
 
 const Header: FunctionComponent = () => {
-  const [iconList, setIconList] = useState([
-    { href: 'https://twitter.com/stanmao', icon: 'fab fa-twitter-square'},
+  const [skillList, setSkillList] = useState([
+    { href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
     { href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook' },
     { href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw', item: 'fab fa-instagram' },
     { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
-  ])
+  ]);
 
-  const onRenderMenuList = ({id, name}: TypeMenuItem) => {
-    return (
-      <li 
-        key={id}
-      >
-        <a href="#">
-          <FormattedMessage 
-            id={name}
-          />
-        </a>
-      </li>
-    )
+  const { refController, _ } = useContext(MenuContext);
+
+  const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
+    e.preventDefault();
+    refController[id].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
 
-
+  
+  const onRenderMenuList = ({id, name}: TypeMenuItem):JSX.Element | null => {
+    if (refController && typeof refController === 'object') {
+      return (
+        <li 
+          key={id}
+          onClick={(e) => handleClick(e, id)}
+        >
+          <a href="#">
+            <FormattedMessage 
+              id={name}
+            />
+          </a>
+        </li>
+      )
+    }
+    return null;
+  }
 
   return (
     <HeaderWrapper>
@@ -56,9 +69,7 @@ const Header: FunctionComponent = () => {
         <Introduction>
           <h1>Stan Mao</h1>
           <span>Backend Engineer</span>
-          <SocialArea>
-
-          </SocialArea>
+          <SocialArea skillList={skillList} />
         </Introduction>
       </HeaderContainer>
     </HeaderWrapper>

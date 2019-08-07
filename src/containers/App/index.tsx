@@ -52,12 +52,14 @@ const setMesLang = (lng: any) => {
   }
 }
 
+interface TypeContextProps {
+  dispatch: () => void;
+}
+
 const App: FunctionComponent = (): JSX.Element => {
   const [language, setLanguage] = useState(() => getWebSiteLanguage());
   const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));
-  const value = useContext(MenuContext);
-
-  console.log(value);
+  const [refController, setRefController] = useState(null);
 
   useEffect(() => {
     setMessagesLang(() => setMesLang(language));
@@ -67,7 +69,7 @@ const App: FunctionComponent = (): JSX.Element => {
   
   return (
     <ApolloProvider client={client}>
-      <MenuContext.Provider value={{}}>
+      <MenuContext.Provider value={{refController, setRefController}}>
         <IntlProvider locale={language} messages={messagesLang}>
           <Fragment>
             <GlobalStyle />

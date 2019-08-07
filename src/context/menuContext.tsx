@@ -1,12 +1,3 @@
-import { createContext, useReducer } from 'react';
+import { createContext } from 'react';
 
-
-// const reducer = (state, action) => {
-//   switch(action.type) {
-//     case 
-//   }
-// }
-
-export const MenuContext = createContext({
-  
-});
+export const MenuContext = createContext({} as any);

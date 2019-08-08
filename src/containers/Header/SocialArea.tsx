@@ -1,7 +1,8 @@
-import React, { FunctionComponent, ReactChild, ReactElement } from 'react';
+import React, { memo } from 'react';
 
 import {
-  SocialIcon
+  SocialIcon,
+  SocialArea
 } from './styles';
 
 
@@ -10,17 +11,26 @@ interface TypeProps {
   item: string;
 }
 
+const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
+  const menuList = props.skillList;
 
-export const SocialArea= (props: { skillList:  TypeProps[]}) => {
+  const onRenderSocialList = (item: TypeProps) => {
+    return (
+      <SocialIcon 
+        key={item.href}
+        target="_blank"
+        href={item.href}
+      >
+        <i className={item.item} />
+      </SocialIcon>
+    )
+  }
+  
   return (
-    <>123</>
-    // <SocialIcon 
-    //   key={item.href}
-    //   target="_blank"
-    //   href={item.href}
-    // >
-    //   <i className={item.item} />
-    // </SocialIcon>
-  )
-}
-
+    <SocialArea>
+      { menuList.map(onRenderSocialList) }
+    </SocialArea>
+    )
+  }
+  
+  export const MemoSocialArea = memo(SocialAreaComponent)

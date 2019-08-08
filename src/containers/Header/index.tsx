@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useContext, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { SocialArea } from './SocialArea';
+import { MemoSocialArea } from './SocialArea';
 import ContentList from '@assets/Content.json';
 import { MenuContext } from '@context/index';
 
@@ -69,7 +69,7 @@ const Header: FunctionComponent = () => {
         <Introduction>
           <h1>Stan Mao</h1>
           <span>Backend Engineer</span>
-          <SocialArea skillList={skillList} />
+          <MemoSocialArea skillList={skillList} />
         </Introduction>
       </HeaderContainer>
     </HeaderWrapper>

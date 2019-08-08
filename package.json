@@ -6,7 +6,7 @@
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
     "webpack": "webpack",
-    "dev": "npm run webpack-dev-server -- --env.mode development",
+    "dev": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9000/graphql",
     "prod": "npm run webpack -- --env.mode production",
     "format": "prettier --write \"**/*.{js,jsx,tsx,json}\"",
     "lint": "tslint \"**/*.{ts,tsx}\"",
@@ -15,13 +15,13 @@
   "author": "mao",
   "license": "ISC",
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.0",
     "apollo-boost": "^0.4.3",
     "d3": "^5.7.0",
     "emotion": "^9.2.12",
     "graphql": "^14.4.2",
     "imagemin-gifsicle": "^6.0.1",
     "react": "^16.8.6",
-    "react-apollo": "^2.5.8",
     "react-decoration": "^2.0.0",
     "react-dom": "^16.8.6",
     "react-intl": "^2.7.2",

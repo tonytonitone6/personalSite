@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Fragment, useState, useEffect, useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { addLocaleData, IntlProvider } from 'react-intl';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
 
@@ -9,7 +9,6 @@ import en_US from '@locales/en.US';
 import zh_CN from '@locales/zh.CN';
 import Header from '@containers/Header';
 import Content from '@components/Content';
-import useLocalStorage from '@utils/useLocalstorage';
 import { client } from '@utils/api';
 import { MenuContext } from '@context/menuContext';
 

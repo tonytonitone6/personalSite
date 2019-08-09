@@ -51,7 +51,9 @@ module.exports = ({ mode, API_URI }) =>
           '@containers': srcPath('containers'),
           '@utils': srcPath('utils'),
           "@assets": srcPath('assets'),
-          "@context": srcPath("context")
+          "@context": srcPath('context'),
+          "@reducers": srcPath('reducers'),
+          "@hooks": srcPath('hooks')
         },
         extensions: [".js", ".jsx", ".json", ".ts", ".tsx"]
       }

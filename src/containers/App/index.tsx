@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState, useEffect, useContext } from 'react';
+import React, { FunctionComponent, Fragment, useState, useEffect, useContext, useReducer } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -11,6 +11,7 @@ import Header from '@containers/Header';
 import Content from '@components/Content';
 import { client } from '@utils/api';
 import { MenuContext } from '@context/menuContext';
+import { menuReducer } from '@reducers/index';
 
 addLocaleData([...en, ...zh]);
 
@@ -55,20 +56,27 @@ interface TypeContextProps {
   dispatch: () => void;
 }
 
+const initialState = {
+  menuList: [],
+  refs: null
+}
+
 const App: FunctionComponent = (): JSX.Element => {
   const [language, setLanguage] = useState(() => getWebSiteLanguage());
   const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));
   const [refController, setRefController] = useState(null);
 
+  const [state, dispatch] = useReducer(menuReducer, initialState);
+
+  
+
   useEffect(() => {
     setMessagesLang(() => setMesLang(language));
   }, [language]);
-
-
   
   return (
     <ApolloProvider client={client}>
-      <MenuContext.Provider value={{refController, setRefController}}>
+      <MenuContext.Provider value={{state, dispatch}}>
         <IntlProvider locale={language} messages={messagesLang}>
           <Fragment>
             <GlobalStyle />

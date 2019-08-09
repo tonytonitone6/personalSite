@@ -11,7 +11,9 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@assets/*": ["assets/*"],
-      "@context/*": ["context/*"]
+      "@context/*": ["context/*"],
+      "@reducers/*": ["reducers/*"],
+      "@hooks/*": ["hooks/*"]
     },
     "resolveJsonModule": true,
     // "lib": [],                             /* Specify library files to be included in the compilation. */

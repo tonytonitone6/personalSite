@@ -1,17 +1,16 @@
-import React, { FunctionComponent, useState, useContext, MouseEvent } from 'react';
+import React, { FunctionComponent, useState, useContext, MouseEvent, useReducer, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { MemoSocialArea } from './SocialArea';
+import { menuReducer } from '@reducers/index';
 import ContentList from '@assets/Content.json';
 import { MenuContext } from '@context/index';
-
+import types from '@reducers/constants';
 import {
   HeaderWrapper,
   HeaderContainer,
   HeaderMenu,
-  HeaderSocial,
   Introduction,
-  SocialIcon
 } from './styles';
 
 
@@ -19,7 +18,6 @@ interface TypeMenuItem {
   id: number;
   name: string;
 }
-
 
 const Header: FunctionComponent = () => {
   const [skillList, setSkillList] = useState([
@@ -29,19 +27,18 @@ const Header: FunctionComponent = () => {
     { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
   ]);
 
-  const { refController, _ } = useContext(MenuContext);
-
+  const { state: { menuList, refs } , dispatch } = useContext(MenuContext);
+    
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault();
-    refController[id].current.scrollIntoView({
+    refs[id].current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
   }
-
   
-  const onRenderMenuList = ({id, name}: TypeMenuItem):JSX.Element | null => {
-    if (refController && typeof refController === 'object') {
+  const onRenderMenuList = ({id, name}: any):JSX.Element | null => {    
+    if (menuList &&  menuList.length !== 0) {
       return (
         <li 
           key={id}
@@ -63,7 +60,10 @@ const Header: FunctionComponent = () => {
       <HeaderContainer>
         <HeaderMenu>
           <ul>
-            {ContentList.map(onRenderMenuList)}
+            {(menuList && menuList.length !== 0) 
+              ? menuList.map(onRenderMenuList)
+              : null}
+            {/* {ContentList.map(onRenderMenuList)} */}
           </ul>
         </HeaderMenu>
         <Introduction>

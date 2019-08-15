@@ -1,19 +1,18 @@
 import React from 'react';
 import { 
-  ExperienceSection 
+  ExperienceSection ,
+  AvatorWrapper
 } from './styles';
 
 
-
-class SkillSection extends React.Component {
-  
-
-
-  render() {
-    return (
-      <div>123</div>
-    );
-  }
+const SkillSection = () => {
+  return (
+    <ExperienceSection>
+      <AvatorWrapper>
+        123
+      </AvatorWrapper>
+    </ExperienceSection>
+  )
 }
 
 

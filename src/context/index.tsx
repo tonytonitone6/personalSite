@@ -1,1 +1,1 @@
-export { MenuContext } from '@context/menuContext';
+export { MenuContext, MenuContextProvider } from '@context/menuContext';

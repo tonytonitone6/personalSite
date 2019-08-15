@@ -7,13 +7,13 @@ exports.default = void 0;
 
 const menuList = (_, args, ctx) => {
   const data = [{
-    "id": 1,
+    "id": 0,
     "name": "App.aboutMe"
   }, {
-    "id": 2,
+    "id": 1,
     "name": "App.experience"
   }, {
-    "id": 3,
+    "id": 2,
     "name": "App.protfolio"
   }];
   return data;

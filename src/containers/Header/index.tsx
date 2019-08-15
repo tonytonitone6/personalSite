@@ -26,9 +26,12 @@ const Header: FunctionComponent = () => {
     { href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw', item: 'fab fa-instagram' },
     { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
   ]);
-
+  const data = useContext(MenuContext)
+  console.log(data);
+  
   const { state: { menuList, refs } , dispatch } = useContext(MenuContext);
-    
+
+  
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault();
     refs[id].current.scrollIntoView({

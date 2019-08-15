@@ -5,17 +5,16 @@ import
     useEffect,
     FunctionComponent,
     createRef,
-    useContext,
-    useRef
+    useContext
   } from 'react';
 
 import { useQuery } from '@apollo/react-hooks';
 
+import Capacity from '@components/Capacity';
+import Diagram from '@components/Diagram';
 import types from '@reducers/constants';
-import { MenuContext } from '@context/menuContext';
+import { MenuContext } from '@context/index';
 import { GET_MENUS } from '@utils/fetch';
-import { menuReducer } from '@reducers/index';
-import ContentList from '@assets/Content.json';
 import {
   ContentWrapper
 } from './styles';
@@ -28,22 +27,41 @@ interface TypeItem {
 
 const List:FunctionComponent = ():JSX.Element | null => {
   const [refStatus, setRefstatus] = useState(null);
-  const { state, dispatch } = useContext(MenuContext);
+  const { _, dispatch } = useContext(MenuContext);
   const {data: { menuList = [] }}: any = useQuery(GET_MENUS);
+  const [block, ignoreFunc] = useState([
+    {
+      id: 1,
+      component: Capacity
+    },
+    {
+      id: 2,
+      component: Diagram
+    },
+    {
+      id: 3,
+      component: Capacity
+    }
+  ]);
+
+  const onRenderComponent = (Component: FunctionComponent): JSX.Element  => {
+    return <Component />
+  }
   
-  const onRenderContentBlock = (refs: any, item: any) => {
+  const onRenderContentBlock = (refs: any, item: TypeItem) => {
+    
     return (
       <ContentWrapper 
         key={item.id}
         ref={refs[item.id]}
         >
-        <div>{item.name}</div>
+        { onRenderComponent(block[item.id].component) }
       </ContentWrapper>
     )
   }
 
   useEffect(() => {        
-    const refs = menuList.reduce((acc: any, value: any):any => {
+    const refs = menuList.reduce((acc:any, value: TypeItem) => {      
       acc[value.id] = createRef();
       return acc;
     }, {});
@@ -62,7 +80,7 @@ const List:FunctionComponent = ():JSX.Element | null => {
   if (menuList.length !== 0 && refStatus !== null) {    
     return (
       <>
-        { menuList.map((item:any) => onRenderContentBlock(refStatus, item)) }
+        { menuList.map((item:TypeItem) => onRenderContentBlock(refStatus, item)) }
       </>
     )
   }

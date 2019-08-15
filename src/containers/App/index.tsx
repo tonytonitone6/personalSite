@@ -10,7 +10,10 @@ import zh_CN from '@locales/zh.CN';
 import Header from '@containers/Header';
 import Content from '@components/Content';
 import { client } from '@utils/api';
-import { MenuContext } from '@context/menuContext';
+import { 
+  MenuContext,
+  MenuContextProvider
+} from '@context/index';
 import { menuReducer } from '@reducers/index';
 
 addLocaleData([...en, ...zh]);
@@ -56,19 +59,9 @@ interface TypeContextProps {
   dispatch: () => void;
 }
 
-const initialState = {
-  menuList: [],
-  refs: null
-}
-
 const App: FunctionComponent = (): JSX.Element => {
   const [language, setLanguage] = useState(() => getWebSiteLanguage());
-  const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));
-  const [refController, setRefController] = useState(null);
-
-  const [state, dispatch] = useReducer(menuReducer, initialState);
-
-  
+  const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));  
 
   useEffect(() => {
     setMessagesLang(() => setMesLang(language));
@@ -76,7 +69,7 @@ const App: FunctionComponent = (): JSX.Element => {
   
   return (
     <ApolloProvider client={client}>
-      <MenuContext.Provider value={{state, dispatch}}>
+      <MenuContextProvider>
         <IntlProvider locale={language} messages={messagesLang}>
           <Fragment>
             <GlobalStyle />
@@ -84,7 +77,7 @@ const App: FunctionComponent = (): JSX.Element => {
             <Content />
           </Fragment>
         </IntlProvider>
-      </MenuContext.Provider>
+      </MenuContextProvider>
     </ApolloProvider>
   )
 }

@@ -9,6 +9,8 @@ var _apolloServer = require("apollo-server");
 
 var _merge = _interopRequireDefault(require("lodash/merge"));
 
+var _models = _interopRequireDefault(require("./models"));
+
 var _schema = require("./utils/schema");
 
 var _menu = _interopRequireDefault(require("./types/menu/menu.resolvers"));
@@ -25,6 +27,9 @@ const start = async () => {
     }
   `;
   const allSchemaTypes = await Promise.all(types.map(_schema.loadTypeSchema));
+
+  _models.default.init();
+
   const server = new _apolloServer.ApolloServer({
     cors: {
       origin: '*',

@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   ExperienceSection ,
-  AvatorWrapper
+  AvatorWrapper,
+  SkillList
 } from './styles';
 
 
@@ -9,8 +10,11 @@ const SkillSection = () => {
   return (
     <ExperienceSection>
       <AvatorWrapper>
-        123
+        
       </AvatorWrapper>
+      <SkillList>
+        
+      </SkillList>
     </ExperienceSection>
   )
 }

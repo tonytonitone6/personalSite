@@ -15,3 +15,9 @@ export const AvatorWrapper = styled.div`
   clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
   background-color: #fff;
 `;
+
+
+export const SkillList = styled.div`
+  max-width: 50%;
+  height: 100%;
+`;

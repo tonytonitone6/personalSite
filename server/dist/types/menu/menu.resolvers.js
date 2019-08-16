@@ -7,13 +7,13 @@ exports.default = void 0;
 
 const menuList = (_, args, ctx) => {
   const data = [{
-    "id": 0,
+    "_id": 0,
     "name": "App.aboutMe"
   }, {
-    "id": 1,
+    "_id": 1,
     "name": "App.experience"
   }, {
-    "id": 2,
+    "_id": 2,
     "name": "App.protfolio"
   }];
   return data;
@@ -22,6 +22,12 @@ const menuList = (_, args, ctx) => {
 var _default = {
   Query: {
     menuList
+  },
+  Menu: {
+    id(menu, _, ctx) {
+      return menu._id;
+    }
+
   }
 };
 exports.default = _default;

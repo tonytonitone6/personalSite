@@ -2,15 +2,15 @@
 const menuList = (_, args, ctx) => {
   const data = [
     {
-      "id": 0,
+      "_id": 0,
       "name": "App.aboutMe"
     },
     {
-      "id": 1,
+      "_id": 1,
       "name": "App.experience"
     },
     {
-      "id": 2,
+      "_id": 2,
       "name": "App.protfolio"
     }
   ];
@@ -22,6 +22,11 @@ const menuList = (_, args, ctx) => {
 export default {
   Query: {
     menuList
+  },
+  Menu: {
+    id(menu, _, ctx) {    
+      return menu._id;
+    } 
   }
 }
 

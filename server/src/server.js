@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import merge from 'lodash/merge';
 
+import model from './models';
 import { loadTypeSchema } from './utils/schema';
 import menu from './types/menu/menu.resolvers';
 
@@ -18,7 +19,7 @@ export const start = async () => {
 
   const allSchemaTypes = await Promise.all(types.map(loadTypeSchema))
 
-
+  model.init();
   const server = new ApolloServer({
     cors: {
       origin: '*',
@@ -35,6 +36,7 @@ export const start = async () => {
 
   console.log(`Server is ready at ${url}`);
 }
+
 
 
 

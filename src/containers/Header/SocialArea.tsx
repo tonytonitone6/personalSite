@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   SocialIcon,
@@ -11,7 +12,7 @@ interface TypeProps {
   item: string;
 }
 
-const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
+const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {  
   const menuList = props.skillList;
 
   const onRenderSocialList = (item: TypeProps) => {
@@ -32,5 +33,15 @@ const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
     </SocialArea>
     )
   }
+
+  SocialAreaComponent.propTypes = {
+    skillList: PropTypes.arrayOf(
+      PropTypes.shape({
+        href: PropTypes.string.isRequired,
+        item: PropTypes.string.isRequired
+      })
+    ).isRequired
+  }
+
   
   export const MemoSocialArea = memo(SocialAreaComponent)

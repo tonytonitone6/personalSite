@@ -2,8 +2,6 @@ import React, { FunctionComponent, useState, useContext, MouseEvent, useReducer,
 import { FormattedMessage } from 'react-intl';
 
 import { MemoSocialArea } from './SocialArea';
-import { menuReducer } from '@reducers/index';
-import ContentList from '@assets/Content.json';
 import { MenuContext } from '@context/index';
 import types from '@reducers/constants';
 import {
@@ -26,8 +24,6 @@ const Header: FunctionComponent = () => {
     { href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw', item: 'fab fa-instagram' },
     { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
   ]);
-  const data = useContext(MenuContext)
-  console.log(data);
   
   const { state: { menuList, refs } , dispatch } = useContext(MenuContext);
 

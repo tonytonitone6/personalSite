@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+
+import useLocation from '@hooks/useLocation';
 import { 
   ExperienceSection ,
   AvatorWrapper,
@@ -7,13 +9,20 @@ import {
 
 
 const SkillSection = () => {
+  const [location, _]: any = useLocation();
+  useEffect(() => {
+    console.log(document.body.scrollHeight);
+    
+  }, [location])
+  
+
   return (
     <ExperienceSection>
       <AvatorWrapper>
-        
+        123
       </AvatorWrapper>
       <SkillList>
-        
+        123
       </SkillList>
     </ExperienceSection>
   )

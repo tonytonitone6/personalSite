@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.8.1",
-    "app-root-path": "^2.2.1",
+    "dataloader": "^1.4.0",
     "dotenv": "^8.0.0",
     "graphql": "^14.4.2",
     "graphql-tools": "^4.0.5",

@@ -9,7 +9,7 @@ import logger from '../services/logger';
 const dir = path.join(__dirname, 'schemas');
 
 const option = {
-  useNewParser: true,
+  useNewUrlParser: true,
   autoReconnect: true,
   reconnectInterval: 1000
 };

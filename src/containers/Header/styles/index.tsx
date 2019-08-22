@@ -21,7 +21,7 @@ export const HeaderWrapper = styled.header`
 export const HeaderContainer = styled.div`
   position: relative;
   height: 100%;
-  background-image: linear-gradient(rgba(55, 93, 100, 0.5), rgba(9, 30, 220, 0.5)), url(${bgPhotos});
+  background-image: linear-gradient(rgba(55, 93, 100, 0.5), rgba(226, 235, 229, 0.5)), url(${bgPhotos});
   background-size: cover;
   background-position: center;
   display: flex;

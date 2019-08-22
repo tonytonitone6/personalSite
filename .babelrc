@@ -10,6 +10,9 @@
       "useESModules": false
     }],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    ["babel-plugin-styled-components", {
+      "displayName": false
+    }]
   ]
 }

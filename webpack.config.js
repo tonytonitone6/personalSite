@@ -1,5 +1,7 @@
 const { join } = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
 const webpackMerge = require("webpack-merge");
 
 const modeConfig = (env, API_URI) => require(`./webpack.utils/webpack.${env}`)(env, API_URI);
@@ -22,7 +24,10 @@ module.exports = ({ mode, API_URI }) =>
           {
             loader: "ts-loader",
             test: /\.tsx?$/,
-            exclude: /node_modules/
+            exclude: /node_modules/,
+            options: {
+              getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
+            }
           },
           {
             test: /\.s?css$/,

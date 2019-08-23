@@ -1,0 +1,57 @@
+enum SkillType {
+  FRONT_END
+  BACK_END
+  DATA_BASE
+  TEST
+}
+
+type Profile {
+  id: Int
+  front: [FrontEnd]
+  back: [BackEnd]
+  other: [Other]
+}
+
+# interface Skill {
+#   name: String!
+#   score: Int!
+#   type: SkillType!
+# }
+
+type FrontEnd {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type BackEnd {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type DataBase {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type Other {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+input NewProfileInput {
+  type: SkillType!
+  name: String!
+  score: Int!
+}
+
+extend type Query {
+  profiles: Profile!
+}
+
+type Mutation {
+  newProfile(input: NewProfileInput!): Profile!
+}

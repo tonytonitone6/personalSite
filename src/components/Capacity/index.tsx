@@ -11,8 +11,12 @@ import useLocation from '@hooks/useLocation';
 import { 
   ExperienceSection ,
   AvatorWrapper,
-  SkillList
+  SkillList,
+  UserAvator,
+  SkillWapper
 } from './styles';
+
+import userPhoto from '../../images/user.jpg';
 
 
 const personalContent = [
@@ -70,11 +74,13 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   return (
     <ExperienceSection ref={elementRef}>
       <AvatorWrapper>
-        123
+        <UserAvator src={userPhoto} width="100px" height="100px"/>
       </AvatorWrapper>
-      <SkillList isActive={animate}>
-        {personalContent.map(onRenderSkill)}
-      </SkillList>
+      <SkillWapper>
+        <SkillList isActive={animate}>
+          {personalContent.map(onRenderSkill)}
+        </SkillList>
+      </SkillWapper>
     </ExperienceSection>
   )
 }

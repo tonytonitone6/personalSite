@@ -4,16 +4,18 @@ import merge from 'lodash/merge';
 import model from './models';
 import { loadTypeSchema } from './utils/schema';
 import menu from './types/menu/menu.resolvers';
+import profile from './types/profile/profile.resolvers';
 
 const port = process.env.PORT || 9000;
 
-const types = ['menu'];
+const types = ['menu', 'profile'];
 
 export const start = async () => {
 
   const rootSchema = `
     schema {
       query: Query
+      mutation: Mutation
     }
   `
 
@@ -26,7 +28,7 @@ export const start = async () => {
       credentials: true
     },
     typeDefs: [rootSchema, ...allSchemaTypes],
-    resolvers: merge({}, menu),
+    resolvers: merge({}, menu, profile),
     async context({ req }) {
       return null;
     }

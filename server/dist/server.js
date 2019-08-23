@@ -15,15 +15,18 @@ var _schema = require("./utils/schema");
 
 var _menu = _interopRequireDefault(require("./types/menu/menu.resolvers"));
 
+var _profile = _interopRequireDefault(require("./types/profile/profile.resolvers"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const port = process.env.PORT || 9000;
-const types = ['menu'];
+const types = ['menu', 'profile'];
 
 const start = async () => {
   const rootSchema = `
     schema {
       query: Query
+      mutation: Mutation
     }
   `;
   const allSchemaTypes = await Promise.all(types.map(_schema.loadTypeSchema));
@@ -36,7 +39,7 @@ const start = async () => {
       credentials: true
     },
     typeDefs: [rootSchema, ...allSchemaTypes],
-    resolvers: (0, _merge.default)({}, _menu.default),
+    resolvers: (0, _merge.default)({}, _menu.default, _profile.default),
 
     async context({
       req

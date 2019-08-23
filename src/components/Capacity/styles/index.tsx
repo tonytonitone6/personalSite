@@ -9,30 +9,49 @@ interface ElementShow {
   isActive: boolean;
 }
 
+interface PhotoRef {
+  src: any;
+}
+
 
 export const ExperienceSection = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   height: 100%;
-  background-color: rgb(226, 235, 229);
 `;
 
 
 export const AvatorWrapper = styled.div`
-  width: 50%;
+  position: absolute;
+  max-width: 50%;
   height: 100%;
   clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
   background-color: #fff;
+  z-index: 1;
+`;
+
+export const SkillWapper = styled.div`
+position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: 2rem;
+  width: 40rem;
+  height: 100%;
+  right: 20px;
+
+  /* background-color: #fff; */
+  z-index: 5;
 `;
 
 export const SkillList = styled.div<ElementShow>`
+  background-color: rgb(226, 235, 229);
   display: flex;
   color: #000;
   flex-flow: column nowrap;
   justify-content: center;
-  width: 50%;
-  height: 100%;
-  font-size: 1.1rem;
+  max-width: 100%;
   opacity: ${(props: ElementShow) => props.isActive ? 1 : 0};
   transition: opacity 1s linear;
   & > p {
@@ -45,4 +64,11 @@ export const SkillList = styled.div<ElementShow>`
       margin-right: 1rem;
     }
   }
+`;
+
+export const UserAvator = styled.img<PhotoRef>`
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

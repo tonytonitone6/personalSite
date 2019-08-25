@@ -7,36 +7,10 @@ enum SkillType {
 
 type Profile {
   id: Int
-  front: [FrontEnd]
-  back: [BackEnd]
-  other: [Other]
+  skill: [Skill]
 }
 
-# interface Skill {
-#   name: String!
-#   score: Int!
-#   type: SkillType!
-# }
-
-type FrontEnd {
-  name: String!
-  score: Int!
-  type: SkillType!
-}
-
-type BackEnd {
-  name: String!
-  score: Int!
-  type: SkillType!
-}
-
-type DataBase {
-  name: String!
-  score: Int!
-  type: SkillType!
-}
-
-type Other {
+type Skill {
   name: String!
   score: Int!
   type: SkillType!

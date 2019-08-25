@@ -13,7 +13,7 @@ import {
   AvatorWrapper,
   SkillList,
   UserAvator,
-  SkillWapper
+  SkillWrapper
 } from './styles';
 
 import userPhoto from '../../images/user.jpg';
@@ -76,11 +76,11 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
       <AvatorWrapper>
         <UserAvator src={userPhoto} width="100px" height="100px"/>
       </AvatorWrapper>
-      <SkillWapper>
+      <SkillWrapper>
         <SkillList isActive={animate}>
           {personalContent.map(onRenderSkill)}
         </SkillList>
-      </SkillWapper>
+      </SkillWrapper>
     </ExperienceSection>
   )
 }

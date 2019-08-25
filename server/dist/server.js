@@ -13,11 +13,9 @@ var _models = _interopRequireDefault(require("./models"));
 
 var _schema = require("./utils/schema");
 
-var _menu = _interopRequireDefault(require("./types/menu/menu.resolvers"));
-
-var _profile = _interopRequireDefault(require("./types/profile/profile.resolvers"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 const port = process.env.PORT || 9000;
 const types = ['menu', 'profile'];
@@ -29,17 +27,16 @@ const start = async () => {
       mutation: Mutation
     }
   `;
+  await _models.default.init();
   const allSchemaTypes = await Promise.all(types.map(_schema.loadTypeSchema));
-
-  _models.default.init();
-
+  const [menu, profile] = await Promise.all([Promise.resolve().then(() => _interopRequireWildcard(require('./types/menu/menu.resolvers'))).then(rs => rs.default), Promise.resolve().then(() => _interopRequireWildcard(require('./types/profile/profile.resolvers'))).then(rs => rs.default)]);
   const server = new _apolloServer.ApolloServer({
     cors: {
       origin: '*',
       credentials: true
     },
     typeDefs: [rootSchema, ...allSchemaTypes],
-    resolvers: (0, _merge.default)({}, _menu.default, _profile.default),
+    resolvers: (0, _merge.default)({}, menu, profile),
 
     async context({
       req

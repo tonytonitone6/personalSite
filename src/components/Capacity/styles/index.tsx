@@ -31,7 +31,7 @@ export const AvatorWrapper = styled.div`
   z-index: 1;
 `;
 
-export const SkillWapper = styled.div`
+export const SkillWrapper = styled.div`
 position: absolute;
   display: flex;
   flex-flow: column nowrap;

@@ -3,8 +3,6 @@ import merge from 'lodash/merge';
 
 import model from './models';
 import { loadTypeSchema } from './utils/schema';
-import menu from './types/menu/menu.resolvers';
-import profile from './types/profile/profile.resolvers';
 
 const port = process.env.PORT || 9000;
 
@@ -18,10 +16,10 @@ export const start = async () => {
       mutation: Mutation
     }
   `
+  await model.init();
+  const allSchemaTypes = await Promise.all(types.map(loadTypeSchema));
+  const [menu, profile] = await Promise.all([import('./types/menu/menu.resolvers').then(rs => rs.default), import('./types/profile/profile.resolvers').then(rs => rs.default)]);
 
-  const allSchemaTypes = await Promise.all(types.map(loadTypeSchema))
-
-  model.init();
   const server = new ApolloServer({
     cors: {
       origin: '*',
@@ -33,9 +31,7 @@ export const start = async () => {
       return null;
     }
   });
-  
   const { url } = await server.listen({ port });
-
   console.log(`Server is ready at ${url}`);
 }
 

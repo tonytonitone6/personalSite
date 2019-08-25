@@ -33,10 +33,10 @@ export default {
                 return path.extname(file) === '.js';
               })
               .forEach(file => {
-                require(path.join(dir, file));
+                require(path.join(dir, file));                
                 logger.info(`Loading model ${file.split('.')[0]}`);
               });
-              resolve();
+              resolve({connect: true});
           } catch (error) {
             logger.error(error);
             reject(error);

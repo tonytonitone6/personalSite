@@ -10,6 +10,8 @@ const dir = path.join(__dirname, 'schemas');
 
 const option = {
   useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
   autoReconnect: true,
   reconnectInterval: 1000
 };

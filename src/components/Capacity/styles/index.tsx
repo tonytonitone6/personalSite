@@ -40,8 +40,6 @@ position: absolute;
   width: 40rem;
   height: 100%;
   right: 20px;
-
-  /* background-color: #fff; */
   z-index: 5;
 `;
 
@@ -64,6 +62,12 @@ export const SkillList = styled.div<ElementShow>`
       margin-right: 1rem;
     }
   }
+`;
+
+export const UserShaDow = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #000;
 `;
 
 export const UserAvator = styled.img<PhotoRef>`

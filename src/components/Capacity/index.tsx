@@ -13,6 +13,7 @@ import {
   AvatorWrapper,
   SkillList,
   UserAvator,
+  UserShaDow,
   SkillWrapper
 } from './styles';
 
@@ -74,6 +75,7 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   return (
     <ExperienceSection ref={elementRef}>
       <AvatorWrapper>
+        <UserShaDow />
         <UserAvator src={userPhoto} width="100px" height="100px"/>
       </AvatorWrapper>
       <SkillWrapper>

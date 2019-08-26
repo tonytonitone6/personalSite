@@ -6,10 +6,10 @@ const schema = new Schema({
   name: {
     type: String
   },
-  skill: {
+  skills: {
     type: Schema.Types.Mixed
   }
-}, { timestamps: true });
+}, { timestamps: true, versionKey: false });
 
 
 const ProfileModel = model('Profile', schema, 'profiles');

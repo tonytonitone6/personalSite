@@ -5,12 +5,40 @@ enum SkillType {
   TEST
 }
 
-type Profile {
-  id: Int
-  skill: [Skill]
-}
+scalar Date
 
 type Skill {
+  front: [FrontEnd]
+  back: [BackEnd]
+  database: [DataBase]
+}
+
+type Profile {
+  _id: String
+  skills: Skill
+  createdAt: Date
+  updatedAt: Date
+}
+
+type FrontEnd {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type BackEnd {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type DataBase {
+  name: String!
+  score: Int!
+  type: SkillType!
+}
+
+type Other {
   name: String!
   score: Int!
   type: SkillType!
@@ -22,10 +50,19 @@ input NewProfileInput {
   score: Int!
 }
 
+input UpdatedProfileInput {
+  _id: String,
+  name: String!
+  type: SkillType!
+  score: Int!
+}
+
 extend type Query {
-  profiles: Profile!
+  profiles: Profile!,
+  profile: Skill!
 }
 
 type Mutation {
   newProfile(input: NewProfileInput!): Profile!
+  updatedProfile(input: UpdatedProfileInput!): Profile!
 }

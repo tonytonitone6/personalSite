@@ -1,47 +1,86 @@
 import get from 'lodash/get';
+import pick from 'lodash/pick';
 import { AuthenticationError } from 'apollo-server';
 
 import models from '../../models';
 const Profile = models.get('Profile');
 
 const getData = (args, field) => get(args.input, field);
+const filterFields = (list, condition) => pick(list, condition);
 
-const newProfile = async (_, args, ctx) => {  
-  const data = {
-    type: getData(args, 'type'),
-    name: getData(args, 'name'),
-    score: getData(args, 'score')
-  };
+const productsTypeMatcher = {
+  FRONT_END: 'front',
+  BACK_END: 'back',
+  DATA_BASE: 'database'
+};
 
-  const result = await Profile.find({}).lean();
-  if (result && result.length !== 0) {
+const newProfile = async (_, args, ctx) => {
+  const fields = ['_id', 'skills', 'updatedAt', 'createdAt'];
 
-  }
-
-  // Profile.create({
-  //   skill: [...data]
-  // });
-  const test = {
-    skill: [{
-      type: 'FRONT_END',
-      name: 'REACT',
-      score: 60
+  const receivedData = {
+    [productsTypeMatcher[args.input.type]]: [{
+      type: getData(args, 'type'),
+      name: getData(args, 'name'),
+      score: getData(args, 'score')
     }]
   };
 
-  return test;
+  const profiles = await Profile.create({skills: {...receivedData}});
+
+  return filterFields(profiles, fields);
 
   };
 
-const productsTypeMatcher = {
-  FRONT_END: 'FRONT_END',
-  BACK_END: 'BACK_END',
-  DATA_BASE: 'DATA_BASE',
-  TEST: 'TEST'
-};
+const updatedProfile = async (_, { input: { _id, ...receivedData } }, ctx) => {
+  const fields = ['_id', 'skills', 'createdAt', 'updatedAt'];
+  const profile = await Profile.findById({_id}).lean();
+
+  const ignoreData = profile.skills[productsTypeMatcher[receivedData.type]]
+    .filter(item => item.name !== receivedData.name);
+
+  const skills = {
+    [productsTypeMatcher[receivedData.type]]: [...ignoreData, receivedData]
+  };
+  
+  const result = await Profile.findByIdAndUpdate(_id, { $set: { skills }}, { new: true });
+
+  return filterFields(result, fields);
+  
+
+}
+
+
+const profiles = async (parent, args, ctx) => {
+  
+  const allProfiles = await Profile.find({}).lean();
+  return {
+    skills: {
+      front: [
+        {
+          name: 'REDUX',
+          type: 'FRONT_END',
+          score: 30
+        },
+        {
+          name: "REACT",
+          type: "FRONT_END",
+          score: 50
+        }
+      ]
+    }
+  }
+}
 
 export default {
   Mutation: {
-    newProfile
+    newProfile,
+    updatedProfile
+  },
+
+  Query: {
+    profiles,
+    profile(parent, args, ctx) {
+      console.log(parent, args, 'test');
+    }
   }
 }

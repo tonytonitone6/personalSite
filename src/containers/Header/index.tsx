@@ -4,11 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { MemoSocialArea } from './SocialArea';
 import { MenuContext } from '@context/index';
 import types from '@reducers/constants';
+
+import ArrowLogo from '../../images/down-arrow.png';
 import {
   HeaderWrapper,
   HeaderContainer,
   HeaderMenu,
   Introduction,
+  ArrowIcon
 } from './styles';
 
 
@@ -36,7 +39,7 @@ const Header: FunctionComponent = () => {
     });
   }
   
-  const onRenderMenuList = ({id, name}: any):JSX.Element | null => {    
+  const onRenderMenuList = ({id, name}: {id: number, name: string}):JSX.Element | null => {    
     if (menuList &&  menuList.length !== 0) {
       return (
         <li 
@@ -54,6 +57,13 @@ const Header: FunctionComponent = () => {
     return null;
   }
 
+  const moveToNextPage = (): void => {
+    refs[0].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+
   return (
     <HeaderWrapper>
       <HeaderContainer>
@@ -62,7 +72,6 @@ const Header: FunctionComponent = () => {
             {(menuList && menuList.length !== 0) 
               ? menuList.map(onRenderMenuList)
               : null}
-            {/* {ContentList.map(onRenderMenuList)} */}
           </ul>
         </HeaderMenu>
         <Introduction>
@@ -70,6 +79,10 @@ const Header: FunctionComponent = () => {
           <span>Backend Engineer</span>
           <MemoSocialArea skillList={skillList} />
         </Introduction>
+        <ArrowIcon 
+          src={ArrowLogo}
+          onClick={moveToNextPage}
+        />
       </HeaderContainer>
     </HeaderWrapper>
   )

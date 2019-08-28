@@ -13,6 +13,36 @@ const moveToRight = keyframes`
   }
 `;
 
+const moveToDown = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(4rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+`;
+
+const pulse = keyframes`
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+
+  50% {
+    opacity: .8;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+`;
+
 
 export const HeaderWrapper = styled.header`
   height: 100%;
@@ -33,6 +63,8 @@ export const HeaderMenu = styled.div`
     display: none;
   }
 
+  position: fixed;
+  z-index: 10;
   & > ul {
     text-transform: uppercase;
 
@@ -40,7 +72,7 @@ export const HeaderMenu = styled.div`
       display: inline-block;
       margin: 1rem 1rem 0 1rem;
       position: relative;
-      
+
       &::after {
         content: '';
         display: inline-block;
@@ -59,7 +91,7 @@ export const HeaderMenu = styled.div`
 
       & > a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
       }
     }
   }
@@ -121,3 +153,17 @@ export const SocialIcon = styled.a`
     }
   }
 `;
+
+
+export const ArrowIcon = styled.img`
+  position: absolute;
+  width: 1.8rem;
+  height: 1.8rem;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  animation: ${moveToDown} 1s 1s ease-out forwards, ${pulse} 2s 3s ease-out infinite;
+  opacity: 0;
+  cursor: pointer;
+`

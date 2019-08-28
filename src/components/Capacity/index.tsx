@@ -14,7 +14,8 @@ import {
   SkillList,
   UserAvator,
   UserShaDow,
-  SkillWrapper
+  SkillWrapper,
+  SkillItem
 } from './styles';
 
 import userPhoto from '../../images/user.jpg';
@@ -67,16 +68,23 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   }, [location]);
 
   const onRenderSkill = (item: SkillItem) => {
+    // return (
+    //   <p key={item.content}><b>{item.title}: </b>{item.content}</p>
+    // )
     return (
-      <p key={item.content}><b>{item.title}: </b>{item.content}</p>
+      <SkillItem key={item.content}>
+        <span>{item.title}:</span>
+        <p>{item.content}</p>
+      </SkillItem>
     )
   };
 
   return (
     <ExperienceSection ref={elementRef}>
       <AvatorWrapper>
-        <UserShaDow />
-        <UserAvator src={userPhoto} width="100px" height="100px"/>
+        <UserShaDow>
+          <UserAvator src={userPhoto} width="100px" height="100px"/>
+        </UserShaDow>
       </AvatorWrapper>
       <SkillWrapper>
         <SkillList isActive={animate}>

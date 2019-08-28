@@ -17,7 +17,8 @@ const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
 
   const onRenderSocialList = (item: TypeProps) => {
     return (
-      <SocialIcon 
+      <SocialIcon
+        data-test="guess-instructions"
         key={item.href}
         target="_blank"
         href={item.href}
@@ -32,6 +33,10 @@ const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
       { menuList.map(onRenderSocialList) }
     </SocialArea>
     )
+  }
+
+  SocialAreaComponent.defaultProps = {
+    skillList: []
   }
 
   SocialAreaComponent.propTypes = {

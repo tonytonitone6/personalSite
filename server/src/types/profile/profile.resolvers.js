@@ -45,8 +45,6 @@ const updatedProfile = async (_, { input: { _id, ...receivedData } }, ctx) => {
   const result = await Profile.findByIdAndUpdate(_id, { $set: { skills }}, { new: true });
 
   return filterFields(result, fields);
-  
-
 }
 
 
@@ -69,6 +67,10 @@ const profiles = async (parent, args, ctx) => {
       ]
     }
   }
+}
+
+const profile = async (_, args, ctx) => {
+  
 }
 
 export default {

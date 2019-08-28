@@ -6,11 +6,15 @@ import { MemoSocialArea } from '@containers/Header/SocialArea';
 
 const defaultProps = {
   skillList: [
-    {
-      href: 'https://twitter.com/stanmao',
-      item: 'fab fa-twitter-square'
-    }
+    { href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
+    { href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook' },
+    { href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw', item: 'fab fa-instagram' },
+    { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
   ]
+}
+
+const findByTestAttr = (wrapper: any, val: string) => {
+  return wrapper.find(`[data-test="${val}"]`);
 }
 
 /**
@@ -20,13 +24,34 @@ const defaultProps = {
  */
 
 const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
+  const setupProps = { ...props };
   return shallow(<MemoSocialArea {...setupProps}/>);
 }
 
 describe('render icon item', () => {
-  it('should ', () => {
-    const component = setup();
+  // let wrapper: any;
+  // beforeEach(() => {
+  //   wrapper = setup();
+  // });
+
+  test('renders' , () => {
+    const wrapper = setup({...defaultProps});
+    expect(wrapper).toMatchSnapshot();
   });
+
+  test('return the default empty array', () => {
+    const wrapper = setup();
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  test('doesn\'t break without skillList', () => {
+    const wrapper = setup();
+    expect(wrapper.find('a')).toHaveLength(0);
+  });
+
+  test('doesn\'t, break with an empty array', () => {
+    const wrapper = setup({skillList: []});
+    expect(wrapper.find('a')).toHaveLength(0);
+  })
   
 });

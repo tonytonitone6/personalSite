@@ -65,12 +65,11 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
     if (elementRef.current !== null && window.scrollY >= elementRef.current.clientHeight - 100) {
       setAnimate(true);
     }
+    console.log(location);
   }, [location]);
 
   const onRenderSkill = (item: SkillItem) => {
-    // return (
-    //   <p key={item.content}><b>{item.title}: </b>{item.content}</p>
-    // )
+
     return (
       <SkillItem key={item.content}>
         <span>{item.title}:</span>

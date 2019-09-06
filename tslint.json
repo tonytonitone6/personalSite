@@ -11,6 +11,7 @@
     "jsx-no-lambda": false,
     "interface-name": [true, "never-prefix"],
     "member-ordering": false,
-    "member-access": false
+    "member-access": false,
+    "no-shadowed-variable": false
   }
 }

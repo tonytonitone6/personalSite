@@ -18,18 +18,19 @@ const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {
   const onRenderSocialList = (item: TypeProps) => {
     return (
       <SocialIcon
-        data-test="guess-instructions"
         key={item.href}
         target="_blank"
         href={item.href}
-      >
+      > 
         <i className={item.item} />
       </SocialIcon>
     )
   }
   
   return (
-    <SocialArea>
+    <SocialArea
+      data-test="renders-socialArea"
+      >
       { menuList.map(onRenderSocialList) }
     </SocialArea>
     )

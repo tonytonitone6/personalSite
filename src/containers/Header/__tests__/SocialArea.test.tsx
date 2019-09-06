@@ -1,9 +1,14 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
+
+
 import {
-SocialIcon
+  SocialIcon,
+  SocialArea
 } from '../styles';
-import { MemoSocialArea } from '@containers/Header/SocialArea';
+import {
+  MemoSocialArea
+} from '@containers/Header/SocialArea';
 
 
 const defaultProps = {
@@ -15,59 +20,40 @@ const defaultProps = {
   ]
 }
 
-const findByTestAttr = (wrapper: any, val: string) => {
-  return wrapper.find(`[data-test="${val}"]`);
+const initialComponent = (props = {}) => {
+  const settingProps = { ...props, ...defaultProps };
+  return render(<MemoSocialArea {...settingProps} />);
 }
 
-/**
- * @function setup create shallow Component
- * @param props Component props specific that
- * @retrun ShallowWrapper {} 
- */
 
-const setup = (props = {}) => {
-  const setupProps = { ...props };
-  return shallow(<MemoSocialArea {...setupProps}/>);
-}
+describe('render icon', () => {
 
-const initMount = (props = {}) => {
-  const setProps = { ...props };
-  return mount(<MemoSocialArea {...setProps} />);
-}
-
-describe('render icon item', () => {
-  // let wrapper: any;
-  // beforeEach(() => {
-  //   wrapper = setup();
-  // });
-
-  test('renders' , () => {
-    const wrapper = setup({...defaultProps});
+  it('renders', () => {
+    const wrapper = initialComponent({name: 'test'});
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('return the default empty array', () => {
-    const wrapper = setup();
+  it('return the default empty array', () => {
+    const wrapper = initialComponent();
     expect(wrapper).toMatchSnapshot();
   });
-
-  test('doesn\'t break without skillList', () => {
-    const wrapper = setup();
-    expect(wrapper.find('a')).toHaveLength(0);
-  });
-
-  test('doesn\'t, break with an empty array', () => {
-    const wrapper = setup({skillList: []});
-    expect(wrapper.find('a')).toHaveLength(0);
-  });
-
-  test('render props data', () => {
-    const wrapper = setup({...defaultProps});
-    expect(wrapper.find(SocialIcon).length).toBe(4);
-  });
-
-  test('mount skillList props', () => {
-    const wrapper = initMount();
-  })
   
+
+  it('should return target icon', () => {
+    const { queryByText } = initialComponent();
+    const icon = queryByText('https://twitter.com/stanmao');
+  });
+
+  it('doesn\'t break without skillList', () => {
+    const { container } = initialComponent();
+    const wrapper = container.getAttribute('data-test');
+    console.log(wrapper);
+  });
+  
+
+  // it('render icon list', () => {
+  //   const { container } = initialComponent();
+  //   const IconNode = container.querySelectorAll('#test-icon');
+  //   expect(IconNode.length).toBe(defaultProps.skillList.length);
+  // })
 });

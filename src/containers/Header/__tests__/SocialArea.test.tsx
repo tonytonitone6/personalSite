@@ -17,7 +17,7 @@ const defaultProps = {
       href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw',
       item: 'fab fa-instagram',
     },
-    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
+    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'}
   ],
 }
 

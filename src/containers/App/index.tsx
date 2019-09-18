@@ -4,7 +4,7 @@ import React, {
   useState,
   useEffect
 } from 'react'
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 import {addLocaleData, IntlProvider} from 'react-intl'
 import {ApolloProvider} from '@apollo/react-hooks'
 import en from 'react-intl/locale-data/en'
@@ -48,7 +48,12 @@ const GlobalStyle = createGlobalStyle`
       flex: 0 0 calc(width / columns * 100%);
     }
   }
-`
+`;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const getWebSiteLanguage = (): string => {
   if (window) {
@@ -84,11 +89,11 @@ const App: FunctionComponent = (): JSX.Element => {
     <ApolloProvider client={client}>
       <MenuContextProvider reducer={menuReducer}>
         <IntlProvider locale={language} messages={messagesLang}>
-          <Fragment>
+          <Container>
             <GlobalStyle />
             <Header />
             <Content />
-          </Fragment>
+          </Container>
         </IntlProvider>
       </MenuContextProvider>
     </ApolloProvider>

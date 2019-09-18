@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 
+import * as Grid from '@styles/grid';
+
 interface SkillItem {
   title: string
   content: string
+}
+
+interface GridProps {
+  flex?: boolean;
+  col6?: boolean;
 }
 
 interface ElementShow {
@@ -14,17 +21,21 @@ interface PhotoRef {
 }
 
 export const ExperienceSection = styled.div`
-  display: flex;
+  ${(props: GridProps) => props.flex ? Grid.row : ''};
   height: 100%;
   max-width: 100%;
   @media (max-width: 576px) {
     flex-wrap: wrap;
+    margin-bottom: .2rem;
   }
 `
 
 export const AvatorWrapper = styled.div`
-  max-width: 50%;
-  height: 100%;
+  ${(props: GridProps) => {
+    const [target] = Object.keys(props).filter(key => key.includes('col'));
+    return (Grid as any)[target]? (Grid as any)[target] : '';
+  }};
+  /* height: 100%; */
   /* clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%); */
   background-color: #fff;
   z-index: 1;
@@ -38,11 +49,11 @@ export const AvatorWrapper = styled.div`
 `
 
 export const SkillWrapper = styled.div`
+  ${(props: GridProps) => props.col6 ? Grid.col6 : ''};
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  width: 40rem;
-  max-width: 40rem;
+  width: 100%;
   height: 100%;
   z-index: 5;
 
@@ -60,7 +71,7 @@ export const SkillList = styled.div<ElementShow>`
   justify-content: space-around;
   width: 100%;
   max-width: 100%;
-  height: 300px;
+  height: 100%;
   opacity: ${(props: ElementShow) => (props.isActive ? 1 : 0)};
   transition: opacity 1s linear;
   & > p {
@@ -74,9 +85,9 @@ export const SkillList = styled.div<ElementShow>`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 996px) {
     font-size: 0.7rem;
-    width: 500px;
+    /* width: 500px; */
   }
   @media (max-width: 576px) {
     font-size: 0.5rem;
@@ -111,6 +122,12 @@ export const UserShaDow = styled.div`
   width: 100%;
   height: 100%;
   padding: 30% 20%;
+
+  @media (max-width: 576px) {
+    padding: 0;
+  }
+
+
 `
 
 export const UserAvator = styled.img<PhotoRef>`

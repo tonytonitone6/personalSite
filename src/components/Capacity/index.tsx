@@ -77,13 +77,20 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   }
 
   return (
-    <ExperienceSection ref={elementRef}>
-      <AvatorWrapper>
+    <ExperienceSection 
+      flex={true}
+      ref={elementRef}
+    >
+      <AvatorWrapper
+        col6={true}
+      >
         <UserShaDow>
           <UserAvator src={userPhoto} />
         </UserShaDow>
       </AvatorWrapper>
-      <SkillWrapper>
+      <SkillWrapper
+        col6={true}
+      >
         <SkillList isActive={animate}>
           {personalContent.map(onRenderSkill)}
         </SkillList>

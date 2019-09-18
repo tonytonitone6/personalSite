@@ -1,91 +1,79 @@
-import 
-  React, 
-  { 
-    useState,
-    useEffect,
-    FunctionComponent,
-    createRef,
-    useContext
-  } from 'react';
+import React, {useState, useEffect, FunctionComponent, createRef} from 'react'
 
-import { useQuery } from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks'
 
-import Capacity from '@components/Capacity';
-import Diagram from '@components/Diagram';
-import types from '@reducers/constants';
-import { MenuContext } from '@context/index';
-import { GET_MENUS } from '@utils/fetch';
-import {
-  ContentWrapper
-} from './styles';
-
+import Capacity from '@components/Capacity'
+import Diagram from '@components/Diagram'
+import types from '@reducers/constants'
+import {useMenuValue} from '@context/index'
+import {GET_MENUS} from '@utils/fetch'
+import {ContentWrapper} from './styles'
 
 interface TypeItem {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
-const List:FunctionComponent = ():JSX.Element | null => {
-  const [refStatus, setRefstatus] = useState(null);
-  const { _, dispatch } = useContext(MenuContext);
-  const {data: { menuList = [] }}: any = useQuery(GET_MENUS);
+const List: FunctionComponent = (): JSX.Element | null => {
+  const [refStatus, setRefstatus] = useState(null)
+  const [_, dispatch] = useMenuValue()
+  const {
+    data: {menuList = []},
+  }: any = useQuery(GET_MENUS)
   const [block, ignoreFunc] = useState([
     {
       id: 1,
-      component: Capacity
+      component: Capacity,
     },
     {
       id: 2,
-      component: Diagram
+      component: Diagram,
     },
     {
       id: 3,
-      component: Capacity
-    }
-  ]);
+      component: Capacity,
+    },
+  ])
 
-  const onRenderComponent = (Component: FunctionComponent): JSX.Element  => {
+  const onRenderComponent = (Component: FunctionComponent): JSX.Element => {
     return <Component />
   }
-  
+
   const onRenderContentBlock = (refs: any, item: TypeItem) => {
-    
     return (
-      <ContentWrapper 
-        key={item.id}
-        ref={refs[item.id]}
-        >
-        { onRenderComponent(block[item.id].component) }
+      <ContentWrapper key={item.id} ref={refs[item.id]}>
+        {onRenderComponent(block[item.id].component)}
       </ContentWrapper>
     )
   }
 
-  useEffect(() => {        
-    const refs = menuList.reduce((acc:any, value: TypeItem) => {      
-      acc[value.id] = createRef();
-      return acc;
-    }, {});
-    
-    setRefstatus(refs);
+  useEffect(() => {
+    const refs = menuList.reduce((acc: any, value: TypeItem) => {
+      acc[value.id] = createRef()
+      return acc
+    }, {})
+
+    setRefstatus(refs)
 
     dispatch({
-      type: types.SET_MENU, 
+      type: types.SET_MENU,
       payload: {
         refs,
-        menuList
-      }
-    });
-  }, [menuList]);
+        menuList,
+      },
+    })
+  }, [menuList])
 
-  if (menuList.length !== 0 && refStatus !== null) {    
+  if (menuList.length !== 0 && refStatus !== null) {
     return (
       <>
-        { menuList.map((item:TypeItem) => onRenderContentBlock(refStatus, item)) }
+        {menuList.map((item: TypeItem) =>
+          onRenderContentBlock(refStatus, item),
+        )}
       </>
     )
   }
-  return null;
+  return null
 }
 
-export default List;
-
+export default List

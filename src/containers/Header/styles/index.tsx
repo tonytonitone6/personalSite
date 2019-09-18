@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components';
-import bgPhotos from '../../../images/header.jpg';
+import styled, {keyframes} from 'styled-components'
+import bgPhotos from '../../../images/header.jpg'
 
 const moveToRight = keyframes`
   0% {
@@ -11,7 +11,7 @@ const moveToRight = keyframes`
     transform: translateX(0);
     opacity: 1;
   }
-`;
+`
 
 const moveToDown = keyframes`
   0% {
@@ -23,7 +23,7 @@ const moveToDown = keyframes`
     opacity: 1;
     transform: none;
   }
-`;
+`
 
 const pulse = keyframes`
   0% {
@@ -41,22 +41,25 @@ const pulse = keyframes`
     transform: scale(1.2);
   }
 
-`;
-
+`
 
 export const HeaderWrapper = styled.header`
   height: 100%;
-`;
+`
 
 export const HeaderContainer = styled.div`
   position: relative;
   height: 100%;
-  background-image: linear-gradient(rgba(55, 93, 100, 0.5), rgba(226, 235, 229, 0.5)), url(${bgPhotos});
+  background-image: linear-gradient(
+      rgba(55, 93, 100, 0.5),
+      rgba(226, 235, 229, 0.5)
+    ),
+    url(${bgPhotos});
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: flex-end;
-`;
+`
 
 export const HeaderMenu = styled.div`
   @media (max-width: 576px) {
@@ -68,7 +71,7 @@ export const HeaderMenu = styled.div`
   & > ul {
     text-transform: uppercase;
 
-    &> li {
+    & > li {
       display: inline-block;
       margin: 1rem 1rem 0 1rem;
       position: relative;
@@ -77,9 +80,9 @@ export const HeaderMenu = styled.div`
         content: '';
         display: inline-block;
         background-color: rgba(1, 4, 29, 1);
-        height: .1rem;
+        height: 0.1rem;
         width: 0;
-        transition: all .3s;
+        transition: all 0.3s;
         position: absolute;
         left: 0;
         bottom: -0.8rem;
@@ -95,7 +98,7 @@ export const HeaderMenu = styled.div`
       }
     }
   }
-`;
+`
 
 export const HeaderSocial = styled.div`
   position: absolute;
@@ -104,7 +107,7 @@ export const HeaderSocial = styled.div`
   width: 100%;
   background: #000;
   opacity: 0.9;
-`;
+`
 
 export const Introduction = styled.div`
   display: flex;
@@ -114,7 +117,7 @@ export const Introduction = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  
+  transform: translate(-50%, -50%);
   & > h1 {
     animation: ${moveToRight} 1s ease-in;
     text-align: center;
@@ -135,16 +138,16 @@ export const Introduction = styled.div`
       font-size: 1rem;
     }
   }
-`;
+`
 
 export const SocialArea = styled.div`
   display: flex;
   justify-content: center;
-`;
+`
 
 export const SocialIcon = styled.a`
   margin: 1rem 2rem;
-  & > [class*="fab"] {
+  & > [class*='fab'] {
     color: #fff;
     font-size: 2rem;
     transition: all 1s;
@@ -152,8 +155,7 @@ export const SocialIcon = styled.a`
       color: red;
     }
   }
-`;
-
+`
 
 export const ArrowIcon = styled.img`
   position: absolute;
@@ -163,7 +165,8 @@ export const ArrowIcon = styled.img`
   left: 0;
   right: 0;
   margin: auto;
-  animation: ${moveToDown} 1s 1s ease-out forwards, ${pulse} 2s 3s ease-out infinite;
+  animation: ${moveToDown} 1s 1s ease-out forwards,
+    ${pulse} 2s 3s ease-out infinite;
   opacity: 0;
   cursor: pointer;
 `

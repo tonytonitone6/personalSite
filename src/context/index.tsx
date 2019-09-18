@@ -1,1 +1,1 @@
-export { MenuContext, MenuContextProvider } from '@context/menuContext';
+export {MenuContextProvider, useMenuValue} from '@context/menuContext'

@@ -1,10 +1,10 @@
-import { gql } from 'apollo-boost';
+import {gql} from 'apollo-boost'
 
 export const GET_MENUS = gql`
-{
-  menuList {
-    id
-    name
+  {
+    menuList {
+      id
+      name
+    }
   }
-}
-`;
+`

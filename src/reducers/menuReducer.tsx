@@ -1,14 +1,13 @@
-import types from '@reducers/constants';
+import types from '@reducers/constants'
 
-
-export const menuReducer = (state: any, action: any): any => {  
+export const menuReducer = (state: any, action: any): any => {
   switch (action.type) {
     case types.SET_MENU:
-      return {...state, ...action.payload};
-      break;
+      return {...state, ...action.payload}
+      break
     case types.FETCH_MENU:
-      return {...state};
+      return {...state}
     default:
-      return state;
+      return state
   }
 }

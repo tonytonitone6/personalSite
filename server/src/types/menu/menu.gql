@@ -6,4 +6,3 @@ type Menu {
 type Query {
   menuList: [Menu]!
 }
-

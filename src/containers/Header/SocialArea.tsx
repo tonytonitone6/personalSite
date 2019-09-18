@@ -1,53 +1,47 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import React, {memo} from 'react'
+import PropTypes from 'prop-types'
 
-import {
-  SocialIcon,
-  SocialArea
-} from './styles';
-
+import {SocialIcon, SocialArea} from './styles'
 
 interface TypeProps {
-  href: string;
-  item: string;
+  href: string
+  item: string
 }
 
-const SocialAreaComponent = (props: { skillList:  TypeProps[]}) => {  
-  const menuList = props.skillList;
+const SocialAreaComponent = (props: {skillList: TypeProps[]}) => {
+  const menuList = props.skillList
 
   const onRenderSocialList = (item: TypeProps) => {
     return (
       <SocialIcon
+        data-testid="test-icon"
         key={item.href}
         target="_blank"
         href={item.href}
-      > 
+      >
         <i className={item.item} />
       </SocialIcon>
     )
   }
-  
+
   return (
-    <SocialArea
-      data-test="renders-socialArea"
-      >
-      { menuList.map(onRenderSocialList) }
+    <SocialArea data-testid="renders-socialArea">
+      {menuList.map(onRenderSocialList)}
     </SocialArea>
-    )
-  }
+  )
+}
 
-  SocialAreaComponent.defaultProps = {
-    skillList: []
-  }
+SocialAreaComponent.defaultProps = {
+  skillList: [],
+}
 
-  SocialAreaComponent.propTypes = {
-    skillList: PropTypes.arrayOf(
-      PropTypes.shape({
-        href: PropTypes.string.isRequired,
-        item: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }
+SocialAreaComponent.propTypes = {
+  skillList: PropTypes.arrayOf(
+    PropTypes.shape({
+      href: PropTypes.string.isRequired,
+      item: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+}
 
-  
-  export const MemoSocialArea = memo(SocialAreaComponent)
+export const MemoSocialArea = memo(SocialAreaComponent)

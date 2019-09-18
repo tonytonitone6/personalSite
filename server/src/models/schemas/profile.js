@@ -1,17 +1,18 @@
-import _ from 'lodash';
-import { Schema, model } from 'mongoose';
+import _ from 'lodash'
+import {Schema, model} from 'mongoose'
 
-
-const schema = new Schema({
-  name: {
-    type: String
+const schema = new Schema(
+  {
+    name: {
+      type: String,
+    },
+    skills: {
+      type: Schema.Types.Mixed,
+    },
   },
-  skills: {
-    type: Schema.Types.Mixed
-  }
-}, { timestamps: true, versionKey: false });
+  {timestamps: true, versionKey: false},
+)
 
+const ProfileModel = model('Profile', schema, 'profiles')
 
-const ProfileModel = model('Profile', schema, 'profiles');
-
-export default ProfileModel;
+export default ProfileModel

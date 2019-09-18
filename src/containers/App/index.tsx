@@ -1,22 +1,29 @@
-import React, { FunctionComponent, Fragment, useState, useEffect, useContext, useReducer } from 'react';
-import { createGlobalStyle } from 'styled-components';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import { ApolloProvider } from '@apollo/react-hooks';
-import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh';
+import React, {
+  FunctionComponent,
+  Fragment,
+  useState,
+  useEffect
+} from 'react'
+import {createGlobalStyle} from 'styled-components'
+import {addLocaleData, IntlProvider} from 'react-intl'
+import {ApolloProvider} from '@apollo/react-hooks'
+import en from 'react-intl/locale-data/en'
+import zh from 'react-intl/locale-data/zh'
 
-import en_US from '@locales/en.US';
-import zh_CN from '@locales/zh.CN';
-import Header from '@containers/Header';
-import Content from '@components/Content';
-import { client } from '@utils/api';
-import { 
-  MenuContext,
-  MenuContextProvider
-} from '@context/index';
-import { menuReducer } from '@reducers/index';
+import en_US from '@locales/en.US'
+import zh_CN from '@locales/zh.CN'
+import Header from '@containers/Header'
+import Content from '@components/Content'
+import {client} from '@utils/api'
+import {MenuContextProvider} from '@context/index'
+import {menuReducer} from '@reducers/index'
+import {
+  width,
+  columns
+} from '@styles/grid';
 
-addLocaleData([...en, ...zh]);
+
+addLocaleData([...en, ...zh])
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -35,41 +42,47 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     line-height: 17px;
   }
-`;
 
-const getWebSiteLanguage = ():string => {
-  if (window) {
-    return window.navigator.language.split('-')[0];
+  @media (max-width: 576px) {
+    [class*="col"] {
+      flex: 0 0 calc(width / columns * 100%);
+    }
   }
-  return navigator.language.split('-')[0];
+`
+
+const getWebSiteLanguage = (): string => {
+  if (window) {
+    return window.navigator.language.split('-')[0]
+  }
+  return navigator.language.split('-')[0]
 }
 
 const setMesLang = (lng: any) => {
-  switch(lng) {
+  switch (lng) {
     case 'en':
-      return en_US;
-      break;
+      return en_US
+      break
 
     default:
-      break;
+      break
   }
 }
 
 interface TypeContextProps {
-  dispatch: () => void;
+  dispatch: () => void
 }
 
 const App: FunctionComponent = (): JSX.Element => {
-  const [language, setLanguage] = useState(() => getWebSiteLanguage());
-  const [messagesLang, setMessagesLang] = useState(() => setMesLang(language));  
+  const [language, setLanguage] = useState(() => getWebSiteLanguage())
+  const [messagesLang, setMessagesLang] = useState(() => setMesLang(language))
 
   useEffect(() => {
-    setMessagesLang(() => setMesLang(language));
-  }, [language]);
-  
+    setMessagesLang(() => setMesLang(language))
+  }, [language])
+
   return (
     <ApolloProvider client={client}>
-      <MenuContextProvider>
+      <MenuContextProvider reducer={menuReducer}>
         <IntlProvider locale={language} messages={messagesLang}>
           <Fragment>
             <GlobalStyle />
@@ -82,4 +95,4 @@ const App: FunctionComponent = (): JSX.Element => {
   )
 }
 
-export default App;
+export default App

@@ -1,32 +1,29 @@
-
 const menuList = (_, args, ctx) => {
   const data = [
     {
-      "_id": 0,
-      "name": "App.aboutMe"
+      _id: 0,
+      name: 'App.aboutMe',
     },
     {
-      "_id": 1,
-      "name": "App.experience"
+      _id: 1,
+      name: 'App.experience',
     },
     {
-      "_id": 2,
-      "name": "App.protfolio"
-    }
-  ];
+      _id: 2,
+      name: 'App.protfolio',
+    },
+  ]
 
-  return data;
+  return data
 }
-
 
 export default {
   Query: {
-    menuList
+    menuList,
   },
   Menu: {
-    id(menu, _, ctx) {    
-      return menu._id;
-    } 
-  }
+    id(menu, _, ctx) {
+      return menu._id
+    },
+  },
 }
-

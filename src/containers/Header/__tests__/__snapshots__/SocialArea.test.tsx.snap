@@ -1,216 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`render icon item renders 1`] = `ShallowWrapper {}`;
-
-exports[`render icon item return the default empty array 1`] = `ShallowWrapper {}`;
-
-exports[`render icon renders 1`] = `
+exports[`render icon pass zero props to render icon 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="sc-EHOje hacebR"
-      >
-        <a
-          class="sc-bZQynM bcPqrc"
-          href="https://twitter.com/stanmao"
-          id="test-icon"
-          target="_blank"
-        >
-          https://twitter.com/stanmao
-          <i
-            class="fab fa-twitter-square"
-          />
-        </a>
-        <a
-          class="sc-bZQynM bcPqrc"
-          href="https://www.facebook.com/yuhsaing.mao"
-          id="test-icon"
-          target="_blank"
-        >
-          https://www.facebook.com/yuhsaing.mao
-          <i
-            class="fab fa-facebook"
-          />
-        </a>
-        <a
-          class="sc-bZQynM bcPqrc"
-          href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
-          id="test-icon"
-          target="_blank"
-        >
-          https://www.instagram.com/tonytonitone6/?hl=zh-tw
-          <i
-            class="fab fa-instagram"
-          />
-        </a>
-        <a
-          class="sc-bZQynM bcPqrc"
-          href="https://github.com/tonytonitone6"
-          id="test-icon"
-          target="_blank"
-        >
-          https://github.com/tonytonitone6
-          <i
-            class="fab fa-github"
-          />
-        </a>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="sc-EHOje hacebR"
-    >
-      <a
-        class="sc-bZQynM bcPqrc"
-        href="https://twitter.com/stanmao"
-        id="test-icon"
-        target="_blank"
-      >
-        https://twitter.com/stanmao
-        <i
-          class="fab fa-twitter-square"
-        />
-      </a>
-      <a
-        class="sc-bZQynM bcPqrc"
-        href="https://www.facebook.com/yuhsaing.mao"
-        id="test-icon"
-        target="_blank"
-      >
-        https://www.facebook.com/yuhsaing.mao
-        <i
-          class="fab fa-facebook"
-        />
-      </a>
-      <a
-        class="sc-bZQynM bcPqrc"
-        href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
-        id="test-icon"
-        target="_blank"
-      >
-        https://www.instagram.com/tonytonitone6/?hl=zh-tw
-        <i
-          class="fab fa-instagram"
-        />
-      </a>
-      <a
-        class="sc-bZQynM bcPqrc"
-        href="https://github.com/tonytonitone6"
-        id="test-icon"
-        target="_blank"
-      >
-        https://github.com/tonytonitone6
-        <i
-          class="fab fa-github"
-        />
-      </a>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
-`;
 
-exports[`render icon return the default empty array 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
+.c1 {
+  margin: 1rem 2rem;
+}
+
+.c1 > [class*='fab'] {
+  color: #fff;
+  font-size: 2rem;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.c1 > [class*='fab']:hover {
+  color: red;
+}
+
+<body>
     <div>
       <div
-        class="sc-EHOje hacebR"
+        class="c0"
+        data-testid="renders-socialArea"
       >
         <a
-          class="sc-bZQynM bcPqrc"
+          class="c1"
+          data-testid="test-icon"
           href="https://twitter.com/stanmao"
-          id="test-icon"
           target="_blank"
         >
-          https://twitter.com/stanmao
           <i
             class="fab fa-twitter-square"
           />
         </a>
         <a
-          class="sc-bZQynM bcPqrc"
+          class="c1"
+          data-testid="test-icon"
           href="https://www.facebook.com/yuhsaing.mao"
-          id="test-icon"
           target="_blank"
         >
-          https://www.facebook.com/yuhsaing.mao
           <i
             class="fab fa-facebook"
           />
         </a>
         <a
-          class="sc-bZQynM bcPqrc"
+          class="c1"
+          data-testid="test-icon"
           href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
-          id="test-icon"
           target="_blank"
         >
-          https://www.instagram.com/tonytonitone6/?hl=zh-tw
           <i
             class="fab fa-instagram"
           />
         </a>
         <a
-          class="sc-bZQynM bcPqrc"
+          class="c1"
+          data-testid="test-icon"
           href="https://github.com/tonytonitone6"
-          id="test-icon"
           target="_blank"
         >
-          https://github.com/tonytonitone6
           <i
             class="fab fa-github"
           />
@@ -221,47 +81,44 @@ Object {
   "container": <div>
     <div
       class="sc-EHOje hacebR"
+      data-testid="renders-socialArea"
     >
       <a
-        class="sc-bZQynM bcPqrc"
+        class="sc-bZQynM ccNtSi"
+        data-testid="test-icon"
         href="https://twitter.com/stanmao"
-        id="test-icon"
         target="_blank"
       >
-        https://twitter.com/stanmao
         <i
           class="fab fa-twitter-square"
         />
       </a>
       <a
-        class="sc-bZQynM bcPqrc"
+        class="sc-bZQynM ccNtSi"
+        data-testid="test-icon"
         href="https://www.facebook.com/yuhsaing.mao"
-        id="test-icon"
         target="_blank"
       >
-        https://www.facebook.com/yuhsaing.mao
         <i
           class="fab fa-facebook"
         />
       </a>
       <a
-        class="sc-bZQynM bcPqrc"
+        class="sc-bZQynM ccNtSi"
+        data-testid="test-icon"
         href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
-        id="test-icon"
         target="_blank"
       >
-        https://www.instagram.com/tonytonitone6/?hl=zh-tw
         <i
           class="fab fa-instagram"
         />
       </a>
       <a
-        class="sc-bZQynM bcPqrc"
+        class="sc-bZQynM ccNtSi"
+        data-testid="test-icon"
         href="https://github.com/tonytonitone6"
-        id="test-icon"
         target="_blank"
       >
-        https://github.com/tonytonitone6
         <i
           class="fab fa-github"
         />

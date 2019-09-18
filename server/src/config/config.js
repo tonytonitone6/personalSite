@@ -1,29 +1,31 @@
-import Joi from 'joi';
-import dotenv from 'dotenv';
+import Joi from 'joi'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 const envVarsSchema = Joi.object({
   NODE_ENV: Joi.string()
     .allow(['development', 'production', 'test'])
     .default('development'),
-  PORT: Joi.number()
-    .default(9000),
-  JWT_SECRET: Joi.string().required()
+  PORT: Joi.number().default(9000),
+  JWT_SECRET: Joi.string()
+    .required()
     .description('Need Jwt to auth'),
-  MONGO_HOST: Joi.string().required()
+  MONGO_HOST: Joi.string()
+    .required()
     .description('mongo uri'),
-  MONGO_PORT: Joi.number()
-    .default(27017),
-  REDIS_HOST: Joi.string().required()
-    .description('redis uri')
-}).unknown()
+  MONGO_PORT: Joi.number().default(27017),
+  REDIS_HOST: Joi.string()
+    .required()
+    .description('redis uri'),
+})
+  .unknown()
   .required()
 
-const { error, value: envVars } = Joi.validate(process.env, envVarsSchema);
+const {error, value: envVars} = Joi.validate(process.env, envVarsSchema)
 
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`);
+  throw new Error(`Config validation error: ${error.message}`)
 }
 
 const config = {
@@ -32,8 +34,8 @@ const config = {
   jwtSecret: envVars.JWT_SECRET,
   mongo: {
     host: envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT
-  }
-};
+    port: envVars.MONGO_PORT,
+  },
+}
 
-export default config;
+export default config

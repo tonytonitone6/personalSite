@@ -1,54 +1,54 @@
-const webpack = require("webpack");
-const { join } = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require('webpack')
+const {join} = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = (env, API_URI) => ({
   mode: env,
   plugins: [
-    new CleanWebpackPlugin(["dist"], {
+    new CleanWebpackPlugin(['dist'], {
       root: join(__dirname, '..'),
       exclude: [],
       verbose: true,
-      dry: false
+      dry: false,
     }),
     new ExtractTextPlugin({
-      filename: "css/styles.css",
-      allChunks: true
+      filename: 'css/styles.css',
+      allChunks: true,
     }),
     new HtmlWebpackPlugin({
-      template: "./index.html",
-      favicon: "./favicon.ico"
+      template: './index.html',
+      favicon: './favicon.ico',
     }),
     new webpack.DefinePlugin({
-      "process.env": {
-        API_URI: JSON.stringify(API_URI)
-      }
+      'process.env': {
+        API_URI: JSON.stringify(API_URI),
+      },
     }),
     new LodashModuleReplacementPlugin({
-      'collections': true,
-      'paths': true,
-      'shorthands': false
+      collections: true,
+      paths: true,
+      shorthands: false,
     }),
     new ImageminPlugin({
       disable: false,
       pngquant: {
-        quality: '95-100'
-      }
+        quality: '95-100',
+      },
     }),
     new CompressionPlugin({
-      filename: "[path].gz[query]",
-      algorithm: "gzip",
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
-    new webpack.ProgressPlugin()
+    new webpack.ProgressPlugin(),
   ],
   optimization: {
     splitChunks: {
@@ -68,19 +68,21 @@ module.exports = (env, API_URI) => ({
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    },
-    minimizer: [new UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      uglifyOptions: {
-        compress: true,
-        ecma: 8,
-        mangle: true
+          reuseExistingChunk: true,
+        },
       },
-      sourceMap: false
-    })]
-  }
-});
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: true,
+          ecma: 8,
+          mangle: true,
+        },
+        sourceMap: false,
+      }),
+    ],
+  },
+})

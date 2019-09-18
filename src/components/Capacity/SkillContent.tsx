@@ -1,9 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react'
 
-
-
-
-const SkillContent:FunctionComponent = (): JSX.Element => {
+const SkillContent: FunctionComponent = (): JSX.Element => {
   return (
     <ul>
       <li>123</li>
@@ -11,4 +8,4 @@ const SkillContent:FunctionComponent = (): JSX.Element => {
   )
 }
 
-export default SkillContent;
+export default SkillContent

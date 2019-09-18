@@ -1,31 +1,34 @@
-import React, 
-  { createContext, 
-    ReactNode, 
-    FunctionComponent,
-    useReducer
-  } from 'react';
-
-import { menuReducer } from '@reducers/menuReducer';
+import React, {
+  createContext,
+  ReactNode,
+  FunctionComponent,
+  useReducer,
+  useContext,
+} from 'react'
 
 interface TypeMenuProps {
-  children: () => ReactNode;
+  children: ReactNode
+  reducer: any
 }
 
 const initialState = {
   menuList: [],
-  refs: null
+  refs: null,
 }
 
-const MenuContext = createContext({} as any);
+const MenuContext = createContext({} as any)
 
-const MenuContextProvider: FunctionComponent = (props: any): JSX.Element => {
-  const [ state, dispatch ]:any = useReducer(menuReducer, initialState);
-  
+const MenuContextProvider = ({
+  children,
+  reducer,
+}: TypeMenuProps): JSX.Element => {
   return (
-    <MenuContext.Provider value={{state, dispatch}}>
-      {props.children}
+    <MenuContext.Provider value={useReducer(reducer, initialState)}>
+      {children}
     </MenuContext.Provider>
   )
 }
 
-export { MenuContext, MenuContextProvider };
+const useMenuValue = () => useContext(MenuContext)
+
+export {MenuContextProvider, useMenuValue}

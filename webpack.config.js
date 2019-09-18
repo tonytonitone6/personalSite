@@ -1,53 +1,57 @@
-const { join } = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
-const styledComponentsTransformer = createStyledComponentsTransformer();
-const webpackMerge = require("webpack-merge");
+const {join} = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
+  .default
+const styledComponentsTransformer = createStyledComponentsTransformer()
+const webpackMerge = require('webpack-merge')
 
-const modeConfig = (env, API_URI) => require(`./webpack.utils/webpack.${env}`)(env, API_URI);
+const modeConfig = (env, API_URI) =>
+  require(`./webpack.utils/webpack.${env}`)(env, API_URI)
 
-const srcPath = (dir) => {
-  return join(__dirname, 'src', dir);
+const srcPath = dir => {
+  return join(__dirname, 'src', dir)
 }
 
-module.exports = ({ mode, API_URI }) =>
+module.exports = ({mode, API_URI}) =>
   webpackMerge(
     {
-      entry: "./src/index.tsx",
+      entry: './src/index.tsx',
       output: {
-        path: join(__dirname, "dist"),
-        publicPath: "/",
-        filename: "[chunkhash].js"
+        path: join(__dirname, 'dist'),
+        publicPath: '/',
+        filename: '[chunkhash].js',
       },
       module: {
         rules: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
             test: /\.tsx?$/,
             exclude: /node_modules/,
             options: {
-              getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
-            }
+              getCustomTransformers: () => ({
+                before: [styledComponentsTransformer],
+              }),
+            },
           },
           {
             test: /\.s?css$/,
             use: ExtractTextPlugin.extract({
-              fallback: "style-loader",
-              use: ["css-loader", "sass-loader"]
-            })
+              fallback: 'style-loader',
+              use: ['css-loader', 'sass-loader'],
+            }),
           },
           {
             test: /\.(svg|png|jpe?g)$/,
-            use:[
+            use: [
               {
                 loader: 'file-loader',
                 options: {
-                  name: 'image/[hash:8].[name].[ext]'
-                }
-              }
-            ]
-          }
-        ]
+                  name: 'image/[hash:8].[name].[ext]',
+                },
+              },
+            ],
+          },
+        ],
       },
       resolve: {
         alias: {
@@ -55,14 +59,15 @@ module.exports = ({ mode, API_URI }) =>
           '@components': srcPath('components'),
           '@containers': srcPath('containers'),
           '@utils': srcPath('utils'),
-          "@assets": srcPath('assets'),
-          "@context": srcPath('context'),
-          "@reducers": srcPath('reducers'),
-          "@hooks": srcPath('hooks'),
-          "@schemas": srcPath('schemas')
+          '@assets': srcPath('assets'),
+          '@context': srcPath('context'),
+          '@reducers': srcPath('reducers'),
+          '@hooks': srcPath('hooks'),
+          '@schemas': srcPath('schemas'),
+          '@styles': srcPath('styles')
         },
-        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"]
-      }
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+      },
     },
-    modeConfig(mode, API_URI)
-  );
+    modeConfig(mode, API_URI),
+  )

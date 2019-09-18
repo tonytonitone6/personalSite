@@ -51,14 +51,14 @@ input NewProfileInput {
 }
 
 input UpdatedProfileInput {
-  _id: String,
+  _id: String
   name: String!
   type: SkillType!
   score: Int!
 }
 
 extend type Query {
-  profiles: Profile!,
+  profiles: Profile!
   profile: Skill!
 }
 

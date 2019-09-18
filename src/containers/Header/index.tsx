@@ -1,67 +1,69 @@
-import React, { FunctionComponent, useState, useContext, MouseEvent, useReducer, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, {FunctionComponent, useState, MouseEvent, useMemo} from 'react'
+import {FormattedMessage} from 'react-intl'
 
-import { MemoSocialArea } from './SocialArea';
-import { MenuContext } from '@context/index';
-import types from '@reducers/constants';
+import {MemoSocialArea} from './SocialArea'
+import {useMenuValue} from '@context/index'
+import types from '@reducers/constants'
 
-import ArrowLogo from '../../images/down-arrow.png';
+import ArrowLogo from '../../images/down-arrow.png'
 import {
   HeaderWrapper,
   HeaderContainer,
   HeaderMenu,
   Introduction,
-  ArrowIcon
-} from './styles';
-
+  ArrowIcon,
+} from './styles'
 
 interface TypeMenuItem {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 const Header: FunctionComponent = () => {
   const [skillList, setSkillList] = useState([
-    { href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
-    { href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook' },
-    { href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw', item: 'fab fa-instagram' },
-    { href: 'https://github.com/tonytonitone6', item: 'fab fa-github' }
-  ]);
-  
-  const { state: { menuList, refs } , dispatch } = useContext(MenuContext);
+    {href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
+    {href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook'},
+    {
+      href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw',
+      item: 'fab fa-instagram',
+    },
+    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
+  ])
 
-  
+  const [{menuList, refs}, _] = useMenuValue()
+
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
-    e.preventDefault();
+    e.preventDefault()
     refs[id].current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
-    });
+    })
   }
-  
-  const onRenderMenuList = ({id, name}: {id: number, name: string}):JSX.Element | null => {    
-    if (menuList &&  menuList.length !== 0) {
+
+  const onRenderMenuList = ({
+    id,
+    name,
+  }: {
+    id: number
+    name: string
+  }): JSX.Element | null => {
+    if (menuList && menuList.length !== 0) {
       return (
-        <li 
-          key={id}
-          onClick={(e) => handleClick(e, id)}
-        >
+        <li key={id} onClick={e => handleClick(e, id)}>
           <a href="#">
-            <FormattedMessage 
-              id={name}
-            />
+            <FormattedMessage id={name} />
           </a>
         </li>
       )
     }
-    return null;
+    return null
   }
 
   const moveToNextPage = (): void => {
     refs[0].current.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
-    });
+      block: 'start',
+    })
   }
 
   return (
@@ -69,7 +71,7 @@ const Header: FunctionComponent = () => {
       <HeaderContainer>
         <HeaderMenu>
           <ul>
-            {(menuList && menuList.length !== 0) 
+            {menuList && menuList.length !== 0
               ? menuList.map(onRenderMenuList)
               : null}
           </ul>
@@ -77,16 +79,12 @@ const Header: FunctionComponent = () => {
         <Introduction>
           <h1>Stan Mao</h1>
           <span>Backend Engineer</span>
-          <MemoSocialArea skillList={skillList} />
+          <MemoSocialArea skillList={useMemo(() => skillList, [])} />
         </Introduction>
-        <ArrowIcon 
-          src={ArrowLogo}
-          onClick={moveToNextPage}
-        />
+        <ArrowIcon src={ArrowLogo} onClick={moveToNextPage} />
       </HeaderContainer>
     </HeaderWrapper>
   )
 }
 
-
-export default Header;
+export default Header

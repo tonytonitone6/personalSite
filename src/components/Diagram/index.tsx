@@ -1,13 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react'
 
+import {
+  Test,
+  Container
+} from './styles';
 
-const Diagram:FunctionComponent = () => {
+const Diagram: FunctionComponent = () => {
   return (
-    <div>
-      diagram
-    </div>
+    <Container>
+      <Test target="true">
+        123
+      </Test>
+    </Container>
   )
-};
+}
 
-
-export default Diagram;
+export default Diagram

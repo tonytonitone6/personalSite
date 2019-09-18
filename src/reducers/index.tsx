@@ -1,1 +1,1 @@
-export { menuReducer } from './menuReducer';
+export {menuReducer} from './menuReducer'

@@ -28,8 +28,9 @@ const initialComponent = (props = {}) => {
 
 describe('render icon', () => {
   it('should return target icon', () => {
-    const {queryByText} = initialComponent(defaultProps)
+    const {queryByText, debug} = initialComponent(defaultProps)
     const icon = queryByText('https://twitter.com/stanmao')
+    // debug(icon);
   })
 
   it('render icon list', () => {
@@ -40,13 +41,5 @@ describe('render icon', () => {
   it('pass zero props to render icon', () => {
     const wrapper = initialComponent({...defaultProps});
     expect(wrapper).toMatchSnapshot();
-  })
-
-  it('test', () => {
-    const {getByTestId, container, debug} = initialComponent()
-    // debug(container);
-    // debug(getByTestId('test-icon'))
-    // expect(getByTestId('renders-socialArea')).toHaveStyleRule
-
   })
 })

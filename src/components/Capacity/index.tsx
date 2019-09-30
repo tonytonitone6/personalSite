@@ -48,7 +48,7 @@ interface SkillItem {
 }
 
 const SkillSection: FunctionComponent = (): JSX.Element => {
-  const [location, _]: any = useLocation()
+  const [{location}, _]: any = useLocation()
   const [animate, setAnimate] = useState(false)
   const elementRef: any | null = useRef(null)
   let limit: number | undefined
@@ -59,12 +59,10 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   }
 
   useLayoutEffect(() => {
-    if (
-      elementRef.current !== null &&
-      window.scrollY >= elementRef.current.clientHeight - 100
-    ) {
-      setAnimate(true)
-    }
+    (elementRef.current !== null && window.scrollY >= elementRef.current.clientHeight - 100)
+      ? setAnimate(true)
+      : setAnimate(false);
+
   }, [location])
 
   const onRenderSkill = (item: SkillItem) => {

@@ -7,11 +7,14 @@ interface Iprops {
 }
 
 export const Container = styled.div`
-  display: flex;
+  /* position: relative; */
+  height: 100%;
   width: 100%;
 `;
 
 export const Test = styled.div`
+  max-width: 100%;
+  height: 100%;
   background-color: #333;
   ${(props: Iprops) => (props.target ? gridBase.col1 : '')}
 `;

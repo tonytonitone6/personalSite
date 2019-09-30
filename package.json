@@ -12,7 +12,6 @@
     "format:check": "prettier --list-different src/**/*.{tsx,ts}",
     "lint": "tslint src/**/*.ts{x}",
     "test": "jest --watch",
-    "precommit": "lint-staged && npm run format:check",
     "cypress": "cypress open",
     "cypress:record": "cypress run --record --key 32fa9afb-7db5-4ab1-a539-7a5e372b6fd8"
   },

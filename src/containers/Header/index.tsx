@@ -1,17 +1,21 @@
-import React, {FunctionComponent, useState, MouseEvent, useMemo} from 'react'
+import React, {FunctionComponent, useState, MouseEvent, useLayoutEffect, useMemo} from 'react'
 import {FormattedMessage} from 'react-intl'
 
-import {MemoSocialArea} from './SocialArea'
 import {useMenuValue} from '@context/index'
 import types from '@reducers/constants'
+import SocialContent from './SocialContent';
+// import useLocation from '@hooks/useLocation'
 
-import ArrowLogo from '../../images/down-arrow.png'
+
+import bgPhoto from '../../images/bg.jpg';
 import {
   HeaderWrapper,
   HeaderContainer,
   HeaderMenu,
   Introduction,
-  ArrowIcon,
+  SocialArea,
+  SocialPersonal,
+  SocialBgImage
 } from './styles'
 
 interface TypeMenuItem {
@@ -20,17 +24,19 @@ interface TypeMenuItem {
 }
 
 const Header: FunctionComponent = () => {
-  const [skillList, setSkillList] = useState([
-    {href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
-    {href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook'},
-    {
-      href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw',
-      item: 'fab fa-instagram',
-    },
-    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
-  ])
+  const [{menuList, refs}, ignoreDispatch] = useMenuValue();
+  const [aniStatus, setAnimation] = useState(() => false);
 
-  const [{menuList, refs}, _] = useMenuValue()
+  useLayoutEffect(() => {
+    const validStatus = (): void => {
+      (window.scrollY > 100) ? setAnimation(true) : setAnimation(false);
+    }
+    window.addEventListener('scroll', validStatus, false);
+    
+    return () => {
+      window.removeEventListener('scroll', validStatus, false);
+    }
+  }, []);
 
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault()
@@ -59,17 +65,13 @@ const Header: FunctionComponent = () => {
     return null
   }
 
-  const moveToNextPage = (): void => {
-    refs[0].current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-  }
 
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <HeaderMenu>
+        <HeaderMenu
+          aniStatus={aniStatus}
+        >
           <ul>
             {menuList && menuList.length !== 0
               ? menuList.map(onRenderMenuList)
@@ -77,11 +79,15 @@ const Header: FunctionComponent = () => {
           </ul>
         </HeaderMenu>
         <Introduction>
-          <h1>Stan Mao</h1>
-          <span>Backend Engineer</span>
-          <MemoSocialArea skillList={useMemo(() => skillList, [])} />
-        </Introduction>
-        <ArrowIcon src={ArrowLogo} onClick={moveToNextPage} />
+          <SocialArea
+            col8={true}
+          >
+            <SocialBgImage src={bgPhoto} />
+          </SocialArea>
+          <SocialPersonal col4={true}>
+              <SocialContent />
+          </SocialPersonal>
+        </Introduction>        
       </HeaderContainer>
     </HeaderWrapper>
   )

@@ -1,7 +1,10 @@
 import React, {memo} from 'react'
 import PropTypes from 'prop-types'
 
-import {SocialIcon, SocialArea} from './styles'
+import {
+  SocialIcon, 
+  IconArea,
+} from './styles'
 
 interface TypeProps {
   href: string
@@ -25,9 +28,9 @@ const SocialAreaComponent = (props: {skillList: TypeProps[]}) => {
   }
 
   return (
-    <SocialArea data-testid="renders-socialArea">
+    <IconArea data-testid="renders-socialArea">
       {menuList.map(onRenderSocialList)}
-    </SocialArea>
+    </IconArea>
   )
 }
 

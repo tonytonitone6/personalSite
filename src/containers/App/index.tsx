@@ -1,6 +1,5 @@
 import React, {
   FunctionComponent,
-  Fragment,
   useState,
   useEffect
 } from 'react'
@@ -17,10 +16,6 @@ import Content from '@components/Content'
 import {client} from '@utils/api'
 import {MenuContextProvider} from '@context/index'
 import {menuReducer} from '@reducers/index'
-import {
-  width,
-  columns
-} from '@styles/grid';
 
 
 addLocaleData([...en, ...zh])
@@ -29,18 +24,26 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+  }
+  
   html, body, #root {
-    width: 100%;
-    height: 100%;
     :focus {
       outline: none;
     }
-    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 100%;
     font-weight: 400;
     color: #fff;
-    line-height: 17px;
+    line-height: 1.6;
+    font-family: 'Mansalva', cursive;
   }
 
   @media (max-width: 576px) {
@@ -51,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 100%;
   height: 100%;
 `;
 
@@ -89,11 +92,11 @@ const App: FunctionComponent = (): JSX.Element => {
     <ApolloProvider client={client}>
       <MenuContextProvider reducer={menuReducer}>
         <IntlProvider locale={language} messages={messagesLang}>
-          <Container>
+          <>
             <GlobalStyle />
             <Header />
             <Content />
-          </Container>
+          </>
         </IntlProvider>
       </MenuContextProvider>
     </ApolloProvider>

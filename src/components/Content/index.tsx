@@ -23,11 +23,11 @@ const List: FunctionComponent = (): JSX.Element | null => {
   const [block, ignoreFunc] = useState([
     {
       id: 1,
-      component: Capacity,
+      component: Diagram,
     },
     {
       id: 2,
-      component: Diagram,
+      component: Capacity,
     },
     {
       id: 3,

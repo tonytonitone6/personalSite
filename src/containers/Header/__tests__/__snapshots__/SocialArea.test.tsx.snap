@@ -4,29 +4,8 @@ exports[`render icon pass zero props to render icon 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c1 {
-  margin: 1rem 2rem;
-}
-
-.c1 > [class*='fab'] {
-  color: #fff;
-  font-size: 2rem;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-
-.c1 > [class*='fab']:hover {
-  color: red;
+  width: 100%;
+  padding: 1rem 0 10rem 0;
 }
 
 <body>
@@ -36,7 +15,7 @@ Object {
         data-testid="renders-socialArea"
       >
         <a
-          class="c1"
+          class=""
           data-testid="test-icon"
           href="https://twitter.com/stanmao"
           target="_blank"
@@ -46,7 +25,7 @@ Object {
           />
         </a>
         <a
-          class="c1"
+          class=""
           data-testid="test-icon"
           href="https://www.facebook.com/yuhsaing.mao"
           target="_blank"
@@ -56,7 +35,7 @@ Object {
           />
         </a>
         <a
-          class="c1"
+          class=""
           data-testid="test-icon"
           href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
           target="_blank"
@@ -66,7 +45,7 @@ Object {
           />
         </a>
         <a
-          class="c1"
+          class=""
           data-testid="test-icon"
           href="https://github.com/tonytonitone6"
           target="_blank"
@@ -80,11 +59,11 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="sc-EHOje hacebR"
+      class="sc-EHOje dIgaOZ"
       data-testid="renders-socialArea"
     >
       <a
-        class="sc-bZQynM ccNtSi"
+        class="sc-htoDjs bAQbaX"
         data-testid="test-icon"
         href="https://twitter.com/stanmao"
         target="_blank"
@@ -94,7 +73,7 @@ Object {
         />
       </a>
       <a
-        class="sc-bZQynM ccNtSi"
+        class="sc-htoDjs bAQbaX"
         data-testid="test-icon"
         href="https://www.facebook.com/yuhsaing.mao"
         target="_blank"
@@ -104,7 +83,7 @@ Object {
         />
       </a>
       <a
-        class="sc-bZQynM ccNtSi"
+        class="sc-htoDjs bAQbaX"
         data-testid="test-icon"
         href="https://www.instagram.com/tonytonitone6/?hl=zh-tw"
         target="_blank"
@@ -114,7 +93,7 @@ Object {
         />
       </a>
       <a
-        class="sc-bZQynM ccNtSi"
+        class="sc-htoDjs bAQbaX"
         data-testid="test-icon"
         href="https://github.com/tonytonitone6"
         target="_blank"

@@ -36,11 +36,11 @@ export const AvatorWrapper = styled.div`
     const [target] = Object.keys(props).filter(key => key.includes('col'));
     return (Grid as any)[target]? (Grid as any)[target] : '';
   }};
-  max-height: 50%;
+  /* max-height: 50%; */
 
-  @media (min-width: 180) {
+  /* @media (min-width: 180) {
     max-height: 100%;
-  }
+  } */
 `
 
 export const SkillWrapper = styled.div`
@@ -49,11 +49,11 @@ export const SkillWrapper = styled.div`
     return (Grid as any)[target]? (Grid as any)[target] : '';
   }};
   background-color: rgb(226, 235, 229);
-  max-height: 50%;
+  max-height: 100%;
 
-  @media (min-width: 996px) {
+  /* @media (min-width: 996px) {
     max-height: 1000px;
-  }
+  } */
 `
 
 export const SkillList = styled.div<ElementShow>`

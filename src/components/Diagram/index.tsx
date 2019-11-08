@@ -1,11 +1,10 @@
 import React, {FunctionComponent} from 'react'
 
-import {
-  Card
-} from '@styles/Card';
+import Common from '@styles/common';
 import {
   Container,
-  Flag
+  Flag,
+  // ContentContainer
 } from './styles';
 
 
@@ -30,9 +29,17 @@ const Diagram: FunctionComponent = () => {
         key={item.name}
         col4={true}
       >
-        <Card>
-          123
-        </Card>
+        <Common.Card.CardContainer>
+          <Common.Card.ContentContainer>
+            <Common.Card.ContentTitle>
+              Front End
+            </Common.Card.ContentTitle>
+            <Common.Card.Content>
+              456
+            </Common.Card.Content>
+          </Common.Card.ContentContainer>
+          
+        </Common.Card.CardContainer>
       </Flag>
     )
   }

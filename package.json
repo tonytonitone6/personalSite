@@ -4,9 +4,10 @@
   "description": "personal web site",
   "main": "webpack.config.js",
   "scripts": {
-    "webpack-dev-server": "webpack-dev-server",
+    "webpack-dev-server": "webpack-dev-server --hot --inline",
     "webpack": "webpack",
     "dev": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9000/graphql",
+    "dev:hot": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9000/graphql",
     "prod": "npm run webpack -- --env.mode production --env.API_URI=http://localhost:9000/graphql",
     "format": "prettier --write \"**/*.{js,jsx,tsx,ts,json,gql,graphql}\"",
     "format:check": "prettier --list-different src/**/*.{tsx,ts}",
@@ -15,10 +16,16 @@
     "cypress": "cypress open",
     "cypress:record": "cypress run --record --key 32fa9afb-7db5-4ab1-a539-7a5e372b6fd8"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint && npm run test"
+    }
+  },
   "author": "mao",
   "license": "ISC",
   "dependencies": {
     "@apollo/react-hooks": "^3.0.0",
+    "@hot-loader/react-dom": "npm:react-dom",
     "apollo-boost": "^0.4.3",
     "d3": "^5.7.0",
     "graphql": "^14.4.2",
@@ -26,7 +33,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-decoration": "^2.0.0",
-    "react-dom": "^16.9.0",
+    "react-dom": "npm:@hot-loader/react-dom",
     "react-intl": "^2.7.2",
     "styled-components": "^4.0.2"
   },
@@ -65,9 +72,6 @@
     "connect-history-api-fallback": "^1.6.0",
     "css-loader": "^1.0.0",
     "cypress": "^3.4.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "enzyme-to-json": "^3.3.5",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
@@ -76,12 +80,12 @@
     "imagemin-webpack-plugin": "^2.4.2",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
-    "jest-enzyme": "^7.0.2",
     "jest-styled-components": "^6.3.3",
     "lint-staged": "^9.2.5",
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.9.4",
     "prettier": "^1.18.2",
+    "react-hot-loader": "^4.12.17",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",

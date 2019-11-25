@@ -1,6 +1,5 @@
-import * as Card from './Card';
-
+import * as Card from './Card'
 
 export default {
-  Card
+  Card,
 }

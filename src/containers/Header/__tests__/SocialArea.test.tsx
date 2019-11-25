@@ -1,13 +1,10 @@
-import React from 'react';
-import {render} from '@testing-library/react';
+import React from 'react'
+import {render} from '@testing-library/react'
 
-import {MemoSocialArea} from '@containers/Header/SocialArea';
-import {
-  SocialArea,
-  SocialIcon
-} from '../styles';
+import {MemoSocialArea} from '@containers/Header/SocialArea'
+import {SocialArea, SocialIcon} from '../styles'
 
-import 'jest-styled-components';
+import 'jest-styled-components'
 
 const defaultProps = {
   skillList: [
@@ -17,7 +14,7 @@ const defaultProps = {
       href: 'https://www.instagram.com/tonytonitone6/?hl=zh-tw',
       item: 'fab fa-instagram',
     },
-    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'}
+    {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
   ],
 }
 
@@ -35,11 +32,13 @@ describe('render icon', () => {
 
   it('render icon list', () => {
     const {getByTestId} = initialComponent(defaultProps)
-    expect(getByTestId('renders-socialArea').children.length).toBe(defaultProps.skillList.length);
+    expect(getByTestId('renders-socialArea').children.length).toBe(
+      defaultProps.skillList.length,
+    )
   })
 
   it('pass zero props to render icon', () => {
-    const wrapper = initialComponent({...defaultProps});
+    const wrapper = initialComponent({...defaultProps})
     // expect(wrapper).toMatchSnapshot();
   })
 })

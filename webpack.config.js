@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
   .default
 const styledComponentsTransformer = createStyledComponentsTransformer()
+
 const webpackMerge = require('webpack-merge')
 
 const modeConfig = (env, API_URI) =>
@@ -15,11 +16,11 @@ const srcPath = dir => {
 module.exports = ({mode, API_URI}) =>
   webpackMerge(
     {
-      entry: './src/index.tsx',
+      entry: ['react-hot-loader/patch', './src/index.tsx'],
       output: {
         path: join(__dirname, 'dist'),
         publicPath: '/',
-        filename: '[chunkhash].js',
+        filename: '[hash]].js',
       },
       module: {
         rules: [
@@ -55,6 +56,7 @@ module.exports = ({mode, API_URI}) =>
       },
       resolve: {
         alias: {
+          'react-dom': '@hot-loader/react-dom',
           '@locales': srcPath('locales'),
           '@components': srcPath('components'),
           '@containers': srcPath('containers'),
@@ -64,7 +66,7 @@ module.exports = ({mode, API_URI}) =>
           '@reducers': srcPath('reducers'),
           '@hooks': srcPath('hooks'),
           '@schemas': srcPath('schemas'),
-          '@styles': srcPath('styles')
+          '@styles': srcPath('styles'),
         },
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       },

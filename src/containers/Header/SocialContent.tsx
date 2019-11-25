@@ -1,16 +1,12 @@
-import React, { FunctionComponent, useState, useMemo } from 'react';
-import {MemoSocialArea} from './SocialArea';
+import React, {FunctionComponent, useState, useMemo} from 'react'
+import {MemoSocialArea} from './SocialArea'
 import {useMenuValue} from '@context/index'
-import {
-  PersonInfo,
-  Avator,
-  ArrowIcon
-} from './styles';
+import {PersonInfo, Avator, ArrowIcon} from './styles'
 
 import ArrowLogo from '../../images/down-arrow.png'
 
 const SocialContent: FunctionComponent = () => {
-  const [skillList, setSkillList] = useState([
+  const [skillList, setSkillList] = useState(() => ([
     {href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
     {href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook'},
     {
@@ -18,9 +14,9 @@ const SocialContent: FunctionComponent = () => {
       item: 'fab fa-instagram',
     },
     {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
-  ]);
+  ]))
 
-  const [{refs}, ignoreDispatch] = useMenuValue();
+  const [{refs}, ignoreDispatch] = useMenuValue()
 
   const moveToNextPage = (): void => {
     refs[0].current.scrollIntoView({
@@ -29,8 +25,7 @@ const SocialContent: FunctionComponent = () => {
     })
   }
 
-  const memoSkillList = useMemo(() => skillList, []);
-
+  const memoSkillList = useMemo(() => skillList, [])
 
   return (
     <PersonInfo>
@@ -38,13 +33,9 @@ const SocialContent: FunctionComponent = () => {
       <p>back end Engineer</p>
       <Avator />
       <MemoSocialArea skillList={memoSkillList} />
-      <ArrowIcon 
-        src={ArrowLogo} 
-        onClick={moveToNextPage}
-      />
+      <ArrowIcon src={ArrowLogo} onClick={moveToNextPage} />
     </PersonInfo>
   )
 }
 
-
-export default SocialContent;
+export default SocialContent

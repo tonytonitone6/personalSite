@@ -1,7 +1,7 @@
 import React, {useState, useLayoutEffect} from 'react'
 
 const useLocation = () => {
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({})
 
   const throttle = (fn: any, time = 1000): any => {
     let timeout: boolean
@@ -20,8 +20,8 @@ const useLocation = () => {
   const onScroll = (e: any) => {
     setLocation({
       location: e,
-      position: window.scrollY
-    });
+      position: window.scrollY,
+    })
   }
 
   useLayoutEffect(() => {

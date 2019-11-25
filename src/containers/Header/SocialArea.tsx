@@ -1,10 +1,7 @@
 import React, {memo} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  SocialIcon, 
-  IconArea,
-} from './styles'
+import {SocialIcon, IconArea} from './styles'
 
 interface TypeProps {
   href: string

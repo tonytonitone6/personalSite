@@ -1,21 +1,20 @@
 import styled, {keyframes, css} from 'styled-components'
-import * as Grid from '@styles/grid';
+import * as Grid from '@styles/grid'
 import avatorPhotos from '../../../images/avator.jpg'
 
-
 interface HeaderProps {
-  aniStatus: boolean;
+  aniStatus: boolean
 }
 
 interface SocialProps {
-  col8?: boolean;
-  col4?: boolean;
+  col8?: boolean
+  col4?: boolean
 }
 
 const barStatus = css`
   background-color: #fff;
   height: 4rem;
-  opacity: .3;
+  opacity: 0.3;
 `
 
 const moveToRight = keyframes`
@@ -51,7 +50,7 @@ const imgAnimation = keyframes`
     opacity: 1;
     transform: none;
   }
-`;
+`
 
 const pulse = keyframes`
   0% {
@@ -68,26 +67,23 @@ const pulse = keyframes`
     opacity: 1;
     transform: scale(1.2);
   }
-`;
-
-
+`
 
 export const HeaderWrapper = styled.header`
   max-height: 100%;
 `
 
-export const HeaderContainer = styled.div`
-`
+export const HeaderContainer = styled.div``
 
 export const HeaderMenu = styled.div`
   height: 4rem;
-  ${({aniStatus}: HeaderProps) => aniStatus ? barStatus : null}
+  ${({aniStatus}: HeaderProps) => (aniStatus ? barStatus : null)}
   position: fixed;
   top: 0;
   width: 100%;
   text-align: right;
   z-index: 10;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
   @media (max-width: 576px) {
     display: none;
     height: 0;
@@ -124,14 +120,13 @@ export const HeaderMenu = styled.div`
   }
 `
 
-export const HeaderSocial = styled.div`
-`
+export const HeaderSocial = styled.div``
 
 export const Introduction = styled.div`
   display: flex;
-  margin-top: 4rem;
+  margin-top: 4em;
   width: 100%;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 4em);
 
   @media (max-width: 576px) {
     flex-direction: column;
@@ -140,48 +135,48 @@ export const Introduction = styled.div`
 
 export const SocialArea = styled.div`
   ${(props: SocialProps) => {
-    const [target] = Object.keys(props).filter(key => key.includes('col'));
-    return (Grid as any)[target]? (Grid as any)[target] : '';
+    const [target] = Object.keys(props).filter(key => key.includes('col'))
+    return (Grid as any)[target] ? (Grid as any)[target] : ''
   }};
   padding-bottom: 10rem;
-  animation: ${imgAnimation} .5s linear;
+  animation: ${imgAnimation} 0.5s linear;
 
   @media (max-width: 576px) {
     display: none;
   }
-`;
+`
 
 export const SocialBgImage = styled.img`
-  border-radius: .2rem;
+  border-radius: 0.2em;
   width: 100%;
   max-width: 100%;
   max-height: 100%;
   height: 100%;
   object-fit: cover;
-`;
+`
 
 export const IconArea = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 20%;
-`;
+  margin-top: 15%;
+`
 
 export const SocialPersonal = styled.div`
   ${(props: SocialProps) => {
-    const [target] = Object.keys(props).filter(key => key.includes('col'));
-    return (Grid as any)[target]? (Grid as any)[target] : '';
+    const [target] = Object.keys(props).filter(key => key.includes('col'))
+    return (Grid as any)[target] ? (Grid as any)[target] : ''
   }};
   max-width: 100%;
   color: #000;
 
   @media (max-width: 576px) {
-    max-height: calc(100vh - 4rem);
+    max-height: calc(100vh - 4em);
   }
-`;
+`
 
 export const SocialIcon = styled.a`
-  margin: 1rem 2rem;
+  margin: 1em 2em;
   & > [class*='fab'] {
     color: #000;
     font-size: 2rem;
@@ -206,15 +201,15 @@ export const PersonInfo = styled.div`
   }
 
   @media (max-width: 576px) {
-    padding-top: 1rem;
+    padding-top: 1em;
   }
-`;
+`
 
 export const ArrowIcon = styled.img`
   position: absolute;
-  width: 1.8rem;
-  height: 1.8rem;
-  bottom: 10rem;
+  width: 1.8em;
+  height: 1.8em;
+  bottom: 10em;
   animation: ${moveToDown} 1s 1s ease-out forwards,
     ${pulse} 2s 3s ease-out infinite;
   opacity: 0;
@@ -227,12 +222,11 @@ export const ArrowIcon = styled.img`
 
 export const Avator = styled.div`
   background-image: url(${avatorPhotos});
-  max-width: 50%;
-  width: 20rem;
-  max-height: 30%;
-  height: 20rem;
+  width: 15em;
+
+  height: 15em;
   background-size: cover;
   background-position: center;
   border-radius: 50%;
-  margin-top: 5rem;
-`;
+  margin-top: 2em;
+`

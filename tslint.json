@@ -8,6 +8,7 @@
     "interface-name": [true, "never-prefix"],
     "member-ordering": false,
     "member-access": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "singleQuote": true
   }
 }

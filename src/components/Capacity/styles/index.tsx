@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import * as Grid from '@styles/grid';
+import * as Grid from '@styles/grid'
 
 interface SkillItem {
   title: string
@@ -8,8 +8,8 @@ interface SkillItem {
 }
 
 interface GridProps {
-  flex?: boolean;
-  col6?: boolean;
+  flex?: boolean
+  col6?: boolean
 }
 
 interface ElementShow {
@@ -21,20 +21,20 @@ interface PhotoRef {
 }
 
 export const ExperienceSection = styled.div`
-  ${(props: GridProps) => props.flex ? Grid.row : ''};
-    flex-wrap: wrap;
-    margin-bottom: .2rem;
-    @media (min-width: 1800px) {
-      margin-bottom: 0;
-      flex-wrap: nowrap;
-      height: 100%;
-    }
+  ${(props: GridProps) => (props.flex ? Grid.row : '')};
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+  @media (min-width: 1800px) {
+    margin-bottom: 0;
+    flex-wrap: nowrap;
+    height: 100%;
+  }
 `
 
 export const AvatorWrapper = styled.div`
   ${(props: GridProps) => {
-    const [target] = Object.keys(props).filter(key => key.includes('col'));
-    return (Grid as any)[target]? (Grid as any)[target] : '';
+    const [target] = Object.keys(props).filter(key => key.includes('col'))
+    return (Grid as any)[target] ? (Grid as any)[target] : ''
   }};
   /* max-height: 50%; */
 
@@ -45,8 +45,8 @@ export const AvatorWrapper = styled.div`
 
 export const SkillWrapper = styled.div`
   ${(props: GridProps) => {
-    const [target] = Object.keys(props).filter(key => key.includes('col'));
-    return (Grid as any)[target]? (Grid as any)[target] : '';
+    const [target] = Object.keys(props).filter(key => key.includes('col'))
+    return (Grid as any)[target] ? (Grid as any)[target] : ''
   }};
   background-color: rgb(226, 235, 229);
   max-height: 100%;
@@ -58,7 +58,7 @@ export const SkillWrapper = styled.div`
 
 export const SkillList = styled.div<ElementShow>`
   max-width: 100%;
-`;
+`
 
 export const SkillItem = styled.div`
   max-width: 100%;
@@ -71,7 +71,7 @@ export const UserShaDow = styled.div`
   @media (min-width: 996px) {
     /* padding: 20% 15%; */
   }
-`;
+`
 
 export const UserAvator = styled.img<PhotoRef>`
   width: 100%;

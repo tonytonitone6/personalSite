@@ -59,10 +59,15 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   }
 
   useLayoutEffect(() => {
-    (elementRef.current !== null && window.scrollY >= elementRef.current.clientHeight - 100)
+    elementRef.current !== null &&
+    window.scrollY >= elementRef.current.clientHeight - 100
       ? setAnimate(true)
-      : setAnimate(false);
+      : setAnimate(false)
 
+    return () => {
+      elementRef.current = null;
+      setAnimate(false);
+    }
   }, [location])
 
   const onRenderSkill = (item: SkillItem) => {
@@ -75,20 +80,13 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
   }
 
   return (
-    <ExperienceSection 
-      flex={true}
-      ref={elementRef}
-    >
-      <AvatorWrapper
-        col6={true}
-      >
+    <ExperienceSection flex={true} ref={elementRef}>
+      <AvatorWrapper col6={true}>
         <UserShaDow>
           <UserAvator src={userPhoto} />
         </UserShaDow>
       </AvatorWrapper>
-      <SkillWrapper
-        col6={true}
-      >
+      <SkillWrapper col6={true}>
         <SkillList isActive={animate}>
           {personalContent.map(onRenderSkill)}
         </SkillList>

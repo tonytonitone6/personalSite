@@ -14,12 +14,12 @@ module.exports = {
     '^@components/(.*)$': 'components/$1',
     '^@containers/(.*)$': 'containers/$1',
     '^@utils/(.*)$': 'utils/$1',
-    '^@styles/(.*)$': 'styles/$1'
+    '^@styles/(.*)$': 'styles/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/src/test/setDefault.tsx'],
   globals: {
     'ts-jest': {
       diagnostics: false,
     },
-  }
+  },
 }

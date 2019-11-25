@@ -7,7 +7,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 module.exports = (env, API_URI) => ({
   mode: env,
   plugins: [
@@ -41,18 +41,27 @@ module.exports = (env, API_URI) => ({
     //     quality: '95-100',
     //   },
     // }),
-    new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
+    // new CompressionPlugin({
+    //   filename: '[path].gz[query]',
+    //   algorithm: 'gzip',
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8,
+    // }),
+    new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      reportFilename: 'bundle_size.html',
     }),
     new webpack.ProgressPlugin(),
   ],
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
   optimization: {
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       minSize: 30000,
       minChunks: 1,
       maxSize: 0,

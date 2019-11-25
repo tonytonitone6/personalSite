@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import * as Grid from '@styles/grid';
+import * as Grid from '@styles/grid'
 
 interface Iprops {
-  target: string;
+  target: string
 }
 
 interface GridProps {
-  flex?: boolean;
-  col4?: boolean;
+  flex?: boolean
+  col4?: boolean
 }
 
 export const Container = styled.div`
@@ -16,21 +16,23 @@ export const Container = styled.div`
   flex-flow: row nowrap;
   height: 100%;
   width: 100%;
-
+  background-color: #1D1D1D;
   @media (max-width: 576px) {
     flex-direction: column;
   }
-`;
+`
 
 export const Flag = styled.div`
   ${(props: GridProps) => {
-    const [target] = Object.keys(props).filter(key => key.includes('col'));
-    return (Grid as any)[target]? (Grid as any)[target] : '';
+    const [target] = Object.keys(props).filter(key => key.includes('col'))
+    return (Grid as any)[target] ? (Grid as any)[target] : ''
   }};
   color: #000;
   max-width: 100%;
   width: 100%;
-  /* background-color: blue; */
+`
+
+export const ContentWords = styled.p`
+  line-height: 3em;
+  padding-left: 1em;
 `;
-
-

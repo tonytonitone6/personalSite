@@ -1,6 +1,4 @@
-import React from 'react';
-
-
+import React from 'react'
 
 describe('123', () => {
   test('test render', () => {

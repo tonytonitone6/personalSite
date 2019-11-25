@@ -7,11 +7,7 @@ const menuList = (_, args, ctx) => {
     {
       _id: 1,
       name: 'App.experience',
-    },
-    {
-      _id: 2,
-      name: 'App.protfolio',
-    },
+    }
   ]
 
   return data

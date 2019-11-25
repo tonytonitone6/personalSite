@@ -1,13 +1,17 @@
-import React, {FunctionComponent, useState, MouseEvent, useLayoutEffect, useMemo} from 'react'
+import React, {
+  FunctionComponent,
+  useState,
+  MouseEvent,
+  useLayoutEffect,
+  useMemo,
+} from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import {useMenuValue} from '@context/index'
 import types from '@reducers/constants'
-import SocialContent from './SocialContent';
-// import useLocation from '@hooks/useLocation'
+import SocialContent from './SocialContent'
 
-
-import bgPhoto from '../../images/bg.jpg';
+import bgPhoto from '../../images/bg.jpg'
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -15,7 +19,7 @@ import {
   Introduction,
   SocialArea,
   SocialPersonal,
-  SocialBgImage
+  SocialBgImage,
 } from './styles'
 
 interface TypeMenuItem {
@@ -24,19 +28,19 @@ interface TypeMenuItem {
 }
 
 const Header: FunctionComponent = () => {
-  const [{menuList, refs}, ignoreDispatch] = useMenuValue();
-  const [aniStatus, setAnimation] = useState(() => false);
+  const [{menuList, refs}, ignoreDispatch] = useMenuValue()
+  const [aniStatus, setAnimation] = useState(() => false)
 
   useLayoutEffect(() => {
     const validStatus = (): void => {
-      (window.scrollY > 100) ? setAnimation(true) : setAnimation(false);
+      window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
     }
-    window.addEventListener('scroll', validStatus, false);
-    
+    window.addEventListener('scroll', validStatus, false)
+
     return () => {
-      window.removeEventListener('scroll', validStatus, false);
+      window.removeEventListener('scroll', validStatus, false)
     }
-  }, []);
+  }, [])
 
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault()
@@ -65,13 +69,10 @@ const Header: FunctionComponent = () => {
     return null
   }
 
-
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <HeaderMenu
-          aniStatus={aniStatus}
-        >
+        <HeaderMenu aniStatus={aniStatus}>
           <ul>
             {menuList && menuList.length !== 0
               ? menuList.map(onRenderMenuList)
@@ -79,15 +80,13 @@ const Header: FunctionComponent = () => {
           </ul>
         </HeaderMenu>
         <Introduction>
-          <SocialArea
-            col8={true}
-          >
+          <SocialArea col8={true}>
             <SocialBgImage src={bgPhoto} />
           </SocialArea>
           <SocialPersonal col4={true}>
-              <SocialContent />
+            <SocialContent />
           </SocialPersonal>
-        </Introduction>        
+        </Introduction>
       </HeaderContainer>
     </HeaderWrapper>
   )

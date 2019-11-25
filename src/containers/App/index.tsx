@@ -1,8 +1,6 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect
-} from 'react'
+import 'react-hot-loader';
+import React, {FunctionComponent, useState, useEffect} from 'react'
+import { hot } from 'react-hot-loader/root';
 import styled, {createGlobalStyle} from 'styled-components'
 import {addLocaleData, IntlProvider} from 'react-intl'
 import {ApolloProvider} from '@apollo/react-hooks'
@@ -16,7 +14,6 @@ import Content from '@components/Content'
 import {client} from '@utils/api'
 import {MenuContextProvider} from '@context/index'
 import {menuReducer} from '@reducers/index'
-
 
 addLocaleData([...en, ...zh])
 
@@ -51,12 +48,12 @@ const GlobalStyle = createGlobalStyle`
       flex: 0 0 calc(width / columns * 100%);
     }
   }
-`;
+`
 
 const Container = styled.div`
   max-width: 100%;
   height: 100%;
-`;
+`
 
 const getWebSiteLanguage = (): string => {
   if (window) {
@@ -103,4 +100,4 @@ const App: FunctionComponent = (): JSX.Element => {
   )
 }
 
-export default App
+export default hot(App);

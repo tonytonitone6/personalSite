@@ -30,7 +30,7 @@ export const CardTime = styled.div`
   justify-content: flex-end;
   max-width: 30%;
   flex: 1;
-`;
+`
 
 export const CardDetail = styled.div`
   flex: 1;
@@ -39,4 +39,4 @@ export const CardDetail = styled.div`
   & > div:nth-last-of-type(1) {
     margin-top: 1em;
   }
-`;
+`

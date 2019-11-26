@@ -1,6 +1,6 @@
-import 'react-hot-loader';
+import 'react-hot-loader'
 import React, {FunctionComponent, useState, useEffect} from 'react'
-import { hot } from 'react-hot-loader/root';
+import {hot} from 'react-hot-loader/root'
 import styled, {createGlobalStyle} from 'styled-components'
 import {addLocaleData, IntlProvider} from 'react-intl'
 import {ApolloProvider} from '@apollo/react-hooks'
@@ -100,4 +100,4 @@ const App: FunctionComponent = (): JSX.Element => {
   )
 }
 
-export default hot(App);
+export default hot(App)

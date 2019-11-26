@@ -34,7 +34,7 @@ module.exports = (env, API_URI) => ({
     contentBase: join(__dirname, '../dist'),
     historyApiFallback: true,
     open: true,
-    hot: true
+    hot: true,
     // proxy: {
     //   "/v1": "http://[::1]:5000"
     // }

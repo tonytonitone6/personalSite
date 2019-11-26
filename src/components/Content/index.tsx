@@ -3,7 +3,7 @@ import React, {useState, useEffect, FunctionComponent, createRef} from 'react'
 import {useQuery} from '@apollo/react-hooks'
 
 import Capacity from '@components/Capacity'
-import Experience from '@components/Experience';
+import Experience from '@components/Experience'
 import Diagram from '@components/Diagram'
 import types from '@reducers/constants'
 import {useMenuValue} from '@context/index'
@@ -21,8 +21,8 @@ const List: FunctionComponent = (): JSX.Element | null => {
   const {
     data: {menuList = []},
   }: any = useQuery(GET_MENUS, {
-    fetchPolicy: 'no-cache'
-  });
+    fetchPolicy: 'no-cache',
+  })
 
   const [block, ignoreFunc] = useState([
     {
@@ -32,7 +32,7 @@ const List: FunctionComponent = (): JSX.Element | null => {
     {
       id: 2,
       component: Experience,
-    }
+    },
   ])
 
   const onRenderComponent = (Component: FunctionComponent): JSX.Element => {

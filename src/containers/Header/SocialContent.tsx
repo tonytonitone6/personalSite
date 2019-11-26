@@ -6,7 +6,7 @@ import {PersonInfo, Avator, ArrowIcon} from './styles'
 import ArrowLogo from '../../images/down-arrow.png'
 
 const SocialContent: FunctionComponent = () => {
-  const [skillList, setSkillList] = useState(() => ([
+  const [skillList, setSkillList] = useState(() => [
     {href: 'https://twitter.com/stanmao', item: 'fab fa-twitter-square'},
     {href: 'https://www.facebook.com/yuhsaing.mao', item: 'fab fa-facebook'},
     {
@@ -14,7 +14,7 @@ const SocialContent: FunctionComponent = () => {
       item: 'fab fa-instagram',
     },
     {href: 'https://github.com/tonytonitone6', item: 'fab fa-github'},
-  ]))
+  ])
 
   const [{refs}, ignoreDispatch] = useMenuValue()
 

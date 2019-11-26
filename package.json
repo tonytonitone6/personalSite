@@ -12,13 +12,13 @@
     "format": "prettier --write \"**/*.{js,jsx,tsx,ts,json,gql,graphql}\"",
     "format:check": "prettier --list-different src/**/*.{tsx,ts}",
     "lint": "tslint src/**/*.ts{x}",
-    "test": "jest --watch",
+    "test": "jest --watchAll",
     "cypress": "cypress open",
     "cypress:record": "cypress run --record --key 32fa9afb-7db5-4ab1-a539-7a5e372b6fd8"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint && npm run test"
+      "pre-commit": "npm run format && npm run lint"
     }
   },
   "author": "mao",

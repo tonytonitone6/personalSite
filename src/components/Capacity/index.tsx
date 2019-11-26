@@ -65,8 +65,8 @@ const SkillSection: FunctionComponent = (): JSX.Element => {
       : setAnimate(false)
 
     return () => {
-      elementRef.current = null;
-      setAnimate(false);
+      elementRef.current = null
+      setAnimate(false)
     }
   }, [location])
 

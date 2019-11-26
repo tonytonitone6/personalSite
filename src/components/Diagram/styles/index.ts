@@ -16,7 +16,7 @@ export const Container = styled.div`
   flex-flow: row nowrap;
   height: 100%;
   width: 100%;
-  background-color: #1D1D1D;
+  background-color: #1d1d1d;
   @media (max-width: 576px) {
     flex-direction: column;
   }
@@ -35,4 +35,4 @@ export const Flag = styled.div`
 export const ContentWords = styled.p`
   line-height: 3em;
   padding-left: 1em;
-`;
+`

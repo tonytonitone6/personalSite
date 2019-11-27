@@ -2,6 +2,7 @@ clone:
   git:
     image: plugins/git
     depath: 50
+    tags: true
 
 
 pipeline:
@@ -9,4 +10,5 @@ pipeline:
     image: node:11.13.0
     commands:
       - yarn install
-      - yarn run dev
+      - yarn run prod
+      - yarn run serve

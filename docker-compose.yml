@@ -8,3 +8,17 @@ services:
     ports:
       - "3000:3000"
     tty: true
+  # maoweb:
+  #   build: .
+  #   # stdin_open: true
+  #   ports:
+  #     - "9000:9000"
+  #   tty: true
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
+  # database:
+  #   image: mongo
+  #   ports: 
+  #     - "27017:27017"

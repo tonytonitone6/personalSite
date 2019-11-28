@@ -22,7 +22,7 @@ pipeline:
       image: appleboy/drone-scp
       host:
         - 206.189.147.149
-      username: stan
+      username: root
       secret: [ ssh_key ]
       target: /var/www/test
       source: 
@@ -32,11 +32,11 @@ pipeline:
       image: appleboy/drone-ssh
       host:
         - 206.189.147.149
-      username: stan
+      username: root
       secret: [ ssh_key ]
       script:
         - echo "Hi login"
         - ls -al /var/www/test
-        
+
 
 

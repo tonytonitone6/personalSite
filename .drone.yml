@@ -9,32 +9,32 @@ pipeline:
     backend:
       image: node:11.13.0
       commands:
-        - echo "backend testing"
-    front:
-      image: node:11.13.0
-      when:
-        branch: [master, dev]
-      commands:
-        - yarn install
-        - yarn run prod
+        - touch maomao.txt
+    # front:
+    #   image: node:11.13.0
+    #   when:
+    #     branch: [master, dev]
+    #   commands:
+    #     - yarn install
+    #     - yarn run prod
     
     scp:
       image: appleboy/drone-scp
       host:
         - 206.189.147.149
-      username: root
-      password: 25946889
-      # secret: [ ssh_key ]
+      port: 22
+      username: stan
+      secret: [ ssh_key ]
       target: /var/www/test
       source: 
-        - dist/*
+        - maomao.txt
 
     ssh:
       image: appleboy/drone-ssh
       host:
         - 206.189.147.149
-      username: root
-      password: 25946889
+      port: 22
+      username: stan
       secret: [ ssh_key ]
       script:
         - echo "Hi login"

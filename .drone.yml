@@ -24,7 +24,7 @@ pipeline:
         - 206.189.147.149
       port: 22
       username: stan
-      secret: [ ssh_key ]
+      secrets: [ ssh_key ]
       target: /var/www/test
       source: 
         - maomao.txt
@@ -35,7 +35,7 @@ pipeline:
         - 206.189.147.149
       port: 22
       username: stan
-      secret: [ ssh_key ]
+      secrets: [ ssh_key ]
       script:
         - echo "Hi login"
         - ls -al /var/www/test

@@ -11,6 +11,7 @@ pipeline:
       secrets: [ ssh_key ]
       commands:
         - touch maomao.txt
+        - touch maomao2.txt
         - echo $SSH_KEY
 
     # front:
@@ -21,16 +22,16 @@ pipeline:
     #     - yarn install
     #     - yarn run prod
     
-    # scp:
-    #   image: appleboy/drone-scp
-    #   host:
-    #     - 206.189.147.149
-    #   port: 22
-    #   username: stan
-    #   secrets: [ ssh_key ]
-    #   target: /var/www/test
-    #   source: 
-    #     - maomao.txt
+    scp:
+      image: appleboy/drone-scp
+      host:
+        - 206.189.147.149
+      port: 22
+      username: stan
+      secrets: [ ssh_key ]
+      target: /var/www/test
+      source: 
+        - maomao.txt
 
     # ssh:
     #   image: appleboy/drone-ssh

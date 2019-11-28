@@ -8,8 +8,11 @@ clone:
 pipeline:
     backend:
       image: node:11.13.0
+      secrets: [ ssh_key ]
       commands:
         - touch maomao.txt
+        - echo $SSH_KEY
+
     # front:
     #   image: node:11.13.0
     #   when:
@@ -18,27 +21,27 @@ pipeline:
     #     - yarn install
     #     - yarn run prod
     
-    scp:
-      image: appleboy/drone-scp
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      target: /var/www/test
-      source: 
-        - maomao.txt
+    # scp:
+    #   image: appleboy/drone-scp
+    #   host:
+    #     - 206.189.147.149
+    #   port: 22
+    #   username: stan
+    #   secrets: [ ssh_key ]
+    #   target: /var/www/test
+    #   source: 
+    #     - maomao.txt
 
-    ssh:
-      image: appleboy/drone-ssh
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      script:
-        - echo "Hi login"
-        - ls -al /var/www/test
+    # ssh:
+    #   image: appleboy/drone-ssh
+    #   host:
+    #     - 206.189.147.149
+    #   port: 22
+    #   username: stan
+    #   secrets: [ ssh_key ]
+    #   script:
+    #     - echo "Hi login"
+    #     - ls -al /var/www/test
 
 
 

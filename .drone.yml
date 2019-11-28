@@ -18,3 +18,11 @@ pipeline:
         - yarn install
         - yarn run prod
         - yarn run serve
+    
+    scp:
+      image: appleboy/drone-scp
+      host: 206.189.147.149
+      username: stan
+      secret: [ ssh_key ]
+      target: /var/www/test
+

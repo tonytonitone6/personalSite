@@ -29,23 +29,24 @@ pipeline:
       secrets: [ ssh_key ]
       target: /var/www/test
       source: 
-        - "*.js"
+        - "server.js"
+        - dist
         - node_modules
       when:
         branch: [ master, dev ]
 
-    # ssh:
-    #   image: appleboy/drone-ssh
-    #   host:
-    #     - 206.189.147.149
-    #   port: 22
-    #   username: stan
-    #   secrets: [ ssh_key ]
-    #   command_timeout: 120
-    #   script:
-    #     - rm -rf ${DRONE_REPO} && mkdir -p ${DRONE_REPO}
-    #     - cp -r drone/${DRONE_REPO}/* /var/www/test2
-    #     - cd /var/www/test && ls
+    ssh:
+      image: appleboy/drone-ssh
+      host:
+        - 206.189.147.149
+      port: 22
+      username: stan
+      secrets: [ ssh_key ]
+      command_timeout: 120
+      script:
+        - rm -rf /var/www/test2 && mkdir -p /var/www/test2
+        - cp -r /var/www/test/* /var/www/test2
+        - cd /var/www/test2 && ls
 
 
 

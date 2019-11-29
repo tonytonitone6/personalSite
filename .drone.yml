@@ -10,7 +10,6 @@ pipeline:
       image: node:11.13.0
       secrets: [ ssh_key ]
       commands:
-        - touch maomao.txt
         - echo $SSH_KEY
 
     front:
@@ -21,12 +20,6 @@ pipeline:
         - yarn install
         - yarn run prod
 
-    test:
-      when:
-        branch: [ master, dev ]
-      commands:
-        - yarn run test
-    
     scp:
       image: appleboy/drone-scp
       host:
@@ -36,11 +29,11 @@ pipeline:
       secrets: [ ssh_key ]
       target: /drone/test
       source: 
-        - "dist"
-        - "node_modules"
+        - dist
+        - node_modules
         - "*.js"
       when:
-        branch: [ master, dev]
+        branch: [ master, dev ]
 
     # ssh:
     #   image: appleboy/drone-ssh

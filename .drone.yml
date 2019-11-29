@@ -20,6 +20,8 @@ pipeline:
         - yarn install
         - yarn run prod
 
+
+
     # scp:
     #   image: appleboy/drone-scp
     #   host:

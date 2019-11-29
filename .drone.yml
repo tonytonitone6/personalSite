@@ -42,7 +42,6 @@ pipeline:
       port: 22
       username: stan
       secrets: [ ssh_key ]
-      command_timeout: 120
       script:
         - rm -rf /var/www/test2 && mkdir -p /var/www/test2
         - cp -r /var/www/test/* /var/www/test2

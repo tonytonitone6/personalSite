@@ -6,9 +6,9 @@
   "scripts": {
     "webpack-dev-server": "webpack-dev-server --hot --inline",
     "webpack": "webpack",
-    "dev": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9000/graphql",
-    "dev:hot": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9000/graphql",
-    "prod": "npm run webpack -- --env.mode production --env.API_URI=http://localhost:9000/graphql",
+    "dev": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9001/graphql",
+    "dev:hot": "npm run webpack-dev-server -- --env.mode development --env.API_URI=http://localhost:9001/graphql",
+    "prod": "npm run webpack -- --env.mode production --env.API_URI=http://localhost:9001/graphql",
     "serve": "node server.js",
     "format": "prettier --write \"**/*.{js,jsx,tsx,ts,json,gql,graphql}\"",
     "format:check": "prettier --list-different src/**/*.{tsx,ts}",

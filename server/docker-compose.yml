@@ -6,7 +6,7 @@ services:
     build: .
     # stdin_open: true
     ports:
-      - "9000:9000"
+      - "9001:9001"
     tty: true
     links:
       - database

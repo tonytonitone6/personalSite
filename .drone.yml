@@ -6,11 +6,11 @@ clone:
 
 
 pipeline:
-    backend:
-      image: node:11.13.0
-      secrets: [ ssh_key ]
-      commands:
-        - echo $SSH_KEY
+    # backend:
+    #   image: node:11.13.0
+    #   secrets: [ ssh_key ]
+    #   commands:
+    #     - echo $SSH_KEY
 
     front:
       image: node:11.13.0
@@ -30,12 +30,15 @@ pipeline:
       target: /var/www/test
       source: 
         - "server.js"
+        - "*.json"
+        - "docker-compose.yml"
+        - Dockerfile
         - dist
+        - server
         - node_modules
       when:
         branch: [ master, dev ]
-
-    ssh:
+    back-ssh:
       image: appleboy/drone-ssh
       host:
         - 206.189.147.149
@@ -43,9 +46,19 @@ pipeline:
       username: stan
       secrets: [ ssh_key ]
       script:
-        - rm -rf /var/www/test2 && mkdir -p /var/www/test2
-        - cp -r /var/www/test/* /var/www/test2
-        - cd /var/www/test2 && ls
-
+        - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+        - cp -r /var/www/test/* /var/www/personalSite
+        - cd /var/www/personalSite/server && docker-compose up -d
+        - docker restart server_maoweb
+    front-ssh:
+      image: appleboy/drone-ssh
+      host:
+        - 206.189.147.149
+      port: 22
+      username: stan
+      secrets: [ ssh_key ]
+      script:
+        - cd /var/www/personalSite && pm2 restart server.js
+        
 
 

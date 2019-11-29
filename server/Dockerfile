@@ -12,7 +12,7 @@ COPY . /usr/src/app
 
 RUN npm run build
 
-EXPOSE 9000
+EXPOSE 9001
 
 CMD ["npm", "start"]
 

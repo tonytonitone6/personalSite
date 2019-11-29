@@ -34,7 +34,7 @@ pipeline:
       port: 22
       username: stan
       secrets: [ ssh_key ]
-      target: /drone/${DRONE_REPO}
+      target: /drone/test
       source: 
         - "dist"
         - "node_modules"

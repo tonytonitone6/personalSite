@@ -11,16 +11,21 @@ pipeline:
       secrets: [ ssh_key ]
       commands:
         - touch maomao.txt
-        - touch maomao2.txt
         - echo $SSH_KEY
 
-    # front:
-    #   image: node:11.13.0
-    #   when:
-    #     branch: [master, dev]
-    #   commands:
-    #     - yarn install
-    #     - yarn run prod
+    front:
+      image: node:11.13.0
+      when:
+        branch: [ master, dev ]
+      commands:
+        - yarn install
+        - yarn run prod
+
+    test:
+      when:
+        branch: [ master, dev ]
+      commands:
+        - yarn run test
     
     scp:
       image: appleboy/drone-scp
@@ -29,20 +34,26 @@ pipeline:
       port: 22
       username: stan
       secrets: [ ssh_key ]
-      target: /var/www/test
+      target: /drone/${DRONE_REPO}
       source: 
-        - maomao.txt
+        - "dist"
+        - "node_modules"
+        - "*.js"
+      when:
+        branch: [ master, dev]
 
-    # ssh:
-    #   image: appleboy/drone-ssh
-    #   host:
-    #     - 206.189.147.149
-    #   port: 22
-    #   username: stan
-    #   secrets: [ ssh_key ]
-    #   script:
-    #     - echo "Hi login"
-    #     - ls -al /var/www/test
+    ssh:
+      image: appleboy/drone-ssh
+      host:
+        - 206.189.147.149
+      port: 22
+      username: stan
+      secrets: [ ssh_key ]
+      command_timeout: 120
+      script:
+        - rm -rf ${DRONE_REPO} && mkdir -p ${DRONE_REPO}
+        - cp -r drone/${DRONE_REPO}/* /var/www/test2
+        - cd /var/www/test && ls
 
 
 

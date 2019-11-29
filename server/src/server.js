@@ -4,7 +4,7 @@ import merge from 'lodash/merge'
 import model from './models'
 import {loadTypeSchema} from './utils/schema'
 
-const port = process.env.PORT || 9001;
+const port = process.env.PORT || 9001
 
 const types = ['menu', 'profile']
 

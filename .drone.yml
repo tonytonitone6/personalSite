@@ -6,11 +6,11 @@ clone:
 
 
 pipeline:
-    # backend:
-    #   image: node:11.13.0
-    #   secrets: [ ssh_key ]
-    #   commands:
-    #     - echo $SSH_KEY
+    backend:
+      image: node:11.13.0
+      secrets: [ ssh_key ]
+      commands:
+        - echo $SSH_KEY
 
     front:
       image: node:11.13.0
@@ -49,7 +49,7 @@ pipeline:
         - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
         - cp -r /var/www/test/* /var/www/personalSite
         - cd /var/www/personalSite/server && docker-compose up -d
-        - docker restart server_maoweb
+        - docker restart server_maoweb mongo
     front-ssh:
       image: appleboy/drone-ssh
       host:
@@ -59,6 +59,6 @@ pipeline:
       secrets: [ ssh_key ]
       script:
         - cd /var/www/personalSite && pm2 restart server.js
-        
+
 
 

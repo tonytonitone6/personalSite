@@ -38,27 +38,27 @@ pipeline:
         - node_modules
       when:
         branch: [ master, dev ]
-    back-ssh:
-      image: appleboy/drone-ssh
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      script:
-        - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-        - cp -r /var/www/test/* /var/www/personalSite
-        - cd /var/www/personalSite/server && docker-compose up -d
-        - docker restart server_maoweb mongo
-    front-ssh:
-      image: appleboy/drone-ssh
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      script:
-        - cd /var/www/personalSite && pm2 restart server.js
+    # back-ssh:
+    #   image: appleboy/drone-ssh
+    #   host:
+    #     - 206.189.147.149
+    #   port: 22
+    #   username: stan
+    #   secrets: [ ssh_key ]
+    #   script:
+    #     - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+    #     - cp -r /var/www/test/* /var/www/personalSite
+    #     - cd /var/www/personalSite/server && docker-compose up -d
+    #     - docker restart server_maoweb mongo
+    # front-ssh:
+    #   image: appleboy/drone-ssh
+    #   host:
+    #     - 206.189.147.149
+    #   port: 22
+    #   username: stan
+    #   secrets: [ ssh_key ]
+    #   script:
+    #     - cd /var/www/personalSite && pm2 restart server.js
 
 
 

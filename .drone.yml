@@ -20,24 +20,24 @@ pipeline:
         - yarn install
         - yarn run prod
 
-    scp:
-      image: appleboy/drone-scp
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      target: /var/www/test
-      source: 
-        - "server.js"
-        - "*.json"
-        - "docker-compose.yml"
-        - Dockerfile
-        - dist
-        - server
-        - node_modules
-      when:
-        branch: [ master, dev ]
+    # scp:
+    #   image: appleboy/drone-scp
+    #   host:
+    #     - 206.189.147.149
+    #   port: 22
+    #   username: stan
+    #   secrets: [ ssh_key ]
+    #   target: /var/www/test
+    #   source: 
+    #     - "server.js"
+    #     - "*.json"
+    #     - "docker-compose.yml"
+    #     - Dockerfile
+    #     - dist
+    #     - server
+    #     - node_modules
+    #   when:
+    #     branch: [ master, dev ]
     # back-ssh:
     #   image: appleboy/drone-ssh
     #   host:

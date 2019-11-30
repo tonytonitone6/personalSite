@@ -9,12 +9,6 @@ kind: pipeline
 name: default
 
 steps:
-  - name: backend
-    image: node:11.13.0
-    secrets: [ ssh_key ]
-    commands:
-      - echo $SSH_KEY
-
   - name: front
     image: node:11.13.0
     when:
@@ -30,7 +24,8 @@ steps:
         - 206.189.147.149
       port: 22
       username: stan
-      secrets: [ ssh_key ]
+      key:
+        from_secret: ssh_key
       target: /var/www/test
       source: 
         - "server.js"
@@ -50,7 +45,8 @@ steps:
           - 206.189.147.149
         port: 22
         username: stan
-        secrets: [ ssh_key ]
+        key:
+          from_secret: ssh_key
         script:
           - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
           - cp -r /var/www/test/* /var/www/personalSite

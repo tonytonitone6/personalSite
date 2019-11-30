@@ -9,6 +9,11 @@ kind: pipeline
 name: default
 
 steps:
+  - name: backend
+    image: node:11.13.0
+    commands:
+      - echo $SSH_KEY
+
   - name: front
     image: node:11.13.0
     when:
@@ -25,7 +30,7 @@ steps:
       port: 22
       username: stan
       key:
-        from_secret: ssh_key
+        from_secret: [ ssh_key ]
       target: /var/www/test
       source: 
         - "server.js"
@@ -38,31 +43,30 @@ steps:
       when:
         branch: [ master, dev ]
 
-    - name: back-ssh
-      image: appleboy/drone-ssh
-      setting:
-        host:
-          - 206.189.147.149
-        port: 22
-        username: stan
-        key:
-          from_secret: ssh_key
-        script:
-          - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-          - cp -r /var/www/test/* /var/www/personalSite
-          - cd /var/www/personalSite/server && docker-compose up -d
-          - docker restart server_maoweb mongo
+    # - name: back-ssh
+    #   image: appleboy/drone-ssh
+    #   setting:
+    #     host:
+    #       - 206.189.147.149
+    #     port: 22
+    #     username: stan
+    #     secrets: [ ssh_key ]
+    #     script:
+    #       - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+    #       - cp -r /var/www/test/* /var/www/personalSite
+    #       - cd /var/www/personalSite/server && docker-compose up -d
+    #       - docker restart server_maoweb mongo
     
-    - name: front-ssh
-      image: appleboy/drone-ssh
-      settings:
-        host:
-          - 206.189.147.149
-        port: 22
-        username: stan
-        secrets: [ ssh_key ]
-        script:
-          - cd /var/www/personalSite && pm2 restart server.js
+    # - name: front-ssh
+    #   image: appleboy/drone-ssh
+    #   settings:
+    #     host:
+    #       - 206.189.147.149
+    #     port: 22
+    #     username: stan
+    #     secrets: [ ssh_key ]
+    #     script:
+    #       - cd /var/www/personalSite && pm2 restart server.js
 
 
 

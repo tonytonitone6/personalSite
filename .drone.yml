@@ -1,8 +1,8 @@
-# clone:
-#   git:
-#     image: plugins/git
-#     depath: 50
-#     tags: true
+clone:
+  git:
+    image: plugins/git
+    depath: 50
+    tags: true
 
 
 kind: pipeline

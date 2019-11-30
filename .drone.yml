@@ -1,68 +1,94 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
 clone:
-  git:
-    image: plugins/git
+  disable: true
+
+steps:
+- name: git
+  pull: if-not-exists
+  image: plugins/git
+  settings:
     depath: 50
     tags: true
 
-
-kind: pipeline
-type: docker
-name: default
-
-steps:
-- name: front
+- name: backend
+  pull: if-not-exists
   image: node:11.13.0
-  when:
-    branch: [ master, dev ]
   commands:
-    - yarn install
-    - yarn run prod
+  - echo $SSH_KEY
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
 
-  # - name: scp
-  #   image: appleboy/drone-scp
-  #   settings:
-  #     host:
-  #       - 206.189.147.149
-  #     port: 22
-  #     username: stan
-  #     key:
-  #       from_secret: [ ssh_key ]
-  #     target: /var/www/test
-  #     source: 
-  #       - "server.js"
-  #       - "*.json"
-  #       - "docker-compose.yml"
-  #       - Dockerfile
-  #       - dist
-  #       - server
-  #       - node_modules
-  #     when:
-  #       branch: [ master, dev ]
+- name: front
+  pull: if-not-exists
+  image: node:11.13.0
+  commands:
+  - yarn install
+  - yarn run prod
+  when:
+    branch:
+    - master
+    - dev
 
-    # - name: back-ssh
-    #   image: appleboy/drone-ssh
-    #   setting:
-    #     host:
-    #       - 206.189.147.149
-    #     port: 22
-    #     username: stan
-    #     secrets: [ ssh_key ]
-    #     script:
-    #       - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-    #       - cp -r /var/www/test/* /var/www/personalSite
-    #       - cd /var/www/personalSite/server && docker-compose up -d
-    #       - docker restart server_maoweb mongo
-    
-    # - name: front-ssh
-    #   image: appleboy/drone-ssh
-    #   settings:
-    #     host:
-    #       - 206.189.147.149
-    #     port: 22
-    #     username: stan
-    #     secrets: [ ssh_key ]
-    #     script:
-    #       - cd /var/www/personalSite && pm2 restart server.js
+- name: scp
+  pull: if-not-exists
+  image: appleboy/drone-scp
+  settings:
+    host:
+    - 206.189.147.149
+    port: 22
+    source:
+    - server.js
+    - "*.json"
+    - docker-compose.yml
+    - Dockerfile
+    - dist
+    - server
+    - node_modules
+    target: /var/www/test
+    username: stan
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
+  when:
+    branch:
+    - master
+    - dev
 
+# - name: back-ssh
+#   pull: if-not-exists
+#   image: appleboy/drone-ssh
+#   settings:
+#     host:
+#     - 206.189.147.149
+#     port: 22
+#     script:
+#     - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+#     - cp -r /var/www/test/* /var/www/personalSite
+#     - cd /var/www/personalSite/server && docker-compose up -d
+#     - docker restart server_maoweb mongo
+#     username: stan
+#   environment:
+#     SSH_KEY:
+#       from_secret: ssh_key
 
-
+# - name: front-ssh
+#   pull: if-not-exists
+#   image: appleboy/drone-ssh
+#   settings:
+#     host:
+#     - 206.189.147.149
+#     port: 22
+#     script:
+#     - cd /var/www/personalSite && pm2 restart server.js
+#     username: stan
+#   environment:
+#     SSH_KEY:
+#       from_secret: ssh_key

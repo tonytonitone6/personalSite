@@ -6,21 +6,17 @@
 
 
 kind: pipeline
+type: docker
 name: default
 
 steps:
-  # - name: backend
-  #   image: node:11.13.0
-  #   commands:
-  #     - echo $SSH_KEY
-
-  - name: front
-    image: node:11.13.0
-    when:
-      branch: [ master, dev ]
-    commands:
-      - yarn install
-      - yarn run prod
+- name: front
+  image: node:11.13.0
+  when:
+    branch: [ master, dev ]
+  commands:
+    - yarn install
+    - yarn run prod
 
   # - name: scp
   #   image: appleboy/drone-scp

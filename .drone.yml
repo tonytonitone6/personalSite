@@ -1,27 +1,31 @@
-clone:
-  git:
-    image: plugins/git
-    depath: 50
-    tags: true
+# clone:
+#   git:
+#     image: plugins/git
+#     depath: 50
+#     tags: true
 
 
-pipeline:
-    backend:
-      image: node:11.13.0
-      secrets: [ ssh_key ]
-      commands:
-        - echo $SSH_KEY
+kind: pipeline
+name: default
 
-    front:
-      image: node:11.13.0
-      when:
-        branch: [ master, dev ]
-      commands:
-        - yarn install
-        - yarn run prod
+steps:
+  - name: backend
+    image: node:11.13.0
+    secrets: [ ssh_key ]
+    commands:
+      - echo $SSH_KEY
 
-    scp:
-      image: appleboy/drone-scp
+  - name: front
+    image: node:11.13.0
+    when:
+      branch: [ master, dev ]
+    commands:
+      - yarn install
+      - yarn run prod
+
+  - name: scp
+    image: appleboy/drone-scp
+    settings:
       host:
         - 206.189.147.149
       port: 22
@@ -39,27 +43,30 @@ pipeline:
       when:
         branch: [ master, dev ]
 
-    back-ssh:
+    - name: back-ssh
       image: appleboy/drone-ssh
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      script:
-        - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-        - cp -r /var/www/test/* /var/www/personalSite
-        - cd /var/www/personalSite/server && docker-compose up -d
-        - docker restart server_maoweb mongo
-    front-ssh:
+      setting:
+        host:
+          - 206.189.147.149
+        port: 22
+        username: stan
+        secrets: [ ssh_key ]
+        script:
+          - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+          - cp -r /var/www/test/* /var/www/personalSite
+          - cd /var/www/personalSite/server && docker-compose up -d
+          - docker restart server_maoweb mongo
+    
+    - name: front-ssh
       image: appleboy/drone-ssh
-      host:
-        - 206.189.147.149
-      port: 22
-      username: stan
-      secrets: [ ssh_key ]
-      script:
-        - cd /var/www/personalSite && pm2 restart server.js
+      settings:
+        host:
+          - 206.189.147.149
+        port: 22
+        username: stan
+        secrets: [ ssh_key ]
+        script:
+          - cd /var/www/personalSite && pm2 restart server.js
 
 
 

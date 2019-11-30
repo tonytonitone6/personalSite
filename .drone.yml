@@ -40,6 +40,7 @@ pipeline:
         - node_modules
       when:
         branch: [ master, dev ]
+
     back-ssh:
       image: appleboy/drone-ssh
       host:

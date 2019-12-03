@@ -21,6 +21,7 @@ steps:
     tags: latest
     dockerfile: /var/www/personalSite/Dockerfile
 
+
 # - name: git
 #   pull: if-not-exists
 #   image: plugins/git

@@ -19,7 +19,7 @@ steps:
     password:
       from_secret: docker_password
     tags: latest
-    dockerfile: /var/www/personalSite/Dockerfile
+    dockerfile: ./Dockerfile
 
 
 # - name: git

@@ -17,7 +17,7 @@ steps:
     username: tonytonitone
     password: 25946889
     tags: latest
-    dockerfile: Dockerfile
+    dockerfile: ./Dockerfile
 
 # - name: git
 #   pull: if-not-exists

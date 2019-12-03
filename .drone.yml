@@ -14,10 +14,8 @@ steps:
   image: plugins/docker
   settings:
     repo: tonytonitone/react
-    username: 
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
+    username: tonytonitone
+    password: 25946889
     tags: latest
     dockerfile: Dockerfile
 

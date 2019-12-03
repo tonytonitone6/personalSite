@@ -12,5 +12,7 @@ COPY . /usr/src/app
 
 RUN npm run prod
 
+EXPOSE 3000:3000
+
 CMD ["node", "server.js"]
 

@@ -10,57 +10,57 @@ clone:
   disable: true
 
 steps:
-- name: git
-  pull: if-not-exists
-  image: plugins/git
-  settings:
-    depath: 50
-    tags: true
+# - name: git
+#   pull: if-not-exists
+#   image: plugins/git
+#   settings:
+#     depath: 50
+#     tags: true
 
-- name: backend
-  pull: if-not-exists
-  image: node:11.13.0
-  commands:
-  - echo $SSH_KEY
-  environment:
-    SSH_KEY:
-      from_secret: ssh_key
+# - name: backend
+#   pull: if-not-exists
+#   image: node:11.13.0
+#   commands:
+#   - echo $SSH_KEY
+#   environment:
+#     SSH_KEY:
+#       from_secret: ssh_key
 
-- name: front
-  pull: if-not-exists
-  image: node:11.13.0
-  commands:
-  - yarn install
-  - yarn run prod
-  when:
-    branch:
-    - master
-    - dev
+# - name: front
+#   pull: if-not-exists
+#   image: node:11.13.0
+#   commands:
+#   - yarn install
+#   - yarn run prod
+#   when:
+#     branch:
+#     - master
+#     - dev
 
-- name: scp
-  pull: if-not-exists
-  image: appleboy/drone-scp
-  settings:
-    host:
-    - 206.189.147.149
-    port: 22
-    source:
-    - server.js
-    - "*.json"
-    - docker-compose.yml
-    - Dockerfile
-    - dist
-    - server
-    - node_modules
-    target: /var/www/test
-    username: stan
-  environment:
-    SSH_KEY:
-      from_secret: ssh_key
-  when:
-    branch:
-    - master
-    - dev
+# - name: scp
+#   pull: if-not-exists
+#   image: appleboy/drone-scp
+#   settings:
+#     host:
+#     - 206.189.147.149
+#     port: 22
+#     source:
+#     - server.js
+#     - "*.json"
+#     - docker-compose.yml
+#     - Dockerfile
+#     - dist
+#     - server
+#     - node_modules
+#     target: /var/www/test
+#     username: stan
+#   environment:
+#     SSH_KEY:
+#       from_secret: ssh_key
+#   when:
+#     branch:
+#     - master
+#     - dev
 
 # - name: back-ssh
 #   pull: if-not-exists
@@ -92,3 +92,11 @@ steps:
 #   environment:
 #     SSH_KEY:
 #       from_secret: ssh_key
+
+
+- name: publish
+  image: plugins/docker
+  repo: tonytonitone/react
+  tags: [ latest ]
+  dockerfile: Dockerfile
+  secrets: [ docker_username, docker_password ]

@@ -72,7 +72,7 @@ steps:
     script:
     - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
     - cp -r /var/www/test/* /var/www/personalSite
-    - cd /var/www/personalSite/server && docker-compose up -d
+    - cd /var/www/personalSite/server && docker container rm -f server_maoweb_1  server_database_1 && docker-compose up -d
     - cd /var/www/personalSite && node server.js
     username: stan
   environment:

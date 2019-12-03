@@ -10,12 +10,23 @@ clone:
   disable: true
 
 steps:
-# - name: git
-#   pull: if-not-exists
-#   image: plugins/git
-#   settings:
-#     depath: 50
-#     tags: true
+- name: git
+  pull: if-not-exists
+  image: plugins/git
+  settings:
+    depath: 50
+    tags: true
+
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: tonytonitone/react
+    username: 
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tags: latest
+    dockerfile: Dockerfile
 
 # - name: backend
 #   pull: if-not-exists
@@ -93,13 +104,3 @@ steps:
 #     SSH_KEY:
 #       from_secret: ssh_key
 
-- name: publish
-  image: plugins/docker
-  settings:
-    repo: tonytonitone/react
-    username: 
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    tags: latest
-    dockerfile: Dockerfile

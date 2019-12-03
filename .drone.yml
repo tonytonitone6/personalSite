@@ -10,25 +10,12 @@ clone:
   disable: true
 
 steps:
-# - name: publish
-#   image: plugins/docker
-#   settings:
-#     repo: tonytonitone/react
-#     username: 
-#       from_secret: docker_username
-#     password:
-#       from_secret: docker_password
-#     tags: latest
-#     dockerfile: Dockerfile
-
-
 - name: git
   pull: if-not-exists
   image: plugins/git
   settings:
     depath: 50
     tags: true
-
 
 - name: backend
   pull: if-not-exists
@@ -91,18 +78,3 @@ steps:
   environment:
     SSH_KEY:
       from_secret: ssh_key
-
-# - name: front-ssh
-#   pull: if-not-exists
-#   image: appleboy/drone-ssh
-#   settings:
-#     host:
-#     - 206.189.147.149
-#     port: 22
-#     script:
-#     - cd /var/www/personalSite && pm2 restart server.js
-#     username: stan
-#   environment:
-#     SSH_KEY:
-#       from_secret: ssh_key
-

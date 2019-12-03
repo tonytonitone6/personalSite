@@ -1,18 +1,16 @@
 FROM node:11.13.0
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/backend
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/backend
 
-COPY package.json /usr/src/app
+COPY package.json /usr/src/backend
 
 RUN npm install
 
-COPY . /usr/src/app
+COPY . /usr/src/backend
 
 RUN npm run build
-
-EXPOSE 9001
 
 CMD ["npm", "start"]
 

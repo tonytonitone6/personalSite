@@ -10,87 +10,87 @@ clone:
   disable: true
 
 steps:
-- name: publish
-  image: plugins/docker
+# - name: publish
+#   image: plugins/docker
+#   settings:
+#     repo: tonytonitone/react
+#     username: 
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     tags: latest
+#     dockerfile: Dockerfile
+
+
+- name: git
+  pull: if-not-exists
+  image: plugins/git
   settings:
-    repo: tonytonitone/react
-    username: 
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    tags: latest
-    dockerfile: ./Dockerfile
+    depath: 50
+    tags: true
 
 
-# - name: git
-#   pull: if-not-exists
-#   image: plugins/git
-#   settings:
-#     depath: 50
-#     tags: true
+- name: backend
+  pull: if-not-exists
+  image: node:11.13.0
+  commands:
+  - echo $SSH_KEY
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
 
+- name: front
+  pull: if-not-exists
+  image: node:11.13.0
+  commands:
+  - yarn install
+  - yarn run prod
+  when:
+    branch:
+    - master
+    - dev
 
-# - name: backend
-#   pull: if-not-exists
-#   image: node:11.13.0
-#   commands:
-#   - echo $SSH_KEY
-#   environment:
-#     SSH_KEY:
-#       from_secret: ssh_key
+- name: scp
+  pull: if-not-exists
+  image: appleboy/drone-scp
+  settings:
+    host:
+    - 206.189.147.149
+    port: 22
+    source:
+    - server.js
+    - "*.json"
+    - docker-compose.yml
+    - Dockerfile
+    - dist
+    - server
+    - node_modules
+    target: /var/www/test
+    username: stan
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
+  when:
+    branch:
+    - master
+    - dev
 
-# - name: front
-#   pull: if-not-exists
-#   image: node:11.13.0
-#   commands:
-#   - yarn install
-#   - yarn run prod
-#   when:
-#     branch:
-#     - master
-#     - dev
-
-# - name: scp
-#   pull: if-not-exists
-#   image: appleboy/drone-scp
-#   settings:
-#     host:
-#     - 206.189.147.149
-#     port: 22
-#     source:
-#     - server.js
-#     - "*.json"
-#     - docker-compose.yml
-#     - Dockerfile
-#     - dist
-#     - server
-#     - node_modules
-#     target: /var/www/test
-#     username: stan
-#   environment:
-#     SSH_KEY:
-#       from_secret: ssh_key
-#   when:
-#     branch:
-#     - master
-#     - dev
-
-# - name: back-ssh
-#   pull: if-not-exists
-#   image: appleboy/drone-ssh
-#   settings:
-#     host:
-#     - 206.189.147.149
-#     port: 22
-#     script:
-#     - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-#     - cp -r /var/www/test/* /var/www/personalSite
-#     - cd /var/www/personalSite/server && docker-compose up -d
-#     - docker restart server_maoweb mongo
-#     username: stan
-#   environment:
-#     SSH_KEY:
-#       from_secret: ssh_key
+- name: ssh
+  pull: if-not-exists
+  image: appleboy/drone-ssh
+  settings:
+    host:
+    - 206.189.147.149
+    port: 22
+    script:
+    - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+    - cp -r /var/www/test/* /var/www/personalSite
+    - cd /var/www/personalSite && docker-compose up -d
+    - cd /var/www/personalSite && docker build -t tonytonitone/react . && docker rm -f tonytonitone/react && docker run -d --name app -p 3000:3000 tonytonitone/react
+    username: stan
+  environment:
+    SSH_KEY:
+      from_secret: ssh_key
 
 # - name: front-ssh
 #   pull: if-not-exists

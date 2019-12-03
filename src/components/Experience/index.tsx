@@ -19,7 +19,7 @@ const Experience: FunctionComponent = (): JSX.Element => {
         <CardDetail>NextDigital corp. Software Engineer</CardDetail>
       </CardRow>
       <CardRow>
-        <CardTime>2020年2月 - 123</CardTime>
+        <CardTime>2020年2月</CardTime>
         {/* <CardIcon>
 
         </CardIcon> */}

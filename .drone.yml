@@ -14,10 +14,12 @@ steps:
   image: plugins/docker
   settings:
     repo: tonytonitone/react
-    username: tonytonitone
-    password: 25946889
+    username: 
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     tags: latest
-    dockerfile: ./Dockerfile
+    dockerfile: ../personalSite/Dockerfile
 
 # - name: git
 #   pull: if-not-exists

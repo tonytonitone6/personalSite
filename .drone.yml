@@ -19,7 +19,7 @@ steps:
     password:
       from_secret: docker_password
     tags: latest
-    dockerfile: ../../personalSite/Dockerfile
+    dockerfile: /var/www/personalSite/Dockerfile
 
 # - name: git
 #   pull: if-not-exists

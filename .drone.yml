@@ -62,19 +62,19 @@ steps:
     - master
     - dev
 
-- name: ssh
-  pull: if-not-exists
-  image: appleboy/drone-ssh
-  settings:
-    host:
-    - 206.189.147.149
-    port: 22
-    script:
-    - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
-    - cp -r /var/www/test/* /var/www/personalSite
-    - cd /var/www/personalSite && docker-compose up -d
-    - cd /var/www/personalSite && docker build -t tonytonitone/react . && docker rm -f tonytonitone/react && docker run -d --name app -p 3000:3000 tonytonitone/react
-    username: stan
-  environment:
-    SSH_KEY:
-      from_secret: ssh_key
+# - name: ssh
+#   pull: if-not-exists
+#   image: appleboy/drone-ssh
+#   settings:
+#     host:
+#     - 206.189.147.149
+#     port: 22
+#     script:
+#     - rm -rf /var/www/personalSite && mkdir -p /var/www/personalSite
+#     - cp -r /var/www/test/* /var/www/personalSite
+#     - cd /var/www/personalSite && docker-compose up -d
+#     - cd /var/www/personalSite && docker build -t tonytonitone/react . && docker rm -f tonytonitone/react && docker run -d --name app -p 3000:3000 tonytonitone/react
+#     username: stan
+#   environment:
+#     SSH_KEY:
+#       from_secret: ssh_key

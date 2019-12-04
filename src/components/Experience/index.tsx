@@ -24,8 +24,7 @@ const Experience: FunctionComponent = (): JSX.Element => {
 
         </CardIcon> */}
         <CardDetail>
-          {/* <div>Garmin corp. Software Engineer</div> */}
-          {/* <div>台達電子 Sr. Software Engineer</div> */}
+          test
         </CardDetail>
       </CardRow>
     </ExpContainer>

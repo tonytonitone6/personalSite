@@ -24,10 +24,7 @@ export const start = async () => {
   ])
 
   const server = new ApolloServer({
-    cors: {
-      origin: '*',
-      credentials: true,
-    },
+    cors: true,
     typeDefs: [rootSchema, ...allSchemaTypes],
     resolvers: merge({}, menu, profile),
     async context({req}) {

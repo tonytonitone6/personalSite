@@ -35,12 +35,12 @@ module.exports = (env, API_URI) => ({
       paths: true,
       shorthands: false,
     }),
-    // new ImageminPlugin({
-    //   disable: false,
-    //   pngquant: {
-    //     quality: '95-100',
-    //   },
-    // }),
+    new ImageminPlugin({
+      disable: false,
+      pngquant: {
+        quality: '95-100',
+      },
+    }),
     // new CompressionPlugin({
     //   filename: '[path].gz[query]',
     //   algorithm: 'gzip',

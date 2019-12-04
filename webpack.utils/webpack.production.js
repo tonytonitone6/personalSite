@@ -41,13 +41,13 @@ module.exports = (env, API_URI) => ({
         quality: '95-100',
       },
     }),
-    // new CompressionPlugin({
-    //   filename: '[path].gz[query]',
-    //   algorithm: 'gzip',
-    //   test: /\.js$|\.css$|\.html$/,
-    //   threshold: 10240,
-    //   minRatio: 0.8,
-    // }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
     new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,

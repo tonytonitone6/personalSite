@@ -38,6 +38,7 @@ steps:
     source:
     - server.js
     - "*.json"
+    - "*.js"
     - Dockerfile
     - src
     - dist

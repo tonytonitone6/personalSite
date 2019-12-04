@@ -1,10 +1,15 @@
-import {ApolloServer} from 'apollo-server'
+import { ApolloServer } from 'apollo-server-express';
 import merge from 'lodash/merge'
-
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 import model from './models'
 import {loadTypeSchema} from './utils/schema'
-
+const app = express();
 const port = process.env.PORT || 9001
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors());
 
 const types = ['menu', 'profile']
 
@@ -24,13 +29,16 @@ export const start = async () => {
   ])
 
   const server = new ApolloServer({
-    cors: true,
     typeDefs: [rootSchema, ...allSchemaTypes],
     resolvers: merge({}, menu, profile),
     async context({req}) {
       return null
-    },
+    }
   })
-  const {url} = await server.listen({port})
-  console.log(`Server is ready at ${url}`)
+
+  server.applyMiddleware({app});
+
+  // const {url} = await app.listen({port})
+  // console.log(`Server is ready at ${url}`)
+  app.listen({port: 9001}, () => console.log(`server port is ${port} ${server.graphqlPath}`))
 }

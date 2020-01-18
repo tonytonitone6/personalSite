@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     line-height: 1.6;
     font-family: 'Mansalva', cursive;
+
   }
 
   @media (max-width: 576px) {

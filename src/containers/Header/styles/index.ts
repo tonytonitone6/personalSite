@@ -131,6 +131,10 @@ export const Introduction = styled.div`
   @media (max-width: 576px) {
     flex-direction: column;
   }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `
 
 export const SocialArea = styled.div`
@@ -142,6 +146,10 @@ export const SocialArea = styled.div`
   animation: ${imgAnimation} 0.5s linear;
 
   @media (max-width: 576px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
     display: none;
   }
 `

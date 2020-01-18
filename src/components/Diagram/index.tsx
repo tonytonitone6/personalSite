@@ -1,5 +1,4 @@
 import React, {FunctionComponent} from 'react'
-
 import Common from '@styles/common'
 import {Container, Flag, ContentWords} from './styles'
 

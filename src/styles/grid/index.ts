@@ -38,6 +38,11 @@ export const col4 = css`
   @media (max-width: 576px) {
     flex: 0 0 calc(12 / ${columns} * 100%);
   }
+
+  @media (max-width: 768px) {
+    flex: 0 0 calc(12 / ${columns} * 100%);
+  }
+
 `
 
 export const col6 = css`

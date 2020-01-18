@@ -8,6 +8,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+
 module.exports = (env, API_URI) => ({
   mode: env,
   plugins: [
@@ -22,8 +24,8 @@ module.exports = (env, API_URI) => ({
       allChunks: true,
     }),
     new HtmlWebpackPlugin({
-      template: './index.html',
-      favicon: './favicon.ico',
+      template: './public/index.html',
+      favicon: './public/favicon.ico',
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -52,6 +54,10 @@ module.exports = (env, API_URI) => ({
       analyzerMode: 'static',
       openAnalyzer: false,
       reportFilename: 'bundle_size.html',
+    }),
+    new WorkboxPlugin.InjectManifest({
+      swSrc: './public/sw.js',
+      swDest: 'service-worker.js'
     }),
     new webpack.ProgressPlugin(),
   ],

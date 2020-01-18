@@ -57,7 +57,7 @@ module.exports = (env, API_URI) => ({
     }),
     new WorkboxPlugin.InjectManifest({
       swSrc: './public/sw.js',
-      swDest: 'service-worker.js'
+      swDest: 'service-worker.js',
     }),
     new webpack.ProgressPlugin(),
   ],

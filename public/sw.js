@@ -1,13 +1,12 @@
+workbox.core.skipWaiting()
 
-workbox.core.skipWaiting();
-
-workbox.core.clientsClaim();
+workbox.core.clientsClaim()
 
 workbox.routing.registerRoute(
   new RegExp('https://use.fontawesome.com/releases/v5.4.2/css/all.css'),
   workbox.strategies.staleWhileRevalidate({
-    cacheName: 'cdn-cache'
-  })
+    cacheName: 'cdn-cache',
+  }),
 )
 
 self.addEventListener('install', () => {

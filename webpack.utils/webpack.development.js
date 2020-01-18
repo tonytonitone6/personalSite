@@ -3,7 +3,7 @@ const {join} = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = (env, API_URI) => ({
   plugins: [
@@ -30,7 +30,7 @@ module.exports = (env, API_URI) => ({
     }),
     new WorkboxPlugin.InjectManifest({
       swSrc: './public/sw.js',
-      swDest: 'service-worker.js'
+      swDest: 'service-worker.js',
     }),
   ],
   mode: env,

@@ -43,6 +43,7 @@ steps:
     - src
     - dist
     - server
+    - public
     - node_modules
     target: /var/www/test
     username: stan

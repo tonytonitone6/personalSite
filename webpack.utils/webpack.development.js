@@ -30,7 +30,7 @@ module.exports = (env, API_URI) => ({
     }),
     new WorkboxPlugin.InjectManifest({
       swSrc: './public/sw.js',
-      swDest: 'service-worker.js',
+      swDest: 'sw.js',
     }),
   ],
   mode: env,

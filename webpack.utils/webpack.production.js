@@ -38,7 +38,6 @@ module.exports = (env, API_URI) => ({
       shorthands: false,
     }),
     new ImageminPlugin({
-      disable: false,
       pngquant: {
         quality: '95-100',
       },
@@ -55,10 +54,10 @@ module.exports = (env, API_URI) => ({
       openAnalyzer: false,
       reportFilename: 'bundle_size.html',
     }),
-    new WorkboxPlugin.InjectManifest({
-      swSrc: './public/sw.js',
-      swDest: 'service-worker.js',
-    }),
+    // new WorkboxPlugin.InjectManifest({
+    //   swSrc: './public/sw.js',
+    //   swDest: 'sw.js',
+    // }),
     new webpack.ProgressPlugin(),
   ],
   externals: {

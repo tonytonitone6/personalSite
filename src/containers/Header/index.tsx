@@ -4,6 +4,7 @@ import React, {
   MouseEvent,
   useLayoutEffect,
   useMemo,
+  useRef
 } from 'react'
 import {FormattedMessage} from 'react-intl'
 
@@ -27,10 +28,14 @@ interface TypeMenuItem {
   name: string
 }
 
+type ImageRef = {
+  src: string;
+}
+
 const Header: FunctionComponent = () => {
   const [{menuList, refs}, ignoreDispatch] = useMenuValue()
   const [aniStatus, setAnimation] = useState(() => false)
-
+  const imageRef = useRef<HTMLImageElement>(null);
   useLayoutEffect(() => {
     const validStatus = (): void => {
       window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
@@ -40,7 +45,21 @@ const Header: FunctionComponent = () => {
     return () => {
       window.removeEventListener('scroll', validStatus, false)
     }
-  }, [])
+  }, []);
+
+  // useLayoutEffect(() => {
+  //   const img = new Image();
+  //   // img.onload = () => {
+  //   //   if (imageRef && imageRef.current) {
+
+  //   //     imageRef.current.src = bgPhoto;
+  //   //   }
+  //   // }
+  //   img.onload = function() {
+  //     console.log('123')
+  //   }
+  // }, [])
+
 
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault()
@@ -81,7 +100,7 @@ const Header: FunctionComponent = () => {
         </HeaderMenu>
         <Introduction>
           <SocialArea col8={true}>
-            <SocialBgImage src={bgPhoto} />
+            <SocialBgImage ref={imageRef} src={bgPhoto} />
           </SocialArea>
           <SocialPersonal col4={true}>
             <SocialContent />

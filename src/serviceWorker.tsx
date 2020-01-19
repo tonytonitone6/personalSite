@@ -25,9 +25,6 @@ export function register(config?: any) {
     // The URL constructor is available in all browsers that support SW.
     const PUBLIC_URL: string = process.env.PUBLIC_URL || ''
     const publicUrl = new URL(PUBLIC_URL, window.location.href)
-    console.log('publicUrl', publicUrl);
-    console.log('window.location.href', window.location.href);
-    console.log('window.location.origin', window.location.origin);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
@@ -36,8 +33,7 @@ export function register(config?: any) {
     }
 
     window.addEventListener('load', () => {
-      console.log(process.env)
-      const swUrl = '/service-worker.js'
+      const swUrl = '/sw'
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.

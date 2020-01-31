@@ -4,6 +4,7 @@ import avatorPhotos from '../../../images/avator.jpg'
 
 interface HeaderProps {
   aniStatus: boolean
+  active: boolean
 }
 
 interface SocialProps {
@@ -11,11 +12,24 @@ interface SocialProps {
   col4?: boolean
 }
 
+interface NavStatus {
+  active: boolean;
+}
+
+
 const barStatus = css`
   background-color: #fff;
   height: 4rem;
   opacity: 0.3;
 `
+
+const iconBar = css`
+  display: block;
+  width: 1.6em;
+  height: .25em;
+  background: #000;
+  margin-top: .2em;
+`;
 
 const moveToRight = keyframes`
   0% {
@@ -75,7 +89,42 @@ export const HeaderWrapper = styled.header`
 
 export const HeaderContainer = styled.div``
 
-export const HeaderMenu = styled.div`
+
+export const NavBarIcon = styled.span`
+  ${iconBar};
+`;
+
+export const NavBar = styled.div<NavStatus>`
+  display: none;
+
+  @media (max-width: 576px) {
+    display: block;
+
+    & > span {
+      transition: all .25s linear;
+    }
+
+    & > span:first-of-type {
+      transform: ${(props: NavStatus) => props.active &&  `
+        rotate(45deg)
+        translate(.25em, .4em)
+      `}
+    }
+
+    & > span:nth-child(2) {
+      opacity: ${(props: NavStatus) => props.active && `0`};
+    }
+
+    & > span:last-of-type {
+      transform: ${(props: NavStatus) => props.active && `
+        rotate(-45deg)
+        translate(.25em, -.4em)
+      `}
+    }
+  }
+`;
+
+export const HeaderMenu = styled.nav`
   height: 4rem;
   ${({aniStatus}: HeaderProps) => (aniStatus ? barStatus : null)}
   position: fixed;
@@ -84,10 +133,7 @@ export const HeaderMenu = styled.div`
   text-align: right;
   z-index: 10;
   transition: all 0.2s ease-in;
-  @media (max-width: 576px) {
-    display: none;
-    height: 0;
-  }
+
   & > ul {
     text-transform: uppercase;
 
@@ -118,6 +164,34 @@ export const HeaderMenu = styled.div`
       }
     }
   }
+
+  @media (max-width: 576px) {
+    position: relative;
+    & > ul {
+      position: absolute;
+      width: 100%;
+      top: ${(props: {active: boolean}) => props.active ? '0' : '-100vh'};
+      height: 100vh;
+      background-color: lightblue;
+      transition: all .3s ease-in;
+      opacity: ${(props: {active: boolean}) => props.active ? '1' : '0'};
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      & > li:first-of-type {
+        margin-top: 5em;
+      }
+    }
+
+    & > ${NavBar} {
+      position: absolute;
+      right: .5em;
+      top: .5em;
+      cursor: pointer;
+    }
+  }
+
+
 `
 
 export const HeaderSocial = styled.div``
@@ -130,6 +204,7 @@ export const Introduction = styled.div`
 
   @media (max-width: 576px) {
     flex-direction: column;
+    margin-top: 0;
   }
 
   @media (max-width: 768px) {

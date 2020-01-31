@@ -3,14 +3,14 @@ import React, {
   useState,
   MouseEvent,
   useLayoutEffect,
-  useMemo,
-  useRef
+  useRef,
+  useCallback
 } from 'react'
 import {FormattedMessage} from 'react-intl'
 
 import {useMenuValue} from '@context/index'
-import types from '@reducers/constants'
 import SocialContent from './SocialContent'
+import MobileHeader from './MobileHeader'
 
 import bgPhoto from '../../images/bg.jpg'
 import {
@@ -23,19 +23,12 @@ import {
   SocialBgImage,
 } from './styles'
 
-interface TypeMenuItem {
-  id: number
-  name: string
-}
-
-type ImageRef = {
-  src: string;
-}
-
 const Header: FunctionComponent = () => {
   const [{menuList, refs}, ignoreDispatch] = useMenuValue()
-  const [aniStatus, setAnimation] = useState(() => false)
-  const imageRef = useRef<HTMLImageElement>(null);
+  const [aniStatus, setAnimation] = useState(false)
+  const [active, setActive] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null)
+  
   useLayoutEffect(() => {
     const validStatus = (): void => {
       window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
@@ -45,24 +38,15 @@ const Header: FunctionComponent = () => {
     return () => {
       window.removeEventListener('scroll', validStatus, false)
     }
-  }, []);
+  }, [])
 
-  // useLayoutEffect(() => {
-  //   const img = new Image();
-  //   // img.onload = () => {
-  //   //   if (imageRef && imageRef.current) {
-
-  //   //     imageRef.current.src = bgPhoto;
-  //   //   }
-  //   // }
-  //   img.onload = function() {
-  //     console.log('123')
-  //   }
-  // }, [])
-
+  const memoToggle = useCallback(() => {
+    setActive((preActive) => !preActive);
+  }, [])
 
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault()
+    setActive((preActive) => !preActive)
     refs[id].current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -91,12 +75,19 @@ const Header: FunctionComponent = () => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <HeaderMenu aniStatus={aniStatus}>
+        <HeaderMenu 
+          aniStatus={aniStatus}
+          active={active}
+        >
           <ul>
             {menuList && menuList.length !== 0
               ? menuList.map(onRenderMenuList)
               : null}
           </ul>
+          <MobileHeader 
+            active={active}
+            onToggle={memoToggle}
+          />
         </HeaderMenu>
         <Introduction>
           <SocialArea col8={true}>

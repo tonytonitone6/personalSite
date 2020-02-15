@@ -4,6 +4,7 @@ import {hot} from 'react-hot-loader/root'
 import styled, {createGlobalStyle} from 'styled-components'
 import {addLocaleData, IntlProvider} from 'react-intl'
 import {ApolloProvider} from '@apollo/react-hooks'
+import ReactGA from 'react-ga';
 import en from 'react-intl/locale-data/en'
 import zh from 'react-intl/locale-data/zh'
 
@@ -81,6 +82,12 @@ interface TypeContextProps {
 const App: FunctionComponent = (): JSX.Element => {
   const [language, setLanguage] = useState(() => getWebSiteLanguage())
   const [messagesLang, setMessagesLang] = useState(() => setMesLang(language))
+
+
+  useEffect(() => {
+    ReactGA.initialize('UA-158619224-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [])
 
   useEffect(() => {
     setMessagesLang(() => setMesLang(language))

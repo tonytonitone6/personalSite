@@ -4,7 +4,7 @@ import React, {
   MouseEvent,
   useLayoutEffect,
   useRef,
-  useCallback
+  useCallback,
 } from 'react'
 import {FormattedMessage} from 'react-intl'
 
@@ -24,11 +24,11 @@ import {
 } from './styles'
 
 const Header: FunctionComponent = () => {
-  const [{menuList, refs}, ignoreDispatch] = useMenuValue()
+  const [{menuList, refs}, _] = useMenuValue()
   const [aniStatus, setAnimation] = useState(false)
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(false)
   const imageRef = useRef<HTMLImageElement>(null)
-  
+
   useLayoutEffect(() => {
     const validStatus = (): void => {
       window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
@@ -41,19 +41,19 @@ const Header: FunctionComponent = () => {
   }, [])
 
   const memoToggle = useCallback(() => {
-    setActive((preActive) => !preActive);
+    setActive(preActive => !preActive)
   }, [])
 
   const handleClick = (e: MouseEvent<HTMLLIElement>, id: number) => {
     e.preventDefault()
-    setActive((preActive) => !preActive)
+    setActive(preActive => !preActive)
     refs[id].current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     })
   }
 
-  const onRenderMenuList = ({
+  const handleRenderMenuList = ({
     id,
     name,
   }: {
@@ -75,19 +75,13 @@ const Header: FunctionComponent = () => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <HeaderMenu 
-          aniStatus={aniStatus}
-          active={active}
-        >
+        <HeaderMenu aniStatus={aniStatus} active={active}>
           <ul>
             {menuList && menuList.length !== 0
-              ? menuList.map(onRenderMenuList)
+              ? menuList.map(handleRenderMenuList)
               : null}
           </ul>
-          <MobileHeader 
-            active={active}
-            onToggle={memoToggle}
-          />
+          <MobileHeader active={active} onToggle={memoToggle} />
         </HeaderMenu>
         <Introduction>
           <SocialArea col8={true}>

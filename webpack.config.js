@@ -20,7 +20,7 @@ module.exports = ({mode, API_URI}) =>
       output: {
         path: join(__dirname, 'dist'),
         publicPath: '/',
-        filename: '[hash]].js',
+        filename: '[hash].js',
       },
       module: {
         rules: [

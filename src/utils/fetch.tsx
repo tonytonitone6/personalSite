@@ -1,10 +1,16 @@
 import {gql} from 'apollo-boost'
 
-export const GET_MENUS = gql`
-  {
+const query = {
+  GET_MENUS: gql`
+    {
     menuList {
       id
       name
     }
   }
-`
+  `
+} as any;
+
+export default (tag: string) => {
+  return query[tag];
+}

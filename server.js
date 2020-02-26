@@ -9,9 +9,11 @@ const app = express()
 app.use(history())
 
 app.get('*.js', (req, res, next) => {
-  req.url = `${req.url}.gz`
-  res.set('Content-Encoding', 'gzip')
-  res.set('Content-Type', 'text/javascript')
+  if (req.originalUrl.indexOf('worker') === -1) {
+    req.url = `${req.url}.gz`
+    res.set('Content-Encoding', 'gzip')
+    res.set('Content-Type', 'text/javascript')
+  }
   next()
 })
 

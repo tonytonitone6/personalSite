@@ -3,14 +3,14 @@ import {gql} from 'apollo-boost'
 const query = {
   GET_MENUS: gql`
     {
-    menuList {
-      id
-      name
+      menuList {
+        id
+        name
+      }
     }
-  }
-  `
-} as any;
+  `,
+} as any
 
 export default (tag: string) => {
-  return query[tag];
+  return query[tag]
 }

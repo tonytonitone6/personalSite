@@ -24,8 +24,6 @@ interface GetDataList {
   menuList: ItemData[];
 }
 
-
-
 const List: FunctionComponent = (): JSX.Element | null => {
   const [refStatus, setRefstatus] = useState(null)
   const [_, dispatch] = useMenuValue()

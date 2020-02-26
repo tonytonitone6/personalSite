@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react'
+import React, {FunctionComponent, memo} from 'react'
 
 import {NavBar, NavBarIcon} from './styles'
 
@@ -20,4 +20,4 @@ const MobileHeader: FunctionComponent<Iprops> = ({
   )
 }
 
-export default MobileHeader
+export default memo(MobileHeader)

@@ -9,6 +9,7 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, API_URI) => ({
   mode: env,
@@ -38,10 +39,14 @@ module.exports = (env, API_URI) => ({
       shorthands: false,
     }),
     new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
       pngquant: {
         quality: '95-100',
       },
     }),
+    new CopyWebpackPlugin([
+      {from: 'src/images', to: 'images'}
+    ]),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',

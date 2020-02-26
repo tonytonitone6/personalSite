@@ -21,6 +21,8 @@ module.exports = ({mode, API_URI}) =>
         path: join(__dirname, 'dist'),
         publicPath: '/',
         filename: '[hash].js',
+        chunkFilename: "[name].chunk.[chunkhash:8].js",
+        globalObject: 'this'
       },
       module: {
         rules: [
@@ -35,6 +37,16 @@ module.exports = ({mode, API_URI}) =>
             },
           },
           {
+            test: /\.worker\.tsx?$/,
+            use: {
+              loader: 'worker-loader',
+              options: {
+                // name: '[name]:[hash:8]'
+                inline: true,
+              }
+            }
+          },
+          {
             test: /\.s?css$/,
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
@@ -47,7 +59,7 @@ module.exports = ({mode, API_URI}) =>
               {
                 loader: 'file-loader',
                 options: {
-                  name: 'image/[hash:8].[name].[ext]',
+                  name: 'images/[name].[ext]',
                 },
               },
             ],

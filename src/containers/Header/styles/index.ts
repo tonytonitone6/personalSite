@@ -13,8 +13,9 @@ interface SocialProps {
 }
 
 interface NavStatus {
-  active: boolean
+  active: boolean;
 }
+
 
 const barStatus = css`
   background-color: #fff;
@@ -25,10 +26,10 @@ const barStatus = css`
 const iconBar = css`
   display: block;
   width: 1.6em;
-  height: 0.25em;
+  height: .25em;
   background: #000;
-  margin-top: 0.2em;
-`
+  margin-top: .2em;
+`;
 
 const moveToRight = keyframes`
   0% {
@@ -88,9 +89,10 @@ export const HeaderWrapper = styled.header`
 
 export const HeaderContainer = styled.div``
 
+
 export const NavBarIcon = styled.span`
   ${iconBar};
-`
+`;
 
 export const NavBar = styled.div<NavStatus>`
   display: none;
@@ -99,16 +101,14 @@ export const NavBar = styled.div<NavStatus>`
     display: block;
 
     & > span {
-      transition: all 0.25s linear;
+      transition: all .25s linear;
     }
 
     & > span:first-of-type {
-      transform: ${(props: NavStatus) =>
-        props.active &&
-        `
+      transform: ${(props: NavStatus) => props.active &&  `
         rotate(45deg)
         translate(.25em, .4em)
-      `};
+      `}
     }
 
     & > span:nth-child(2) {
@@ -116,15 +116,13 @@ export const NavBar = styled.div<NavStatus>`
     }
 
     & > span:last-of-type {
-      transform: ${(props: NavStatus) =>
-        props.active &&
-        `
+      transform: ${(props: NavStatus) => props.active && `
         rotate(-45deg)
         translate(.25em, -.4em)
-      `};
+      `}
     }
   }
-`
+`;
 
 export const HeaderMenu = styled.nav`
   height: 4rem;
@@ -172,11 +170,11 @@ export const HeaderMenu = styled.nav`
     & > ul {
       position: absolute;
       width: 100%;
-      top: ${(props: {active: boolean}) => (props.active ? '0' : '-100vh')};
+      top: ${(props: {active: boolean}) => props.active ? '0' : '-100vh'};
       height: 100vh;
       background-color: lightblue;
-      transition: all 0.3s ease-in;
-      opacity: ${(props: {active: boolean}) => (props.active ? '1' : '0')};
+      transition: all .3s ease-in;
+      opacity: ${(props: {active: boolean}) => props.active ? '1' : '0'};
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -187,11 +185,13 @@ export const HeaderMenu = styled.nav`
 
     & > ${NavBar} {
       position: absolute;
-      right: 0.5em;
-      top: 0.5em;
+      right: .5em;
+      top: .5em;
       cursor: pointer;
     }
   }
+
+
 `
 
 export const HeaderSocial = styled.div``
@@ -236,6 +236,11 @@ export const SocialBgImage = styled.img`
   max-height: 100%;
   height: 100%;
   object-fit: cover;
+
+  &:not([src]) {
+    visibility: hidden;
+  }
+
 `
 
 export const IconArea = styled.div`

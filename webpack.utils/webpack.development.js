@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const WorkboxPlugin = require('workbox-webpack-plugin')
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env, API_URI) => ({
   plugins: [
     new ExtractTextPlugin({
@@ -28,6 +28,9 @@ module.exports = (env, API_URI) => ({
         quality: '95-100',
       },
     }),
+    new CopyWebpackPlugin([
+      {from: 'src/images', to: 'images'}
+    ]),
     new WorkboxPlugin.InjectManifest({
       swSrc: './public/sw.js',
       swDest: 'sw.js',

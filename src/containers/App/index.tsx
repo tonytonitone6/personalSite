@@ -8,6 +8,7 @@ import ReactGA from 'react-ga'
 import en from 'react-intl/locale-data/en'
 import zh from 'react-intl/locale-data/zh'
 
+
 import en_US from '@locales/en.US'
 import zh_CN from '@locales/zh.CN'
 import Header from '@containers/Header'

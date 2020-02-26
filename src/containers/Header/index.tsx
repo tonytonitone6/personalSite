@@ -5,8 +5,11 @@ import React, {
   useLayoutEffect,
   useRef,
   useCallback,
+  memo,
+  useEffect
 } from 'react'
 import {FormattedMessage} from 'react-intl'
+import Worker from "worker-loader!../App/worker";
 
 import {useMenuValue} from '@context/index'
 import SocialContent from './SocialContent'
@@ -23,21 +26,51 @@ import {
   SocialBgImage,
 } from './styles'
 
+const worker = new Worker();
+
+type image = {
+  imageURL: string
+  blob: object
+}
+
 const Header: FunctionComponent = () => {
   const [{menuList, refs}, _] = useMenuValue()
-  const [aniStatus, setAnimation] = useState(false)
-  const [active, setActive] = useState(false)
+  const [aniStatus, setAnimation] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
   const imageRef = useRef<HTMLImageElement>(null)
+  let objectURL: any;
+  worker.addEventListener("message", (e) => {
+    const { data: { blob } } = e;
+    objectURL = URL.createObjectURL(blob);
 
-  useLayoutEffect(() => {
-    const validStatus = (): void => {
-      window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
+    if (imageRef && imageRef.current) {
+      imageRef.current.setAttribute('src', objectURL)
     }
-    window.addEventListener('scroll', validStatus, false)
 
-    return () => {
-      window.removeEventListener('scroll', validStatus, false)
+  });
+  
+  /**  detection location */
+  // useLayoutEffect(() => {
+  //   const validStatus = (): void => {
+  //     window.scrollY > 100 ? setAnimation(true) : setAnimation(false)
+  //   }
+  //   window.addEventListener('scroll', validStatus, false)
+
+  //   return () => {
+  //     window.removeEventListener('scroll', validStatus, false)
+  //   }
+  // }, [])
+
+  const removeDataSrc = () => {
+    if (imageRef && imageRef.current) {
+      imageRef.current.removeAttribute('data-src');
+      URL.revokeObjectURL(objectURL)
     }
+  }
+
+  useEffect(() => {
+    const imageElements = imageRef.current!.dataset.src
+    worker.postMessage(imageElements);
   }, [])
 
   const memoToggle = useCallback(() => {
@@ -85,7 +118,11 @@ const Header: FunctionComponent = () => {
         </HeaderMenu>
         <Introduction>
           <SocialArea col8={true}>
-            <SocialBgImage ref={imageRef} src={bgPhoto} />
+            <SocialBgImage 
+              ref={imageRef}
+              onLoad={removeDataSrc}
+              data-src="../../images/bg.jpg" 
+            />
           </SocialArea>
           <SocialPersonal col4={true}>
             <SocialContent />
